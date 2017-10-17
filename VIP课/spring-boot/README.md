@@ -24,8 +24,7 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
   * 理解 Spring Boot 三大特性：自动装配、嵌入式容器、为生产准备的特性
 
 
-
-### 第二节 Spring Web MVC
+### [第二节 Spring Web MVC](lesson-2)
 
 * 主要内容
   * Spring Web MVC 介绍：整体介绍 Spring Web MVC 框架设计思想、功能特性、以及插播式实现
@@ -37,7 +36,7 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
   * 国际化：利用`Locale`技术，实现视图内容的国际化
 
 
-### 第三节 REST
+### [第三节 REST](lesson-3)
 
 * 主要内容
   * REST 理论基础：基本概念、架构属性、架构约束、使用场景、实现框架（服务端、客户端）
@@ -45,7 +44,7 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
   * REST 客户端实践：传统浏览器、Apache HttpClient 、Spring RestTemplate 等相关实践
 
 
-### 第四节 数据库 JDBC
+### [第四节 数据库 JDBC](lesson-4)
 
 * 主要内容
 
