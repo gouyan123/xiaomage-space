@@ -13,8 +13,19 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
 
 ## 课程详情
 
+### 第一节 Spring Boot 初体验
 
-### 第一节 Spring Web MVC
+* 主要内容
+  * Spring Boot 技术栈：介绍 Spring Boot 完整的技术栈，比如 Web 应用、数据操作、消息、测试以及运维管理等
+  * Spring Boot 构建方式：介绍图形化以及命令行方式构建 Spring Boot 项目
+  * Spring Boot 多模块应用：构建分层、多模块 Spring Boot 应用
+  * Spring Boot 运行方式：分别介绍 IDEA 启动、命令行启动以 Maven 插件启动方式
+  * Spring Boot 简单应用：使用 Spring Web MVC 以及 Spring Web Flux 技术，编程简单应用
+  * 理解 Spring Boot 三大特性：自动装配、嵌入式容器、为生产准备的特性
+
+
+
+### 第二节 Spring Web MVC
 
 * 主要内容
   * Spring Web MVC 介绍：整体介绍 Spring Web MVC 框架设计思想、功能特性、以及插播式实现
@@ -26,7 +37,7 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
   * 国际化：利用`Locale`技术，实现视图内容的国际化
 
 
-### 第二节 REST
+### 第三节 REST
 
 * 主要内容
   * REST 理论基础：基本概念、架构属性、架构约束、使用场景、实现框架（服务端、客户端）
@@ -34,7 +45,7 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
   * REST 客户端实践：传统浏览器、Apache HttpClient 、Spring RestTemplate 等相关实践
 
 
-### 第三节 数据库 JDBC
+### 第四节 数据库 JDBC
 
 * 主要内容
 
@@ -43,7 +54,7 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
     * JDBC（JSR-221）：介绍JDBC 核心接口，数据源、数据库连接、执行语句、事务等核心API的使用方法
 
 
-### 第四节 验证
+### 第五节 验证
 
 * 主要内容
 
