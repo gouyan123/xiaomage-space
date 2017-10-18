@@ -13,7 +13,7 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
 
 ## 课程详情
 
-### 第一节 Spring Boot 初体验
+### [第一节 Spring Boot 初体验](lesson-1)
 
 * 主要内容
   * Spring Boot 技术栈：介绍 Spring Boot 完整的技术栈，比如 Web 应用、数据操作、消息、测试以及运维管理等
