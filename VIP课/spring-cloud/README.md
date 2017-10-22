@@ -47,7 +47,7 @@ Spring Cloud 系列实战运行环境如下：
 ## 课程详情
 
 
-### 第一节 Spring Cloud Config Client
+### [第一节 Spring Cloud Config Client](lesson-1)
 
 
 * 课程内容（1.5 - 2 小时）
