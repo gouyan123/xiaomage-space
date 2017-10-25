@@ -61,7 +61,7 @@ Spring Cloud 系列实战运行环境如下：
 
 
 * 课程内容（1.5 - 2 小时）
-    * 基本使用：介绍`@EnableConfigServer`、`Environment` 仓储、秘钥管理等基本使用方法
+    * 基本使用：介绍`@EnableConfigServer`、`Environment` 仓储
     * 分布式配置官方实现：介绍 Spring 官方标准分布式配置实现方式：Git实现 和 文件系统实现
     * 动态配置属性 Bean：介绍`@RefreshScope`基本用法和使用场景，并且说明其中的局限性
     * 健康指标：介绍 Spring Boot 标准端口（`/health`）以及 健康指标（Health Indicator）
