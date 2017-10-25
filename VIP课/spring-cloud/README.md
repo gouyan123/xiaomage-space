@@ -57,7 +57,7 @@ Spring Cloud 系列实战运行环境如下：
     * 安全：介绍客户端配置安全相关议题
 
 
-### 第二节 Spring Cloud Config Server
+### [第二节 Spring Cloud Config Server](lesson-2)
 
 
 * 课程内容（1.5 - 2 小时）
