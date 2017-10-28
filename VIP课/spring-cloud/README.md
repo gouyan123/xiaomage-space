@@ -68,7 +68,7 @@ Spring Cloud 系列实战运行环境如下：
     * 健康指标自定义实现：实现分布式配置的健康指标自定义实现
 
 
-### 第三节 Spring Cloud Netflix Eureka
+### [第三节 Spring Cloud Netflix Eureka](lesson-3)
 
 
 * 课程内容（1.5 - 2 小时）
