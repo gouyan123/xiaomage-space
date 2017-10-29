@@ -78,8 +78,7 @@ Spring Cloud 系列实战运行环境如下：
     * Eureka 服务器：介绍 Eureka 服务器作为服务注册中心的搭建方法，以及內建 Dashboard 基本运维手段
 
 
-
-### 第四节 Spring Cloud Netflix Ribbon
+### [第四节 Spring Cloud Netflix Ribbon](lesson-4)
 
 
 * 课程内容（1.5 - 2 小时）
