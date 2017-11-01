@@ -87,7 +87,7 @@ Spring Cloud 系列实战运行环境如下：
     * 整合 Netflix Ribbon：作为 Spring Cloud 客户端负载均衡实现 ，Netflix Ribbon 提供了丰富的组件，包括负载均衡器、负载均衡规则、PING 策略等，根据前章所积累的经验，实现客户端负载均衡
 
 
-### 第五节 Spring Cloud Hystrix
+### [第五节 Spring Cloud Hystrix](lesson-5)
 
 
 * 课程内容（1.5 - 2 小时）
