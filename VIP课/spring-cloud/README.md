@@ -96,7 +96,7 @@ Spring Cloud 系列实战运行环境如下：
     * 生产准备特性：介绍聚合数据指标 Turbine 、Turbine Stream，以及整合 Hystrix Dashboard
 
 
-### 第六节 Spring Cloud Feign
+### [第六节 Spring Cloud Feign](lesson-6)
 
 
 * 课程内容（1.5 - 2 小时）
