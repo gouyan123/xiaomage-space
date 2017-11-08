@@ -104,9 +104,16 @@ Spring Cloud 系列实战运行环境如下：
   * Spring Cloud Feign ：介绍声明式客户端REST实现 Spring Cloud Feign的使用方式（如`@EnableFeignClients` 、 `@FeignClient`)，结合 Eureka 构建分布式服务应用
   * 整合支持：Spring Cloud Feign 整合 Hystrix 以及 Ribbon
 
+### 第七节 Spring Cloud Zuul
+
+* 课程内容（1.5 小时）
+  * 核心概念：介绍服务网关使用场景、服务能力、依赖关系、架构以及类型
+  * Ribbon 整合：
+  * Hystrix 整合
 
 
-### 第七节 Spring Cloud Stream
+
+### 第八节 Spring Cloud Stream
 
 
 * 课程内容（1.5 小时）
@@ -115,7 +122,7 @@ Spring Cloud 系列实战运行环境如下：
   * RabbitMQ 绑定实现
 
 
-### 第八节 Spring Cloud Bus
+### 第九节 Spring Cloud Bus
 
 * 课程内容（1.5 小时）
   * 面向消息服务器
@@ -123,7 +130,7 @@ Spring Cloud 系列实战运行环境如下：
   * RabbitMQ 实现 
 
 
-### 第九节 Spring Cloud Sleuth
+### 第十节 Spring Cloud Sleuth
 
 
 * 课程内容（1.5 小时）
