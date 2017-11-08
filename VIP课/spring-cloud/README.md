@@ -104,7 +104,7 @@ Spring Cloud 系列实战运行环境如下：
   * Spring Cloud Feign ：介绍声明式客户端REST实现 Spring Cloud Feign的使用方式（如`@EnableFeignClients` 、 `@FeignClient`)，结合 Eureka 构建分布式服务应用
   * 整合支持：Spring Cloud Feign 整合 Hystrix 以及 Ribbon
 
-### 第七节 Spring Cloud Zuul
+### [第七节 Spring Cloud Zuul](lesson-7)
 
 * 课程内容（1.5 小时）
   * 核心概念：介绍服务网关使用场景、服务能力、依赖关系、架构以及类型
