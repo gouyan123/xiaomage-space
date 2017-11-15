@@ -122,25 +122,24 @@ Spring Cloud 系列实战运行环境如下：
   * Spring Boot Kafka
   
 
-### 第九节 Spring Cloud Stream (下)
+### [第九节 Spring Cloud Stream (下)](lesson-9)
 * 课程内容（1.5 小时）
   * Spring Cloud Stream 
   * Kafka 绑定实现
 
 
 
-### 第十节 Spring Cloud Bus
-
-* 课程内容（1.5 小时）
-  * 面向消息服务器
-  * Kafka 实现
-  * RabbitMQ 实现 
-
-
-### 第十一节 Spring Cloud Sleuth
+### 第十节 Spring Cloud Sleuth
 
 
 * 课程内容（1.5 小时）
   * 分布式应用跟踪
   * ZipKin 整合
+ 
+
+### 第十一节 Spring Cloud 整体回顾
+
+
+* 课程内容（1.5 小时）
+  * Spring Boot + Spring Cloud 系列整体回顾
 
