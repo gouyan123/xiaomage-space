@@ -129,7 +129,7 @@ Spring Cloud 系列实战运行环境如下：
 
 
 
-### 第十节 Spring Cloud Sleuth
+### [第十节 Spring Cloud Sleuth](lesson-10)
 
 
 * 课程内容（1.5 小时）
