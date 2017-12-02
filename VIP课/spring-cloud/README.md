@@ -137,7 +137,7 @@ Spring Cloud 系列实战运行环境如下：
   * ZipKin 整合
  
 
-### [第十一节 Spring Cloud 整体回顾](lesson-11)
+### 第十一节 Spring Cloud 整体回顾
 
 
 * 课程内容（1.5 小时）
