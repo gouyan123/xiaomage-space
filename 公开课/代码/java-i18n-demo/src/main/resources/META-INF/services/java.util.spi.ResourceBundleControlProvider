@@ -1,0 +1,2 @@
+# 配置 java.util.spi.ResourceBundleControlProvider 实现类
+com.gupao.javai18ndemo.javase.EncodingResourceBundleControlProvider
