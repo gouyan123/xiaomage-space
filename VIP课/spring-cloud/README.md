@@ -46,7 +46,6 @@ Spring Cloud 系列实战运行环境如下：
 
 ## 课程详情
 
-
 ### [第一节 Spring Cloud Config Client](lesson-1)
 
 
@@ -95,7 +94,6 @@ Spring Cloud 系列实战运行环境如下：
     * Spring Cloud Hystrix：作为服务端服务短路实现，介绍 Spring Cloud Hystrix 常用限流的功能，同时，说明健康指标以及数据指标在生产环境下的现实意义
     * 生产准备特性：介绍聚合数据指标 Turbine 、Turbine Stream，以及整合 Hystrix Dashboard
 
-
 ### [第六节 Spring Cloud Feign](lesson-6)
 
 
@@ -123,6 +121,7 @@ Spring Cloud 系列实战运行环境如下：
   
 
 ### [第九节 Spring Cloud Stream (下)](lesson-9)
+
 * 课程内容（1.5 小时）
   * Spring Cloud Stream 
   * Kafka 绑定实现
@@ -135,7 +134,7 @@ Spring Cloud 系列实战运行环境如下：
 * 课程内容（1.5 小时）
   * 分布式应用跟踪
   * ZipKin 整合
- 
+
 
 ### [第十一节 Spring Cloud 整体回顾](lesson-11)
 
