@@ -8,7 +8,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<modules>
 		<module>spring-application</module>
-	</modules>
+        <module>spring-mvc-view</module>
+        <module>spring-mvc-rest</module>
+    </modules>
 	<packaging>pom</packaging>
 
 	<name>microservices-project</name>
