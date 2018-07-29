@@ -1,4 +1,4 @@
-# 咕泡学院 微服务系列课钢
+# 咕泡学院 微服务系列课纲
 
 ### [第一节 SpringApplication](lesson-1)
 
