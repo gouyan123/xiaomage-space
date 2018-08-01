@@ -11,6 +11,7 @@
         <module>spring-mvc-view</module>
         <module>spring-mvc-rest</module>
         <module>spring-reactive</module>
+        <module>spring-cloud-project</module>
     </modules>
 	<packaging>pom</packaging>
 
