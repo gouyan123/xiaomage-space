@@ -1,6 +1,6 @@
 # 第十节 Spring Cloud 服务熔断
 
-![1533656373153](E:\Google Driver\Private\Lessons\gupao\xiaomage-space\VIP课\microservices\lesson-10\assets\1533656373153.png)
+![1533656373153](assets\1533656373153.png)
 
 
 
