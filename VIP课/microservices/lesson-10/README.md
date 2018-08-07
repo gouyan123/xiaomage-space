@@ -254,6 +254,39 @@ public class ServerControllerAspect {
 
 
 
+#### 高级版本（信号灯实现 = 单机版限流方案）
+
+```java
+    @Around("execution(* com.gupao.micro.services.spring.cloud." +
+            "server.controller.ServerController.advancedSay3(..))" +
+            " && args(message)" +
+            " && @annotation(circuitBreaker) ")
+    public Object advancedSay3InSemaphore(ProceedingJoinPoint point,
+                                          String message,
+                                          SemaphoreCircuitBreaker circuitBreaker) throws Throwable {
+        int value = circuitBreaker.value();
+        if (semaphore == null) {
+            semaphore = new Semaphore(value);
+        }
+        Object returnValue = null;
+        try {
+            if (semaphore.tryAcquire()) {
+                returnValue = point.proceed(new Object[]{message});
+                Thread.sleep(1000);
+            } else {
+                returnValue = errorContent("");
+            }
+        } finally {
+            semaphore.release();
+        }
+
+        return returnValue;
+
+    }
+```
+
+
+
 
 
 ## 下节预习
