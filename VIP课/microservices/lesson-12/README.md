@@ -4,7 +4,7 @@
 
 ### 上周六的问题
 
-接口方法参数名称在 `ParameterNameDiscoverer `找不到
+接口方法参数名称在 `ParameterNameDiscoverer ` 找不到
 
 类方法参数名称在 `ParameterNameDiscoverer` 可以找到
 
