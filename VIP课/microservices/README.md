@@ -99,19 +99,20 @@
   - Spring RabbitMQ
   - Spring Boot RabbitMQ
 
-### [第十四节 Spring Cloud Stream (下)](lesson-14)
+### [第十四节 Spring Cloud Bus](lesson-14)
 
 - 课程内容（1.5 小时）
-  - Spring Cloud Stream 
-  - RabbitMQ 绑定实现
+  - Spring 事件/监听器机制
+  - Spring Cloud Bus 实现
 
 
 
-### [第十五节 Spring Cloud Sleuth](lesson-15)
+### [第十五节 Spring Cloud Stream 实现](lesson-15)
 
 - 课程内容（1.5 小时）
-  - 分布式应用跟踪
-  - ZipKin 整合
+  - 实现 Spring Cloud Stream for RocketMQ
+
+    
 
 ### [第十六节 Spring Cloud 整体回顾](lesson-16)
 
