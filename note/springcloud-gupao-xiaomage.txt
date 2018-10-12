@@ -1,0 +1,45 @@
+2018课程位置：VIP课/microservices/source/microservices-project
+---
+第6节 云原生应用（Cloud Native Applications）
+官网说明文档位置：spring.io → 导航栏PROJECTS → 方框 SPRING CLOUD → 右侧 REFERENCE → Single HTML；
+官方文档链接：http://cloud.spring.io/spring-cloud-static/Finchley.SR1/single/spring-cloud.html；
+
+云原生：
+Cloud Native is a style of application development that encourages easy adoption of best practices in
+the areas of continuous delivery and value-driven development.
+---
+spring应用上下文层次性？
+Component的"派生性"
+---
+spring应用上下文 ApplicationContext类：
+Environment
+Spring事件：
+1 事件类ApplicationEvent；
+2 事件监听器ApplicationListener；
+3 事件源方法里面调用监听器方法，监听方法的参数是 事件类对象；
+4 事件广播器：ApplicationEventMulticaster，它只有一个实现类即SimpleApplicationEventMulticaster；
+5 事件发送器：ApplicationEventPublisher接口的publishEvent(ApplicationEvent var1)方法；
+看spring-application服务MicroservicesProjectApplication类；
+---
+spring应用上下文 ApplicationContext类：
+理解spring上下文的层次性：在spring-cloud-project下创建 spring-cloud-native-application服务；
+通过层次性理解BeanFactory与ApplicationContext：
+public interface ApplicationContext extends EnvironmentCapable, ListableBeanFactory, HierarchicalBeanFactory, MessageSource, ApplicationEventPublisher, ResourcePatternResolver {
+    ...
+}
+ApplicationContext扩展ListableBeanFactory和HierarchicalBeanFactory；
+从结构而言，ApplicationContext组合了BeanFactory的实现，即ApplicationContext类持有BeanFactory为成员变量；
+public abstract class AbstractRefreshableApplicationContext extends AbstractApplicationContext {
+    private DefaultListableBeanFactory beanFactory;
+}
+小结：ApplicationContext从层次上 继承/扩展了 BeanFactory，从结构上 组合/关联了BeanFactory，这是什么设计模式呢？
+装饰者模式：组合并继承，底层实现基于被继承的实例；
+区别：ApplicationContext与BeanFactory区别？
+BeanFactory才是真正的Bean容器，管理bean生命周期；
+ApplicationContext组合即包含了BeanFactory的职责，并且还有其他功能；
+启示：ApplicationContext继承/扩展了HierarchicalBeanFactory接口，给开发人员的提示？
+Hierarchical层次性的，层次性说明有上下继承关系，
+public interface HierarchicalBeanFactory extends BeanFactory {
+    BeanFactory getParentBeanFactory();
+}
+---
