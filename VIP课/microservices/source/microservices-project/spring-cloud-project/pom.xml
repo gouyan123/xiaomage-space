@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>microservices-project</artifactId>
+        <groupId>com.gupao</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>spring-cloud-project</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>spring-cloud-native-application</module>
+        <module>spring-cloud-config-client</module>
+        <module>spring-cloud-config-server</module>
+        <module>spring-cloud-service-discovery-client</module>
+        <module>spring-cloud-client-application</module>
+        <module>spring-cloud-server-application</module>
+        <module>spring-cloud-servlet-gateway</module>
+        <module>spring-cloud-stream-binder-rocketmq</module>
+        <module>spring-cloud-stream-binder-http</module>
+    </modules>
+
+    <properties>
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
