@@ -9,16 +9,16 @@ import org.springframework.context.support.GenericApplicationContext;
 public class SpringEventListenerDemo {
 
     public static void main(String[] args) {
+
         GenericApplicationContext context = new GenericApplicationContext();
 
         // 添加事件监听器
-//        context.addApplicationListener(new ApplicationListener<ApplicationEvent>() {
-//            @Override
-//            public void onApplicationEvent(ApplicationEvent event) {
-//                System.err.println("监听事件:" + event);
-//
-//            }
-//        });
+        context.addApplicationListener(new ApplicationListener<ApplicationEvent>() {
+            @Override
+            public void onApplicationEvent(ApplicationEvent event) {
+                System.err.println("监听事件:" + event);
+            }
+        });
 
         // 添加自义定监听器
         context.addApplicationListener(new ClosedListener());
@@ -26,14 +26,13 @@ public class SpringEventListenerDemo {
         // 启动 Spring 应用上下文
         context.refresh();
 
-        // 一个是 ContextRefreshedEvent
-        // 一个是 PayloadApplicationEvent
+        // 监听2个事件：分别为ContextRefreshedEvent和PayloadApplicationEvent
         // Spring 应用上下文发布事件
         context.publishEvent("HelloWorld"); // 发布一个 HelloWorld 内容的事件
-        // 一个是 MyEvent
+        // 监听1个事件：MyEvent
         context.publishEvent(new MyEvent("HelloWorld 2018"));
 
-        // 一个是 ContextClosedEvent
+        // 监听1个事件：ContextClosedEvent
         // 关闭应用上下文
         context.close();
     }
