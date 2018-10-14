@@ -298,3 +298,14 @@ protected void finishRefresh() {
     this.publishEvent((ApplicationEvent)(new ContextRefreshedEvent(this)));
     LiveBeansView.registerApplicationContext(this);
 }
+
+Spring 内部发送事件
+ContextRefreshedEvent
+ApplicationContextEvent
+ApplicationEvent
+refresh() -> finishRefresh() -> publishEvent(new ContextRefreshedEvent(this));
+
+ContextClosedEvent
+ApplicationContextEvent
+ApplicationEvent
+close() -> doClose() -> publishEvent(new ContextClosedEvent(this));
