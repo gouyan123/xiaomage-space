@@ -1,0 +1,94 @@
+小马哥新书：SpringBoot编程思想
+---
+项目名称：spring-application
+项目路径：VIP课/microservices/source/microservices-project/spring-application
+讲解对象：--SpringApplication--
+@SpringBootApplication
+public class MicroservicesProjectApplication {
+    public static void main(String[] args) {
+        // 写法 1：设置随机端口并启动 springboot；不是build模式，每次都要set；
+        SpringApplication springApplication = new SpringApplication(MicroservicesProjectApplication.class);
+        Map<String, Object> properties = new LinkedHashMap<>();
+        properties.put("server.port", 0);
+        springApplication.setDefaultProperties(properties);
+        // 设置为 非 web 应用
+        springApplication.setWebApplicationType(WebApplicationType.NONE);
+        ConfigurableApplicationContext context = springApplication.run(args);
+        // 写法 2：设置随机端口并启动 springboot；build模式，API更简洁；
+        new SpringApplicationBuilder(MicroservicesProjectApplication.class)
+        .properties("server.port=0") // fluent风格API；server.port=0表示随机向系统要一个可用端口；
+        .run(args);
+    }
+}
+---
+@SpringBootApplication：标注当前一些功能；跟@SpringBootApplication注解，如下：
+
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan(excludeFilters ={
+    @Filter(type = FilterType.CUSTOM,classes = {TypeExcludeFilter.class}),
+    @Filter(type = FilterType.CUSTOM,classes = {AutoConfigurationExcludeFilter.class})})
+public @interface SpringBootApplication {
+    ...
+}
+
+@ComponentScan，spring framework 3.1开始引入的，扫描当前包及其子包下使用了Spring注解的类，并实例化到spring容器，
+跟@ComponentScan，代码如下：
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE})
+@Documented
+@Repeatable(ComponentScans.class)
+public @interface ComponentScan {
+    ...
+}
+
+@EnableAutoConfiguration：激活自动装配；@Enable模式：@Enable开头的都可以称为@Enable模式；例如：
+@EnableWebMvc，@EnableTransactionManagement，@EnableAspectAutoProxy，@EnableAsnc
+
+@SpringBootConfiguration 等价于 @Configuration，作为 Configuration类的注解；Spring注解驱动上下文，和
+XML配置文件驱动上下文ClassPathXmlApplicationContext一样，都是找BeanDefinition的，即@Bean或@Configuration
+注释的类的，举例如下：
+package com.gupao.spring;
+@Configuration
+public class SpringAnnotationDemo {
+    public static void main(String[] args) {
+        // XML配置文件驱动上下文 ClassPathXmlApplicationContext
+        // Annotation注解驱动上下文
+        // 两者都是找 BeanDefinition的，即@Bean或者@Configuration注释的类的；
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        // 注册一个 Configuration Class = SpringAnnotationDemo
+        context.register(SpringAnnotationDemo.class);
+        // 上下文启动
+        context.refresh();
+        System.out.println(context.getBean(SpringAnnotationDemo.class));
+    }
+}
+AnnotationConfigApplicationContext是 注解驱动上下文，springframework3.0引入的，负责将使用@Bean和@Configuration
+注解的类 加载到spring容器中；
+
+@Component注解的派生性：@Component是根；@Service，@Repository，@Controller，@Configuration是派生的；
+@Component			        @Component                            @Component
+public @interface Service   {	public @interface Repository {    public @interface Controller {
+    ...				                ...                               ...
+}				            }                                     }
+@Component
+public @interface Configuration {
+	...
+}
+Meta-Annotations：元注解，即 标注注解的注解，元注解允许继承；
+Stereotype Annotations：模式注解，@Service，@Repository，@Controller，@Configuration都是模式注解：
+派生性只在 @Component中有效果：@Component与@ComponentScan关系？@ComponentScan扫描@Component及其派生的注解；
+@ComponentScan注解的 扫描类：ClassPathScanningCandidateComponentProvider.registerDefaultFilters()如下：
+protected void registerDefaultFilters() {
+    // 增加过滤器，只扫描 @Component注解即其派生的注解
+    this.includeFilters.add(new AnnotationTypeFilter(Component.class));
+    ...
+}
+处理类：ConfigurationClassParser；
+---
+SpringApplication：springboot应用的引导；
