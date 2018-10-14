@@ -1,6 +1,5 @@
 2018课程位置：VIP课/microservices/source/microservices-project
----
-第6节 云原生应用（Cloud Native Applications）
+---第6节 云原生应用（Cloud Native Applications）
 官网说明文档位置：spring.io → 导航栏PROJECTS → 方框 SPRING CLOUD → 右侧 REFERENCE → Single HTML；
 官方文档链接：http://cloud.spring.io/spring-cloud-static/Finchley.SR1/single/spring-cloud.html；
 
@@ -76,7 +75,7 @@ management.endpoints.web.exposure.include = *
 	}
 }
 有2个上下文，分别为 application-1 和 bootstrap，beans代表每个上下文管理的 bean；bootstrap上下文的parentId
-为null，表示bootstrap 是 根上下文
+为null，表示bootstrap 是 根上下文；application-1上下文的父上下文是bootstrap上下文；
 管理上下文 和 服务上下文 分离：application.properties 设置如下：
 server.port = 9090
 management.server.port = 9091
@@ -199,3 +198,203 @@ SpringBoot有 1个上下文 ApplicationContext，如果独立管理上下文，�
 SpringCloud 时会增加 1个上下文 Bootstrap ApplicationContext；SpringBoot 2.x合并为 1个ApplicationContext，
 但是只要使用 SpringCloud就会增加 1个Bootstrap ApplicationContext
 ---
+显示的设置 双亲上下文，方法如下，在启动类主方法上面操作：
+@SpringBootApplication
+public class SpringBootApplicationBootstrap {
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(SpringBootApplicationBootstrap.class)
+                .parent(new AnnotationConfigApplicationContext())   // 显示设置双亲上下文
+                .run(args);
+    }
+}
+此时，会报 AnnotationConfigApplicationContext@7cd62f43 has not been refreshed yet，即上下文没有加载；
+因此要先创建上下文，并加载；
+@SpringBootApplication
+public class SpringBootApplicationBootstrap {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.refresh();
+        new SpringApplicationBuilder(SpringBootApplicationBootstrap.class)
+                .parent(context)   // 显示设置双亲上下文
+                .run(args);
+    }
+}
+访问 Endpoints：http://localhost:9091/actuator/beans，结果如下：
+{
+	"context" : {
+	    "org.springframework.context.annotation.AnnotationConfigApplicationContext@7e0babb1": {
+                    "beans": {...},
+                    "parentId": "bootstrap"
+                },
+		"application-1" : {
+			"beans" : {...},
+			"parentId" : "AnnotationConfigApplicationContext@7e0babb1"
+		},
+		"bootstrap" : {
+			"beans" : {...},
+			"parentId" : null
+		}
+	}
+}
+相比原来，多了一个 AnnotationConfigApplicationContext@7e0babb1上下文，这个上下文名字不好，可以设置，如下：
+context.setId("小马哥");此时返回的上下文名称将改为 小马哥；此时 application-1的双亲上下文是 "小马哥"，
+小马哥的双亲上下文是 bootstrap；bootstrap（Read only）> "小马哥"（Read only）> application-1（Read only）
+---
+子上下文启动，必须双亲上下文先启动；例如 bootstrap双亲上下文 > 子上下文context-1，是否意味着bootstrap要
+提前加载某些资源？
+
+
+---
+上下文理解：
+服务上下文 通过自己的BeanFactory 间接管理 bean，例如 bean1，bean2；
+Bootstrap根上下文 通过自己的BeanFactory 间接管理 bean，例如 beanA，beanB；
+层次性关系：Bootstrap > 服务上下文 即Bootstrap是服务上下文的双亲上下文；
+可以自定义上下文，例如 小马哥上下文，通过自己的BeanFactory，间接管理 bean x；
+层次关系：Bootstrap > 小马哥上下文 > 服务上下文；子上下文 可以使用 父上下文管理的 bean；例如，服务上下文
+可以用 小马哥上下文中的bean，也可以用 Bootstrap上下文中的bean；
+上下文ApplicationContext不只有BeanFactory管理Bean生命周期，还有Environment配置管理，每个上下文都有一个环境 Envrionment；
+子上下文的 Environment会合并父上下文的 Environment；
+代码如下：
+@SpringBootApplication
+public class SpringBootApplicationBootstrap {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.refresh();
+        context.setId("小马哥");    // 设置上下文名称
+        // 向上下文中添加 bean，beanName为"helloWorld"，然后直接可以使用@Autowired String helloWorld 获取其bean了
+        context.registerBean("helloWorld",String.class,"HelloWorld");
+        new SpringApplicationBuilder(SpringBootApplicationBootstrap.class)
+                .parent(context)   // 显示设置双亲上下文
+                .run(args);
+    }
+    @Autowired
+    @Qualifier("helloWorld")
+    private String helloWorld;  // 使用父上下文小马哥 中的 bean
+
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public String index(){
+        return helloWorld;
+    }
+}
+其中，context.registerBean("helloWorld",String.class,"HelloWorld");向 小马哥上下文中添加实例bean;
+@Autowired @Qualifier("helloWorld") private String helloWorld;当前上下文从父上下文小马哥 中获取bean实例；
+类比：Root WebApplication管理 ServiceBeans和ComponentBeans；DispatcherServlet和Filter是Root WebApplication
+的子上下文，可以使用Root WebApplication里面管理的bean；
+---
+bootstrap上下文是根上下文，里面有很多配置要加载；
+***加载bootstrap.yml创建的是 根上下文bootrap，加载application.yml创建的是 当前的 服务上下文，服务上下文是bootstrap上下文的 子上下文，子上下文可以获取父上下文里面的所有实例；
+使用bootstrap.yml可以实现 上下文的分离，bootstrap根上下文可以作为一个公共交集使用；
+---
+理解 Bootstrap应用上下文：
+AbstractApplicationContext.setParent()方法 打断点，重新启动项目：
+public abstract class AbstractApplicationContext implements ConfigurableApplicationContext {
+    public void setParent(@Nullable ApplicationContext parent) {
+        this.parent = parent;
+        if (parent != null) {
+            // 将父上下文的 环境 合并到 当前环境中；
+            Environment parentEnvironment = parent.getEnvironment();
+            if (parentEnvironment instanceof ConfigurableEnvironment) {
+                this.getEnvironment().merge((ConfigurableEnvironment)parentEnvironment);
+            }
+        }
+    }
+}
+调用链路：
+org.springframework.boot.builder.ParentContextApplicationContextInitializer.initialize()：springboot实现；
+--
+org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent()：spring cloud实现：
+监听ApplicationEnvironmentPreparedEvent事件，ApplicationEnvironmentPreparedEvent表示Environment已准备好，可以被调整；
+在 onApplicationEvent()上打断点
+public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
+    ConfigurableEnvironment environment = event.getEnvironment();
+    // 如果spring.cloud.bootstrap.enabled=false，表示禁用 bootstrap.yml配置文件
+    if ((Boolean)environment.getProperty("spring.cloud.bootstrap.enabled", Boolean.class, true)) {
+        if (!environment.getPropertySources().contains("bootstrap")) {
+            ConfigurableApplicationContext context = null;
+            // 加载 bootstrap.yml
+            String configName = environment.resolvePlaceholders("${spring.cloud.bootstrap.name:bootstrap}");
+            Iterator var5 = event.getSpringApplication().getInitializers().iterator();
+            while(var5.hasNext()) {
+                ApplicationContextInitializer<?> initializer = (ApplicationContextInitializer)var5.next();
+                if (initializer instanceof ParentContextApplicationContextInitializer) {
+                    context = this.findBootstrapContext((ParentContextApplicationContextInitializer)initializer, configName);
+                }
+            }
+            if (context == null) {
+                context = this.bootstrapServiceContext(environment, event.getSpringApplication(), configName);
+            }
+            this.apply(context, event.getSpringApplication(), environment);
+        }
+    }
+}
+在 idea的 Program Arguments中设置：--spring.cloud.bootstrap.enabled=false；
+关闭 bootstrap.yml，关闭 spring cloud Bootstrap上下文，注意：spring boot中没有 bootstrap这个上下文，只有applicationContext上下文；
+启动项目后，访问http://localhost:9091/actuator/beans，发现已经没有 spring cloud Bootstrap上下文了；
+关闭spring cloud Bootstrap上下文只是观察理解上下文层次，实际中一定不要关，否则spring cloud无法正常使用；
+spring cloud Bootstrap上下文可以加载 配置中心，获取一下配置，这样配置将完全依赖外部；
+
+技术关联：Spring应用上下文层次，Spring事件；
+---
+理解Environment：
+应用配置 即Environment 加载下列 配置源 的顺序？
+1 命令行参数；2 application.yml；3 bootstrap.yml；4 分布式配置.yml；5 Java System 属性；6 环境变量；
+查看官方文档：https://docs.spring.io/spring-boot/docs/2.0.5.RELEASE/reference/htmlsingle/#boot-features-web-environment
+1 Devtools global settings properties on your home directory (~/.spring-boot-devtools.properties when devtools is active).
+2 @TestPropertySource annotations on your tests.
+3 @SpringBootTest#properties annotation attribute on your tests.
+4 Command line arguments.
+5 Properties from SPRING_APPLICATION_JSON (inline JSON embedded in an environment variable or system property).
+6 ServletConfig init parameters.
+7 ServletContext init parameters.
+8 JNDI attributes from java:comp/env.
+9 Java System properties (System.getProperties()).
+10 OS environment variables.
+11 A RandomValuePropertySource that has properties only in random.*.
+12 Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants).
+13 Profile-specific application properties packaged inside your jar (application-{profile}.properties and YAML variants).
+14 Application properties outside of your packaged jar (application.properties and YAML variants).
+15 Application properties packaged inside your jar (application.properties and YAML variants).
+16 @PropertySource annotations on your @Configuration classes.
+17 Default properties (specified by setting SpringApplication.setDefaultProperties).
+访问 http://localhost:9091/actuator/env，获取环境配置信息；返回 各种类型 配置源 加载顺序；
+可以在 BootstrapApplicationListener.bootstrapServiceContext()中打断点，观察各种类型配置源 的加载顺序；
+跟 ConfigurableEnvironment.getPropertySources():MutablePropertySources；
+跟 PropertySourcesPropertyResolver.getProperty(String key, Class<T> targetValueType, boolean resolveNestedPlaceholders):T，该方法为获取
+配置信息；
+***当 多配置源 配置信息有重复时，用先加载配置源的；
+***配置中心为什么能被覆盖？MutablePropertySources，Mutable易变的；
+---
+Bean生命周期：
+全局搜索关键字"restartEnd"，搜索方法：Edit → Find → Find in Path → Scope；
+跟 RestartEndPoint.doRestart()，该方法做了 3件事：1 重新启动 应用上下文applicationContext
+@Endpoint(id = "restart",enableByDefault = false)
+public class RestartEndpoint{
+     public synchronized ConfigurableApplicationContext doRestart() {
+            if (this.context != null) {
+                if (this.integrationShutdown != null) {
+                    this.integrationShutdown.stop(this.timeout);
+                }
+                this.application.setEnvironment(this.context.getEnvironment());
+                this.close();
+                this.overrideClassLoaderForRestart();
+                this.context = this.application.run(this.args);
+            }
+            return this.context;
+        }
+     }
+}
+
+/actuator/pause与/actuator/start端口：
+访问/actuator/pause 端口会调用 ApplicationContext.stop()方法，管理 Spring LifeCycle Beans；
+访问/actuator/start 端口会调用 ApplicationContext.start()方法，管理 Spring LifeCycle Beans；
+跟 LifeCycle接口：
+public interface Lifecycle {
+    void start();
+
+    void stop();
+
+    boolean isRunning();
+}
+---
+---
+配置中心完全依赖Environment；
