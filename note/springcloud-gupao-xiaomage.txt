@@ -42,4 +42,160 @@ Hierarchical层次性的，层次性说明有上下继承关系，
 public interface HierarchicalBeanFactory extends BeanFactory {
     BeanFactory getParentBeanFactory();
 }
+ApplicationContext具有Bean的生命周期管理能力，来自于BeanFactory，并且ApplicationContext又是HierarchicalBeanFactory
+子接口，说明它具备BeanFactory的层次性关系；
+以Parent ClassLoader和Child ClassLoader理解 层次性关系：
+Parent ClassLoader加载10个类，Child ClassLoader加载20个类，Child ClassLoader实际可以用30个类；
+以Parent BeanFactory和Child BeanFactory理解 层次性关系：
+Parent BeanFactory管理10个Bean，Child BeanFactory管理20个Bean，Child BeanFactory实际管理了30个Bean；
+
+同时ApplicationContext有getParent()方法，返回双亲 ApplicationContext；
+ConfigurableApplicationContext extends ApplicationContext：ConfigurableApplicationContext可配置的上下文
+其他上下文都是只读，ConfigurableApplicationContext是一个可写上下文，有设置双亲ApplicationContext的能力；
+
+
+---
+创建 spring-cloud-native-application项目，来更好理解 ApplicationContext与BeanFactory的层次性关系
+项目路径：VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-native-application
+---
+Endpoints：web端点，即web接口；Endpoints本课重点难点；Endpoints需要spring-boot-starter-actuator包；
+理解 Spring Boot Actuator Endpoints：
+# 开放 所有Web 管理 Endpoints
+management.endpoints.web.exposure.include = *
+浏览：http://localhost:9090/actuator/beans，结果如下：
+{
+	"context" : {
+		"application-1" : {
+			"beans" : {...},
+			"parentId" : "bootstrap"
+		},
+		"bootstrap" : {
+			"beans" : {...},
+			"parentId" : null
+		}
+	}
+}
+有2个上下文，分别为 application-1 和 bootstrap，beans代表每个上下文管理的 bean；bootstrap上下文的parentId
+为null，表示bootstrap 是 根上下文
+管理上下文 和 服务上下文 分离：application.properties 设置如下：
+server.port = 9090
+management.server.port = 9091
+启动服务后，发现tomcat有 2个启动端口；访问 http://localhost:9091/actuator，返回结果如下：
+{
+    "_links": {
+        "self": {
+            "href": "http://localhost:9091/actuator",
+            "templated": false
+        },
+        "health": {
+            "href": "http://localhost:9091/actuator/health",
+            "templated": false
+        },
+        "info": {
+            "href": "http://localhost:9091/actuator/info",
+            "templated": false
+        }
+    }
+}
+当 management.endpoints.web.exposure.include = *时，即开放 所有Web 管理的 Endpoints再访问
+http://localhost:9091/actuator，发现返回结果变得很多了；
+{
+    "_links": {
+        "self": {
+            "href": "http://localhost:9091/actuator",
+            "templated": false
+        },
+        "auditevents": {
+            "href": "http://localhost:9091/actuator/auditevents",
+            "templated": false
+        },
+        "beans": {
+            "href": "http://localhost:9091/actuator/beans",
+            "templated": false
+        },
+        "health": {
+            "href": "http://localhost:9091/actuator/health",
+            "templated": false
+        },
+        "conditions": {
+            "href": "http://localhost:9091/actuator/conditions",
+            "templated": false
+        },
+        "configprops": {
+            "href": "http://localhost:9091/actuator/configprops",
+            "templated": false
+        },
+        "env": {
+            "href": "http://localhost:9091/actuator/env",
+            "templated": false
+        },
+        "env-toMatch": {
+            "href": "http://localhost:9091/actuator/env/{toMatch}",
+            "templated": true
+        },
+        "info": {
+            "href": "http://localhost:9091/actuator/info",
+            "templated": false
+        },
+        "loggers-name": {
+            "href": "http://localhost:9091/actuator/loggers/{name}",
+            "templated": true
+        },
+        "loggers": {
+            "href": "http://localhost:9091/actuator/loggers",
+            "templated": false
+        },
+        "heapdump": {
+            "href": "http://localhost:9091/actuator/heapdump",
+            "templated": false
+        },
+        "threaddump": {
+            "href": "http://localhost:9091/actuator/threaddump",
+            "templated": false
+        },
+        "metrics-requiredMetricName": {
+            "href": "http://localhost:9091/actuator/metrics/{requiredMetricName}",
+            "templated": true
+        },
+        "metrics": {
+            "href": "http://localhost:9091/actuator/metrics",
+            "templated": false
+        },
+        "scheduledtasks": {
+            "href": "http://localhost:9091/actuator/scheduledtasks",
+            "templated": false
+        },
+        "httptrace": {
+            "href": "http://localhost:9091/actuator/httptrace",
+            "templated": false
+        },
+        "mappings": {
+            "href": "http://localhost:9091/actuator/mappings",
+            "templated": false
+        },
+        "refresh": {
+            "href": "http://localhost:9091/actuator/refresh",
+            "templated": false
+        },
+        "restart": {
+            "href": "http://localhost:9091/actuator/restart",
+            "templated": false
+        },
+        "pause": {
+            "href": "http://localhost:9091/actuator/pause",
+            "templated": false
+        },
+        "resume": {
+            "href": "http://localhost:9091/actuator/resume",
+            "templated": false
+        },
+        "features": {
+            "href": "http://localhost:9091/actuator/features",
+            "templated": false
+        }
+    }
+}
+SpringBoot有 1个上下文 ApplicationContext，如果独立管理上下文，会有 2个 ApplicationContext，当使用
+SpringCloud 时会增加 1个上下文 Bootstrap ApplicationContext；SpringBoot 2.x合并为 1个ApplicationContext，
+但是只要使用 SpringCloud就会增加 1个Bootstrap ApplicationContext
 ---
