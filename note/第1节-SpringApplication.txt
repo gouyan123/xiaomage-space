@@ -3,7 +3,7 @@
 项目名称：spring-application
 项目路径：VIP课/microservices/source/microservices-project/spring-application
 讲解对象：--SpringApplication--
-@SpringBootApplication
+@SpringBootApplication/@EnableAutoConfiguration
 public class MicroservicesProjectApplication {
     public static void main(String[] args) {
         // 写法 1：设置随机端口并启动 springboot；不是build模式，每次都要set；
@@ -300,12 +300,105 @@ protected void finishRefresh() {
 }
 
 Spring 内部发送事件
-ContextRefreshedEvent
-ApplicationContextEvent
-ApplicationEvent
+1 ContextRefreshedEvent →继承→ ApplicationContextEvent →继承→ ApplicationEvent
 refresh() -> finishRefresh() -> publishEvent(new ContextRefreshedEvent(this));
 
-ContextClosedEvent
-ApplicationContextEvent
-ApplicationEvent
+2 ContextClosedEvent →继承→ ApplicationContextEvent →继承→ ApplicationEvent
 close() -> doClose() -> publishEvent(new ContextClosedEvent(this));
+
+Spring事件 都是 ApplicationEvent 类型；
+发送 Spring：ApplicationEventMulticaster#multicastEvent(ApplicationEvent, ResolvableType)
+
+Spring 事件的类型：ApplicationEvent；
+Spring 事件监听器：ApplicationListener；
+Spring 事件广播器：ApplicationEventMulticaster；实现类都是：SimpleApplicationEventMulticaster；
+
+Spring 事件理解为消息
+ApplicationEvent 相当于消息内容
+ApplicationListener 相当于消息消费者、订阅者
+ApplicationEventMulticaster 相当于消息生产者、发布者
+
+创建 com.gupao.spring.ApplicationEventMulticasterDemo，简单展示spring事件的使用方法；
+
+创建 com.gupao.microservicesproject.SpringBootEventDemo，在springboot启动过程中增加监听器，监听springboot
+启动各个时间节点，如下：
+}
+监听到事件 ： ApplicationStartingEvent
+监听到事件 ： ApplicationEnvironmentPreparedEvent
+监听到事件 ： ApplicationPreparedEvent
+监听到事件 ： ContextRefreshedEvent
+监听到事件 ： ServletWebServerInitializedEvent
+监听到事件 ： ApplicationStartedEvent
+监听到事件 ： ApplicationReadyEvent
+监听到事件 ： ContextClosedEvent
+
+Spring Boot 事件监听器
+
+org.springframework.context.ApplicationListener=\
+org.springframework.boot.ClearCachesApplicationListener,\
+org.springframework.boot.builder.ParentContextCloserApplicationListener,\
+org.springframework.boot.context.FileEncodingApplicationListener,\
+org.springframework.boot.context.config.AnsiOutputApplicationListener,\
+org.springframework.boot.context.config.ConfigFileApplicationListener,\
+org.springframework.boot.context.config.DelegatingApplicationListener,\
+org.springframework.boot.context.logging.ClasspathLoggingApplicationListener,\
+org.springframework.boot.context.logging.LoggingApplicationListener,\
+org.springframework.boot.liquibase.LiquibaseServiceLocatorApplicationListener
+
+public class ConfigFileApplicationListener implements EnvironmentPostProcessor, SmartApplicationListener, Ordered {
+	...
+	private static final String DEFAULT_NAMES = "application";  // application.yml文件
+	...
+	@Override
+    public void onApplicationEvent(ApplicationEvent event) {
+        if (event instanceof ApplicationEnvironmentPreparedEvent) {
+            // 跟onApplicationEnvironmentPreparedEvent()
+            onApplicationEnvironmentPreparedEvent(
+                    (ApplicationEnvironmentPreparedEvent) event);
+        }
+        if (event instanceof ApplicationPreparedEvent) {
+            onApplicationPreparedEvent(event);
+        }
+    }
+}
+ConfigFileApplicationListener.onApplicationEnvironmentPreparedEvent()
+private void onApplicationEnvironmentPreparedEvent(ApplicationEnvironmentPreparedEvent event) {
+    List<EnvironmentPostProcessor> postProcessors = loadPostProcessors();
+    postProcessors.add(this);
+    AnnotationAwareOrderComparator.sort(postProcessors);
+    for (EnvironmentPostProcessor postProcessor : postProcessors) {
+        // 跟postProcessEnvironment()
+        postProcessor.postProcessEnvironment(event.getEnvironment(),
+                event.getSpringApplication());
+    }
+}
+ConfigFileApplicationListener.postProcessEnvironment()
+@Override
+public void postProcessEnvironment(ConfigurableEnvironment environment,SpringApplication application) {
+    // 跟addPropertySources()
+    addPropertySources(environment, application.getResourceLoader());
+}
+protected void addPropertySources(ConfigurableEnvironment environment,ResourceLoader resourceLoader) {
+    RandomValuePropertySource.addToEnvironment(environment);
+    // 跟 Loader()
+    new Loader(environment, resourceLoader).load();
+}
+Loader.Loader()
+Loader(ConfigurableEnvironment environment, ResourceLoader resourceLoader) {
+    this.environment = environment;
+    this.resourceLoader = (resourceLoader != null ? resourceLoader : new DefaultResourceLoader());
+    this.propertySourceLoaders = SpringFactoriesLoader.
+    loadFactories(PropertySourceLoader.class, getClass().getClassLoader());
+}
+// 跟 PropertySourceLoader的实现类YamlPropertySourceLoader和实现类PropertiesPropertySourceLoader
+private final List<PropertySourceLoader> propertySourceLoaders;
+ConfigFileApplicationListener监听 ApplicationEnvironmentPreparedEvent事件，从而加载application.properties 或者 application.yml 文件
+
+SpringApplication 利用
+1 Spring 应用上下文（ApplicationContext）生命周期控制 注解驱动 Bean；
+2 Spring 事件/监听（ApplicationEventMulticaster）机制加载或者初始化组件；
+SpringBoot就是把Spring的东西搬出来，做一个嵌入式容器，用spring的上下文来驱动这个容器，把bean装载好；
+
+导读 LoggingApplicationListener.onApplicationEvent()，
+
+小结：SpringBoot事件都源于Spring事件；SpringBoot很多组件依赖于SpringBoot事件，SpringBoot可以理解为事件驱动的；
