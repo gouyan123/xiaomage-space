@@ -1,0 +1,68 @@
+REST 理论基础：RPC (Remote Procedure Call：远程过程调用)
+语言相关：Java - RMI（Remote Method Invocation）；.NET - COM+；
+语言无关：
+1 SOA，Web Services，SOAP（传输介质协议），可以走HTTP、SMTP（通讯协议）；
+2 微服务（MSA）一般用REST做，REST介质为HTML、JSON、XML，REST通讯协议为HTTP，HTTP分为：
+1、HTTP 1.1 无状态短连接，Keep-Alive有连接池的概念表示连接存活时间(请求头Header里面有)，并延伸出Long Polling表示长时间轮休；
+servlet会自动帮你断开连接，但是可以自己写socket不断开连接；
+2、HTTP/2 有状态长连接；
+3、WebSocket是短连接和长连接的折中方案，但是REST里面不会有WebSocket；
+
+REST技术实现：
+Spring 客户端 ： RestTemplate
+Spring WebMVC ： @RestController = @Controller + @ResponseBody + @RequestBody
+Spring Cloud : RestTemplate 扩展 + @LoadBalanced
+
+
+
+REST的 Cacheability（可缓存性 与REST没有必然关系）：创建 spring-mvc-rest项目进行说明；项目路径：VIP课/microservices/source/microservices-project/
+创建 com.gupao.micro.services.mvc.controller.CachedRestController()方法
+@ResponseBody：表示响应体（Response Body）；响应（Response）= 响应头即元信息（Headers）+ 响应体即业务信息（Response Body表示Http实体/Payload表示消息，事件实体）
+public class HttpEntity<T> {
+	...
+	private final HttpHeaders headers;
+
+	@Nullable
+	private final T body;
+}
+请求方法
+
+HEAD
+元信息（Meta-Data）
+
+Accept-Language -> Locale
+Connection -> Keep-Alive
+实现
+
+多值 Map MultiValueMap
+
+Key : Value = 1 : N
+
+Name : Value = 1 : N
+
+public class HttpHeaders implements MultiValueMap<String, String>, Serializable {
+    ...
+}
+响应体
+
+业务信息（Business Data）
+Body：HTTP 实体、REST
+@ResponseBody
+HttpEntity.body 属性（泛型结构）
+Payload ： 消息 JMS、事件、SOAP
+public class HttpEntity<T> {
+	...
+	private final HttpHeaders headers;
+
+	@Nullable
+	private final T body;
+}
+
+HTTP 状态码 (封装在org.springframework.http.HttpStatus 枚举类里)
+200：org.springframework.http.HttpStatus#OK
+304：org.springframework.http.HttpStatus#NOT_MODIFIED
+第一次完整请求，获取响应头（200），直接获取
+第二次请求，只读取头信息，响应头（304），客户端（流量器）取上次 Body 结果
+400：org.springframework.http.HttpStatus#BAD_REQUEST
+404
+500
