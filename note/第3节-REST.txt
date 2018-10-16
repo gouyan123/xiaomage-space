@@ -13,11 +13,9 @@ Spring 客户端 ： RestTemplate
 Spring WebMVC ： @RestController = @Controller + @ResponseBody + @RequestBody
 Spring Cloud : RestTemplate 扩展 + @LoadBalanced
 
-
-
 REST的 Cacheability（可缓存性 与REST没有必然关系）：创建 spring-mvc-rest项目进行说明；项目路径：VIP课/microservices/source/microservices-project/
-创建 com.gupao.micro.services.mvc.controller.CachedRestController()方法
-@ResponseBody：表示响应体（Response Body）；响应（Response）= 响应头即元信息（Headers）+ 响应体即业务信息（Response Body表示Http实体/Payload表示消息，事件实体）
+@ResponseBody：表示响应体（Response Body）；
+响应（Response）= 响应头即元信息（Headers Accept-Language -> Locale,Connection -> Keep-Alive）+ 响应体即业务信息（Response Body表示Http实体/Payload表示消息，事件实体）
 public class HttpEntity<T> {
 	...
 	private final HttpHeaders headers;
@@ -25,44 +23,222 @@ public class HttpEntity<T> {
 	@Nullable
 	private final T body;
 }
-请求方法
-
-HEAD
-元信息（Meta-Data）
-
-Accept-Language -> Locale
-Connection -> Keep-Alive
-实现
-
-多值 Map MultiValueMap
-
-Key : Value = 1 : N
-
-Name : Value = 1 : N
-
+头：HttpHeaders 是MultiValueMap接口的实现类，该接口为多值map，即一个key对应多个value；
 public class HttpHeaders implements MultiValueMap<String, String>, Serializable {
     ...
 }
-响应体
-
-业务信息（Business Data）
-Body：HTTP 实体、REST
-@ResponseBody
-HttpEntity.body 属性（泛型结构）
-Payload ： 消息 JMS、事件、SOAP
-public class HttpEntity<T> {
-	...
-	private final HttpHeaders headers;
-
-	@Nullable
-	private final T body;
-}
+体：泛型T；
 
 HTTP 状态码 (封装在org.springframework.http.HttpStatus 枚举类里)
 200：org.springframework.http.HttpStatus#OK
-304：org.springframework.http.HttpStatus#NOT_MODIFIED
-第一次完整请求，获取响应头（200），直接获取
-第二次请求，只读取头信息，响应头（304），客户端（流量器）取上次 Body 结果
-400：org.springframework.http.HttpStatus#BAD_REQUEST
-404
-500
+304：org.springframework.http.HttpStatus#NOT_MODIFIED：第一次请求：返回 响应头(200) + 响应体；
+第二次请求，如果 响应头=304，响应体则取上一次返回结果；
+
+创建 com.gupao.micro.services.mvc.controller.CachedRestController()方法如下：
+@Controller
+public class CachedRestController{
+    /**状态码304表示不会被改变；这种没有缓存，因为服务端和客户端没有形成默契；这是HTTP协议，被REST继承了*/
+    @RequestMapping
+    @ResponseBody
+    public String helloWorld() {
+        // Body = "Hello,World"
+        return "Hello,World";
+    }
+
+    /**ResponseEntity = 响应头 + 响应体*/
+    @RequestMapping("/cache") //  Spring MVC 返回值处理
+    @OptionsMapping(name="")
+    public ResponseEntity<String> cachedHelloWorld(@RequestParam(required = false, defaultValue = "false") boolean cached) {
+        /**如果用缓存，直接返回响应头；如果不用缓存，要返回 响应头 + 响应体*/
+        if (cached) {
+            /**     responseEntity  =  responseBody   +   responseHeader*/
+            return new ResponseEntity("hello world",HttpStatus.NOT_MODIFIED);
+        } else {
+            return ResponseEntity.ok("Hello,World");
+        }
+    }
+}
+启动主类MvcRestApplication，访问 http://localhost:8080/cache；
+--
+Uniform interface（统一接口）：
+URI与 URL：U Uniform统一；R Resources资源；I Identify 鉴别；L Locate 定位；
+在Java中，URI与URL可以相互互换；URI可以理解为相对路径，URL可以理解为绝对路径；
+
+servlet入口，即 HttpServlet的入口是 service(request,response)方法；
+
+资源操作 - HTTP 动词
+
+GET：
+注解：@GetMapping
+注解属性别名和覆盖（https://github.com/spring-projects/spring-framework/wiki/Spring-Annotation-Programming-Model#attribute-aliases-and-overrides）
+@Target({ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@RequestMapping(method = {RequestMethod.GET})
+public @interface GetMapping {
+    // 表示 注解属性别名和覆盖
+    @AliasFor(annotation = RequestMapping.class)
+    String name() default "";
+    ...
+}
+这种注解是Spring Framework 4.2 引入的，Spring Boot 1.3 才可以使用，Spring Boot加以发展；
+创建 com.gupao.micro.services.mvc.annotation.OptionsMapping注解，代码如下：
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@RequestMapping(method = RequestMethod.OPTIONS)  // 如果不增加元注解的话，会报错
+public @interface OptionsMapping {
+    //@OptionsMapping要表示@RequestMapping的属性，必须自己重新该定义属性，才能表示
+    @AliasFor(annotation = RequestMapping.class) // 指定之后变成RequestMethod的属性
+    String name() default ""; // 不加的话，只是代表@OptionsMapping自己的属性
+}
+该 @OptionsMapping注解使用在了 CachedRestController.cachedHelloWorld()方法上；
+
+
+@RequestMapping(method = RequestMethod.POST) // 注解“派生性”
+public @interface PostMapping {
+    ...
+    @AliasFor(annotation = RequestMapping.class) // 注解别名
+	String name() default "";
+    ...
+}
+@PostMapping 是注解，@RequestMapping是@PostMapping的注解，即@RequestMapping是@PostMapping的元注解，换言之，
+@RequestMapping元标注了@PostMapping；
+@AliasFor只能标注在目标注解的属性上，annotation()指向的注解必须是元注解，该注解attribute()必须元注解的属性
+
+@AliasFor很重要，不理解的话，看不懂源码；导读@SpringBootApplication注解：
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan(excludeFilters = {
+        @Filter(type = FilterType.CUSTOM,classes = {TypeExcludeFilter.class}),
+        @Filter(type = FilterType.CUSTOM,classes = {AutoConfigurationExcludeFilter.class})}
+)
+public @interface SpringBootApplication {
+    @AliasFor(annotation = EnableAutoConfiguration.class)
+    Class<?>[] exclude() default {};
+
+    @AliasFor(annotation = EnableAutoConfiguration.class)
+    String[] excludeName() default {};
+
+    @AliasFor(
+        annotation = ComponentScan.class,
+        attribute = "basePackages"
+    )
+    String[] scanBasePackages() default {};
+
+    @AliasFor(
+        annotation = ComponentScan.class,
+        attribute = "basePackageClasses"
+    )
+    Class<?>[] scanBasePackageClasses() default {};
+}
+@SpringBootApplication继承了 元注解@EnableAutoConfiguration，元注解里面的属性，外部无法访问，因此在目标
+注解@SpringBootApplication中定义一个别名或同名覆盖，把元注解的属性暴露出来，让外部可以访问到；
+使用@SpringBootApplication一个注解表达多个注解的语义，实现注解的复用；
+跟 AnnotationUtils.getAnnotationAttributes()方法，发现spring中将 注解的属性和值 转换成了一个 map
+public static Map<String, Object> getAnnotationAttributes(Annotation annotation) {
+    return getAnnotationAttributes((AnnotatedElement)null, annotation);
+}
+创建 com.gupao.micro.services.mvc.annotation.TransactionalService注解，代码如下：
+
+创建 com.gupao.micro.services.mvc.service.EchoService类，使用 @TransactionalService注解：
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+@Documented
+@Service // 说明该注解继承了@Service，拥有@Service的特性
+@Transactional // 说明该注解继承了@Transactional，拥有@Transactional的特性
+public @interface TransactionalService { //  @Service + @Transactional
+    /**annotation = Service.class表示暴露Service注解的value属性*/
+    @AliasFor(annotation = Service.class)
+    String value(); /*暴露名称可以自定义也可同名覆盖*/
+    /**annotation = Transactional.class表示暴露Transactional注解的属性；attribute = "value"表示暴露value这个属性*/
+    @AliasFor(annotation = Transactional.class,attribute = "value")
+    String txName();/*暴露名称可以自定义也可同名覆盖*/
+}
+创建 com.gupao.micro.services.mvc.service.EchoService类，使用 @TransactionalService注解，代码如下：
+@TransactionalService(value = "echoService-2018", txName = "myTxName") // @Service Bean + @Transactional
+// 定义它的 Bean 名称
+public class EchoService {
+    public void echo(String message) {
+        System.out.println(message);
+    }
+}
+创建 com.gupao.micro.services.mvc.SpringApplication启动类，代码如下：
+@ComponentScan(basePackages = "com.gupao.micro.services.mvc.service")
+@EnableTransactionManagement
+public class SpringApplication {
+
+    @Component("myTxName")
+    public static class MyPlatformTransactionManager implements PlatformTransactionManager {
+
+        @Override
+        public TransactionStatus getTransaction(@Nullable TransactionDefinition definition) throws TransactionException {
+            return new DefaultTransactionStatus(
+                    null, true, true,
+                    definition.isReadOnly(), true, null
+            );
+        }
+
+        @Override
+        public void commit(TransactionStatus status) throws TransactionException {
+            System.out.println("Commit()....");
+        }
+
+        @Override
+        public void rollback(TransactionStatus status) throws TransactionException {
+            System.out.println("rollback()....");
+        }
+    }
+
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        // 注册 SpringApplication 扫描  com.gupao.micro.services.mvc.service
+        context.register(SpringApplication.class);
+        context.refresh(); // 启动
+        context.getBeansOfType(EchoService.class).forEach((beanName, bean) -> {
+            System.err.println("Bean Name : " + beanName + " , Bean : " + bean);
+            bean.echo("Hello,World");
+        });
+        context.close(); // 关闭
+    }
+}
+
+PUT
+
+@PutMapping
+POST
+
+@PostMapping
+PATCH
+
+@PatchMapping
+
+限制
+
+Servlet API 没有规定 PATCH
+
+Spring Web 对其做了扩展
+
+public abstract class FrameworkServlet extends HttpServletBean implements ApplicationContextAware {
+
+    ...
+protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		HttpMethod httpMethod = HttpMethod.resolve(request.getMethod());
+		if (httpMethod == HttpMethod.PATCH || httpMethod == null) {
+			processRequest(request, response);
+		}
+		else {
+			super.service(request, response);
+		}
+	}
+    ...
+}
+DELETE
+
+@DeleteMapping

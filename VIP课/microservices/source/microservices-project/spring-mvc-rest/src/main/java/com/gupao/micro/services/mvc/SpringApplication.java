@@ -39,18 +39,17 @@ public class SpringApplication {
     }
 
     public static void main(String[] args) {
+        /*AnnotationConfigApplicationContext存 通过@Componet即派生注解注释的类的 Bean*/
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         // 注册 SpringApplication 扫描  com.gupao.micro.services.mvc.service
         context.register(SpringApplication.class);
-
         context.refresh(); // 启动
-
+        /*相当于 map.forEach()*/
         context.getBeansOfType(EchoService.class).forEach((beanName, bean) -> {
             System.err.println("Bean Name : " + beanName + " , Bean : " + bean);
 
             bean.echo("Hello,World");
         });
-
         context.close(); // 关闭
     }
 }

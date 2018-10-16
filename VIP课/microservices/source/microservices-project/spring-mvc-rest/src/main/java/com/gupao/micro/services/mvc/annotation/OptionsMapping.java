@@ -11,9 +11,7 @@ import java.lang.annotation.*;
 @Documented
 @RequestMapping(method = RequestMethod.OPTIONS)  // 如果不增加元注解的话，会报错
 public @interface OptionsMapping {
-    //需要重新定义属性
-
-    @AliasFor(annotation = RequestMapping.class) // 指定之后，RequestMethod 的属性
-    String name() default ""; // 不加的话，只是代表自己
-
+    //@OptionsMapping要表示@RequestMapping的属性，必须自己重新该定义属性，才能表示
+    @AliasFor(annotation = RequestMapping.class) // 指定之后变成RequestMethod的属性
+    String name() default ""; // 不加的话，只是代表@OptionsMapping自己的属性
 }
