@@ -167,7 +167,7 @@ public class EchoService {
         System.out.println(message);
     }
 }
-创建 com.gupao.micro.services.mvc.SpringApplication启动类，代码如下：
+创建 com.gupao.micro.services.mvc.SpringApplication启动类，代码如下，bean.echo("Hello,World");会触发事务？？？：
 @ComponentScan(basePackages = "com.gupao.micro.services.mvc.service")
 @EnableTransactionManagement
 public class SpringApplication {
@@ -207,28 +207,12 @@ public class SpringApplication {
     }
 }
 
-PUT
 
-@PutMapping
-POST
-
-@PostMapping
-PATCH
-
-@PatchMapping
-
-限制
-
-Servlet API 没有规定 PATCH
-
-Spring Web 对其做了扩展
-
+PUT：@PutMapping；POST：@PostMapping；DELETE：@DeleteMapping；PATCH：@PatchMapping，Servlet API没有规定PATCH，Spring Web对其做了扩展；
 public abstract class FrameworkServlet extends HttpServletBean implements ApplicationContextAware {
-
     ...
-protected void service(HttpServletRequest request, HttpServletResponse response)
+    protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		HttpMethod httpMethod = HttpMethod.resolve(request.getMethod());
 		if (httpMethod == HttpMethod.PATCH || httpMethod == null) {
 			processRequest(request, response);
@@ -239,6 +223,62 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 	}
     ...
 }
-DELETE
 
-@DeleteMapping
+
+自描述消息：
+
+注解驱动：
+@RequestBody：JSON -> MappingJackson2HttpMessageConverter，TEXT -> StringHttpMessageConverter
+@ResponseBody：JSON -> MappingJackson2HttpMessageConverter，TEXT -> StringHttpMessageConverter
+
+SpringMVC返回值处理类：RequestResponseBodyMethodProcessor
+
+接口编程
+ResponseEntity extends HttpEntity
+RequestEntity extends HttpEntity
+
+返回值处理类：HttpEntityMethodProcessor
+
+代码导读：
+@EnableWebMvc注解如下：
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE})
+@Documented
+@Import({DelegatingWebMvcConfiguration.class})
+public @interface EnableWebMvc {
+}
+跟@Import({DelegatingWebMvcConfiguration.class})中的DelegatingWebMvcConfiguration.class：
+@Configuration
+public class DelegatingWebMvcConfiguration extends WebMvcConfigurationSupport {
+    ...
+}
+DelegatingWebMvcConfiguration是一个标准的 @Configuration，那么，自己实现过 WebMvcConfigurer接口吗？
+该接口有一个实现类 WebMvcConfigurerAdapter；
+
+@EnableWebMvc导读：
+1、导入 DelegatingWebMvcConfiguration（配置 Class）
+2、注册 WebMvcConfigurer
+3、装配各种 Spring MVC 需要的Bean
+4、注解驱动扩展点：①HandlerMethodArgumentResolver；②HandlerMethodReturnValueHandler；
+③@RequestBody 和 @ResponseBody 实现类：RequestResponseBodyMethodProcessor，HttpEntityMethodProcessor
+RequestResponseBodyMethodProcessor.supportsReturnType()
+public boolean supportsReturnType(MethodParameter returnType) {
+    return AnnotatedElementUtils.hasAnnotation(returnType.getContainingClass(), ResponseBody.class) || returnType.hasMethodAnnotation(ResponseBody.class);
+}
+当发现某个方法使用 @ResponseBody注解时，就对这个方法进行拦截，使用RequestResponseBodyMethodProcessor.handleReturnValue()
+进行处理；
+最后跟到 AbstractMessageConverterMethodProcessor.writeWithMessageConverters()，发现
+MappingJackson2HttpMessageConverter和MappingHttpMessage2Jackson2Converter
+
+媒体类型（MediaType）
+org.springframework.http.MediaType#APPLICATION_JSON_UTF8_VALUE
+"application/json;charset=UTF-8"
+
+HTTP 消息转换器（HttpMessageConverter）
+application/json
+MappingJackson2HttpMessageConverter
+text/html
+StringHttpMessageConverter
+
+
+问答环节：https://ask.gupaoedu.com/questions

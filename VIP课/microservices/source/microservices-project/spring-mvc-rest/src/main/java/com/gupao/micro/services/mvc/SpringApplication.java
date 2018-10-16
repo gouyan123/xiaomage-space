@@ -16,9 +16,9 @@ import org.springframework.transaction.support.DefaultTransactionStatus;
 @EnableTransactionManagement
 public class SpringApplication {
 
-    @Component("myTxName")
+    /**定义事务*/
+    @Component("myTxName")  // myTxName改为其他名字会报错
     public static class MyPlatformTransactionManager implements PlatformTransactionManager {
-
         @Override
         public TransactionStatus getTransaction(@Nullable TransactionDefinition definition) throws TransactionException {
             return new DefaultTransactionStatus(
