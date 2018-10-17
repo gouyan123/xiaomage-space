@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 public class GUIEvent {
 
     public static void main(String[] args) throws Exception {
-
+        /**JFrame：窗体*/
         final JFrame frame = new JFrame("简单 GUI 程序 - Java 事件/监听机制");
 
         frame.addMouseListener(new MouseAdapter() {

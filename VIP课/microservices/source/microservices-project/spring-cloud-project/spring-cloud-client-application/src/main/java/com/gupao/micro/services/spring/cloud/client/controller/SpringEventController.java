@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SpringEventController implements ApplicationEventPublisherAware {
-
+    /*publisher事件发送者，publishEvent(msg)发送事件并携带msg*/
     private ApplicationEventPublisher publisher;
 
     @GetMapping("/send/event")
