@@ -3,8 +3,6 @@ package com.gupao.springcloudconfigclient.demo;
 import java.util.*;
 
 /**
- * TODO:小马哥，写点注释吧！
- *
  * @author mercyblitz
  * @email mercyblitz@gmail.com
  * @date 2017-10-22

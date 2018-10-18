@@ -1,0 +1,4 @@
+创建 spring-cloud-config-client项目，项目位置：VIP课/spring-cloud/lesson-1/spring-cloud-config-client；
+java.util.Observerable：发布者；
+java.util.Observer：订阅者；
+创建 com.gupao.springcloudconfigclient.demo.ObserverDemo类，使用观察者模式；

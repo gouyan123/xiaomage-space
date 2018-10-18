@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
     // 保存使用 Spring Web MVC
-
+    /**@Controller线程不安全，使用final*/
     private final UserRepository userRepository;
-
+    /**构造器注入*/
     @Autowired
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
