@@ -8,9 +8,7 @@ import java.util.*;
  * @date 2017-10-22
  **/
 public class ObserverDemo {
-
     public static void main(String[] args) {
-
         MyObservable observable = new MyObservable();
         // 增加订阅者
         observable.addObserver(new Observer() {
@@ -21,13 +19,13 @@ public class ObserverDemo {
         });
 
         observable.setChanged();
-        // 发布者通知，订阅者是被动感知（推模式）
+        // 发布者通知，订阅者是被动感知（推的模式：被动接收数据）
         observable.notifyObservers("Hello,World");
 
         echoIterator();
 
     }
-
+    /**拉的模式：主动请求数据；*/
     private static void echoIterator(){
         List<Integer> values = Arrays.asList(1,2,3,4,5);
         Iterator<Integer> integerIterator = values.iterator();
@@ -37,9 +35,7 @@ public class ObserverDemo {
     }
 
 
-
     public static class MyObservable extends Observable {
-
         public void setChanged() {
             super.setChanged();
         }

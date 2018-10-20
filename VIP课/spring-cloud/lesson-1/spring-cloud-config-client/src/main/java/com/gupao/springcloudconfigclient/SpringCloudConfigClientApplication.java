@@ -3,6 +3,7 @@ package com.gupao.springcloudconfigclient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.bootstrap.config.PropertySourceLocator;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -19,7 +20,7 @@ public class SpringCloudConfigClientApplication {
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(SpringCloudConfigClientApplication.class);
         application.setWebEnvironment(true);
-        application.run(args);
+        ConfigurableApplicationContext context = application.run(args);
     }
 
     @Configuration
