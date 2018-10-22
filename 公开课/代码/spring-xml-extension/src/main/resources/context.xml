@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:gupao="http://gupaoedu.com/schema/gupao"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://gupaoedu.com/schema/gupao
+        http://gupaoedu.com/schema/gupao.xsd
+">
+
+    <!-- Schema Namespace -->
+    <!-- prefix:local-element-name = context:component-scan -->
+
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >-->
+        <!--<property name="locations">-->
+            <!--<value>application.properties</value>-->
+        <!--</property>-->
+        <!--<property name="fileEncoding" value="GBK" />-->
+    <!--</bean>-->
+
+    <!-- context:property-placeholder = PropertyPlaceholderConfigurer ? -->
+    <context:property-placeholder location="classpath:application.properties" file-encoding="GBK" />
+    <!-- XML Schema 扩展替代 Bean 配置 -->
+
+    <!--<bean id="user" class="com.gupao.springxmlextension.domain.User">-->
+        <!--<property name="id" value="1"/>-->
+        <!--<property name="name" value="${name}" />-->
+    <!--</bean>-->
+
+    <gupao:user bean-name="user1" id="1" name="${name}" />
+    <gupao:user bean-name="user2" id="2" name="小马哥" />
+
+
+</beans>
