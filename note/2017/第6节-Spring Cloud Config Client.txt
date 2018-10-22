@@ -1,0 +1,195 @@
+创建 spring-cloud-config-client项目，项目位置：VIP课/spring-cloud/lesson-1/spring-cloud-config-client；
+java.util.Observerable：发布者；
+java.util.Observer：订阅者；
+创建 com.gupao.springcloudconfigclient.demo.ObserverDemo类，使用观察者模式；
+推模式：将数据推给其他方法；
+拉模式：主动拉取数据；
+---
+java事件/监听模式：
+java.util.EventObject：事件对象，一般事件里面封装事件源 EventSource和事件类型 type；
+java.util.EventListener：事件监听接口(标记)；
+---
+spring事件/监听模式：
+ApplicationEvent extends EventObject；
+ApplicationListener extends EventListener；
+创建 com.gupao.springcloudconfigclient.demo.SpringEventListenerDemo类，观察spring中事件监听；
+---
+springboot核心事件：
+1、ApplicationEnvironmentPreparedEvent：封装了SpringApplication和ConfigurableEnvironment
+SpringApplication.run(args)方法返回上下文 ConfigurableApplicationContext；
+选中 ApplicationEnvironmentPreparedEvent，右键 Find Usages，看一下这个类在哪里被使用了，发现在很多地方被使用了，例如：
+ConfigFileApplicationListener类的onApplicationEvent(ApplicationEvent event)方法；
+ConfigFileApplicationListener类是管理配置文件 application.yml的；其中supportsEventType(Class<? extends ApplicationEvent> eventType)方法
+public boolean supportsEventType(Class<? extends ApplicationEvent> eventType) {
+    //  isAssignableFrom：a对象所对应类信息是b对象所对应的类信息的父类或者是父接口
+    return ApplicationEnvironmentPreparedEvent.class.isAssignableFrom(eventType)
+            || ApplicationPreparedEvent.class.isAssignableFrom(eventType);
+}
+表示判断支持的事件类型，此次只支持；
+跟onApplicationEnvironmentPreparedEvent()方法中的postProcessEnvironment()方法：
+@Override
+public void postProcessEnvironment(ConfigurableEnvironment environment,SpringApplication application) {
+    // getResourceLoader()加载 application.yml或者application.properties
+    addPropertySources(environment, application.getResourceLoader());
+}
+配置文件application.yml或者application.properties就是由ConfigFileApplicationListener类加载的，那么什么时候加载的呢？
+选中 ConfigFileApplicationListener类，右键 Find Usages，找到 Value read，找到spring.factories
+2、ApplicationPreparedEvent
+3、ApplicationStartingEvent
+4、ApplicationReadyEvent
+5、ApplicationFailedEvent
+
+每个监听器监听一种类型事件，当上下文发布事件1时 context.publishEvent(event1)，监听event1的监听器监听方法
+自动执行，那么多个事件，多个监听方法，顺序如何控制呢？？
+1、监听器类实现 Ordered接口复写getOrder()方法：ConfigFileApplicationListener implements Ordered；
+public int getOrder() {return this.order;}
+2、监听器类使用 @Ordered注解；
+
+重点：BootstrapApplicationListener类负责加载 bootstrap.yml文件，负责初始化BootstrapApplicationContext，id="bootstrap"
+Bootstrap是一个根上下文，parent=null;
+在该类的onApplicationEvent(ApplicationEnvironmentPreparedEvent event)方法打断点，启动spring-cloud-config-client服务；
+public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
+    ConfigurableEnvironment environment = event.getEnvironment();
+    if ((Boolean)environment.getProperty("spring.cloud.bootstrap.enabled", Boolean.class, true)) {
+        if (!environment.getPropertySources().contains("bootstrap")) {
+            // 其实现类 AnnotationConfigApplicationContext
+            ConfigurableApplicationContext context = null;
+            String configName = environment.resolvePlaceholders("${spring.cloud.bootstrap.name:bootstrap}");
+            Iterator var5 = event.getSpringApplication().getInitializers().iterator();
+
+            while(var5.hasNext()) {
+                ApplicationContextInitializer<?> initializer = (ApplicationContextInitializer)var5.next();
+                if (initializer instanceof ParentContextApplicationContextInitializer) {
+                    context = this.findBootstrapContext((ParentContextApplicationContextInitializer)initializer, configName);
+                }
+            }
+
+            if (context == null) {
+                // 跟bootstrapServiceContext()方法
+                context = this.bootstrapServiceContext(environment, event.getSpringApplication(), configName);
+            }
+
+            this.apply(context, event.getSpringApplication(), environment);
+        }
+    }
+}
+BootstrapApplicationListerner.bootstrapServiceContext()
+private ConfigurableApplicationContext bootstrapServiceContext(ConfigurableEnvironment environment, final SpringApplication application,String configName) {
+    StandardEnvironment bootstrapEnvironment = new StandardEnvironment();
+    MutablePropertySources bootstrapProperties = bootstrapEnvironment
+            .getPropertySources();
+    for (PropertySource<?> source : bootstrapProperties) {
+        bootstrapProperties.remove(source.getName());
+    }
+    String configLocation = environment
+            .resolvePlaceholders("${spring.cloud.bootstrap.location:}");
+    Map<String, Object> bootstrapMap = new HashMap<>();
+    bootstrapMap.put("spring.config.name", configName);
+    if (StringUtils.hasText(configLocation)) {
+        bootstrapMap.put("spring.config.location", configLocation);
+    }
+    bootstrapProperties.addFirst(
+            new MapPropertySource(BOOTSTRAP_PROPERTY_SOURCE_NAME, bootstrapMap));
+    for (PropertySource<?> source : environment.getPropertySources()) {
+        bootstrapProperties.addLast(source);
+    }
+    ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+    // Use names and ensure unique to protect against duplicates
+    List<String> names = SpringFactoriesLoader
+            .loadFactoryNames(BootstrapConfiguration.class, classLoader);
+    for (String name : StringUtils.commaDelimitedListToStringArray(
+            environment.getProperty("spring.cloud.bootstrap.sources", ""))) {
+        names.add(name);
+    }
+    // TODO: is it possible or sensible to share a ResourceLoader?
+    SpringApplicationBuilder builder = new SpringApplicationBuilder()
+            .profiles(environment.getActiveProfiles()).bannerMode(Mode.OFF)
+            .environment(bootstrapEnvironment)
+            .properties("spring.application.name:" + configName)
+            .registerShutdownHook(false).logStartupInfo(false).web(false);
+    List<Class<?>> sources = new ArrayList<>();
+    for (String name : names) {
+        Class<?> cls = ClassUtils.resolveClassName(name, null);
+        try {
+            cls.getDeclaredAnnotations();
+        }
+        catch (Exception e) {
+            continue;
+        }
+        sources.add(cls);
+    }
+    AnnotationAwareOrderComparator.sort(sources);
+    builder.sources(sources.toArray(new Class[sources.size()]));
+    // 重点：初始化了BootstrapApplicationContext，id="bootstrap"
+    final ConfigurableApplicationContext context = builder.run();
+    // Make the bootstrap context a parent of the app context
+    addAncestorInitializer(application, context);
+    // It only has properties in it now that we don't want in the parent so remove
+    // it (and it will be added back later)
+    bootstrapProperties.remove(BOOTSTRAP_PROPERTY_SOURCE_NAME);
+    mergeDefaultProperties(environment.getPropertySources(), bootstrapProperties);
+    return context;
+}
+分析：AbstractApplicationContext；
+跟 rerefresh()方法：
+public void refresh() throws BeansException, IllegalStateException {
+    Object var1 = this.startupShutdownMonitor;
+    synchronized(this.startupShutdownMonitor) {
+        this.prepareRefresh();
+        ConfigurableListableBeanFactory beanFactory = this.obtainFreshBeanFactory();
+        this.prepareBeanFactory(beanFactory);
+        try {
+            // 重点：spring中很多post...()方法都是让子类去实现；
+            this.postProcessBeanFactory(beanFactory);
+            // invoke factory processors registered as beans in the context
+            this.invokeBeanFactoryPostProcessors(beanFactory);
+            // Register bean processors that intercept bean creation
+            this.registerBeanPostProcessors(beanFactory);
+            // initialize message source for the contex
+            this.initMessageSource();
+            // initialize event multicaster for this context
+            this.initApplicationEventMulticaster();
+            // initialize other special beans in specific context subclasses
+            this.onRefresh();
+            // Check for listener beans and register them.
+            this.registerListeners();
+            // Instantiate all remaining (non-lazy-init) singletons. Bean的初始化；
+            this.finishBeanFactoryInitialization(beanFactory);
+            // Last step: publish corresponding event.
+            this.finishRefresh();
+        } catch (BeansException var9) {
+            ...
+        } finally {
+            this.resetCommonCaches();
+        }
+    }
+}
+BeanFactoryPostProcessor接口postProcessBeanFactory(beanFactory)方法表示当beanFactory准备好了，会调用
+postProcessBeanFactory()方法；
+@FunctionalInterface
+public interface BeanFactoryPostProcessor {
+	/**
+	 * Modify the application context's internal bean factory after its standard
+	 * initialization. All bean definitions will have been loaded, but no beans
+	 * will have been instantiated yet. This allows for overriding or adding
+	 * properties even to eager-initializing beans.
+	 * @param beanFactory the bean factory used by the application context
+	 * @throws org.springframework.beans.BeansException in case of errors
+	 */
+	void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException;
+
+}
+BeanDefinitionRegistryPostProcessor接口，注册bean的时候大多会调postProcessBeanDefinitionRegistry()这个
+方法，BeanDefinitionRegistry表示注册器，接着会调上面的postProcessBeanFactory()方法；
+public interface BeanDefinitionRegistryPostProcessor extends BeanFactoryPostProcessor {
+	/**
+	 * Modify the application context's internal bean definition registry after its
+	 * standard initialization. All regular bean definitions will have been loaded,
+	 * but no beans will have been instantiated yet. This allows for adding further
+	 * bean definitions before the next post-processing phase kicks in.
+	 * @param registry the bean definition registry used by the application context
+	 * @throws org.springframework.beans.BeansException in case of errors
+	 */
+	void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException;
+}
+

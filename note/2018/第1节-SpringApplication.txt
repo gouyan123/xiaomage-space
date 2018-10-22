@@ -1,0 +1,404 @@
+小马哥新书：SpringBoot编程思想；共5部分，基础，自动装配，外部化配置，
+---
+项目名称：spring-application
+项目路径：VIP课/microservices/source/microservices-project/spring-application
+讲解对象：--SpringApplication--
+@SpringBootApplication/@EnableAutoConfiguration
+public class MicroservicesProjectApplication {
+    public static void main(String[] args) {
+        // 写法 1：设置随机端口并启动 springboot；不是build模式，每次都要set；
+        SpringApplication springApplication = new SpringApplication(MicroservicesProjectApplication.class);
+        Map<String, Object> properties = new LinkedHashMap<>();
+        properties.put("server.port", 0);
+        springApplication.setDefaultProperties(properties);
+        // 设置为 非 web 应用
+        springApplication.setWebApplicationType(WebApplicationType.NONE);
+        ConfigurableApplicationContext context = springApplication.run(args);
+        // 写法 2：设置随机端口并启动 springboot；build模式，API更简洁；
+        new SpringApplicationBuilder(MicroservicesProjectApplication.class)
+        .properties("server.port=0") // fluent风格API；server.port=0表示随机向系统要一个可用端口；
+        .run(args);
+    }
+}
+---
+@SpringBootApplication：标注当前一些功能；跟@SpringBootApplication注解，如下：
+
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan(excludeFilters ={
+    @Filter(type = FilterType.CUSTOM,classes = {TypeExcludeFilter.class}),
+    @Filter(type = FilterType.CUSTOM,classes = {AutoConfigurationExcludeFilter.class})})
+public @interface SpringBootApplication {
+    ...
+}
+
+@ComponentScan，spring framework 3.1开始引入的，扫描当前包及其子包下使用了Spring注解的类，并实例化到spring容器，
+跟@ComponentScan，代码如下：
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE})
+@Documented
+@Repeatable(ComponentScans.class)
+public @interface ComponentScan {
+    ...
+}
+
+@EnableAutoConfiguration：激活自动装配；@Enable模式：@Enable开头的都可以称为@Enable模式；例如：
+@EnableWebMvc，@EnableTransactionManagement，@EnableAspectAutoProxy，@EnableAsnc
+
+@SpringBootConfiguration 等价于 @Configuration，作为 Configuration类的注解；Spring注解驱动上下文，和
+XML配置文件驱动上下文ClassPathXmlApplicationContext一样，都是找BeanDefinition的，即@Bean或@Configuration
+注释的类的，举例如下：
+package com.gupao.spring;
+@Configuration
+public class SpringAnnotationDemo {
+    public static void main(String[] args) {
+        // XML配置文件驱动上下文 ClassPathXmlApplicationContext
+        // Annotation注解驱动上下文
+        // 两者都是找 BeanDefinition的，即@Bean或者@Configuration注释的类的；
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        // 注册一个 Configuration Class = SpringAnnotationDemo
+        context.register(SpringAnnotationDemo.class);
+        // 上下文启动
+        context.refresh();
+        System.out.println(context.getBean(SpringAnnotationDemo.class));
+    }
+}
+AnnotationConfigApplicationContext是 注解驱动上下文，springframework3.0引入的，负责将使用@Bean和@Configuration
+注解的类 加载到spring容器中；
+
+@Component注解的派生性：注解不能称为继承，因此称为派生，实际就是 继承；
+@Component是根；@Service，@Repository，@Controller，@Configuration是派生的；
+@Component			        @Component                            @Component
+public @interface Service   {	public @interface Repository {    public @interface Controller {
+    ...				                ...                               ...
+}				            }                                     }
+@Component
+public @interface Configuration {
+	...
+}
+***想自定义注解，上面使用 @Component注释即可；
+Meta-Annotations：元注解，即 标注注解的注解，元注解允许继承；
+Stereotype Annotations：模式注解，@Service，@Repository，@Controller，@Configuration都是模式注解，这些
+注解只是逻辑不同，但是对于spring而言，这些注解都是 Bean：
+派生性只在 @Component中有效果：@Component与@ComponentScan关系？@ComponentScan扫描@Component及其派生的注解；
+@ComponentScan注解的 扫描类：ClassPathScanningCandidateComponentProvider.registerDefaultFilters()如下：
+protected void registerDefaultFilters() {
+    // 增加过滤器，只扫描 @Component注解即其派生的注解
+    this.includeFilters.add(new AnnotationTypeFilter(Component.class));
+    ...
+}
+处理类：ConfigurationClassParser；
+
+看启动类 MicroservicesProjectApplication
+@SpringBootApplication  // @SpringBootApplication等价于@SpringBootConfiguration；等价于@Configuration
+public class MicroservicesProjectApplication {
+    public static void main(String[] args) {
+        SpringApplication springApplication = new SpringApplication(MicroservicesProjectApplication.class);
+        Map<String, Object> properties = new LinkedHashMap<>();
+        properties.put("server.port", 0);
+        springApplication.setDefaultProperties(properties);
+        // 设置为 非 web 应用
+        springApplication.setWebApplicationType(WebApplicationType.NONE);
+        ConfigurableApplicationContext context = springApplication.run(args);
+        // 没有异常
+        System.out.println(context.getBean(MicroservicesProjectApplication.class));
+        // 输出当前 Spring Boot应用使用的ApplicationContext上下文的类型
+        // 输出 AnnotationConfigApplicationContext，即当前springboot使用的是AnnotationConfigApplicationContext上下文；
+        System.out.println("当前 Spring 应用上下文的类：" + context.getClass().getName());
+    }
+}
+输出：com.gupao.microservicesproject.MicroservicesProjectApplication$$EnhancerBySpringCGLIB$$7cb5000d@24d4d7c9，即MicroservicesProjectApplication的实例化对象
+回到 SpringAnnotationDemo
+package com.gupao.spring;
+@Configuration
+public class SpringAnnotationDemo {
+    public static void main(String[] args) {
+        // XML配置文件驱动上下文 ClassPathXmlApplicationContext
+        // Annotation注解驱动上下文
+        // 两者都是找 BeanDefinition的，即@Bean或者@Configuration注释的类的；
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        // 注册一个 @Configuration注解注释的类SpringAnnotationDemo
+        context.register(SpringAnnotationDemo.class);
+        // 上下文启动
+        context.refresh();
+        System.out.println(context.getBean(SpringAnnotationDemo.class));
+    }
+}
+输出：com.gupao.spring.SpringAnnotationDemo$$EnhancerBySpringCGLIB$$39cc280f@dd05255，即SpringAnnotationDemo实例对象
+小结：MicroservicesProjectApplication类与SpringAnnotationDemo是等价的；springboot就是驱动spring容器的；
+跟 new SpringApplication(MicroservicesProjectApplication.class)
+public SpringApplication(ResourceLoader resourceLoader, Class... primarySources) {
+    ...
+    // SpringApplication的类型推断，跟deduceWebApplicationType()
+    this.webApplicationType = this.deduceWebApplicationType();
+    ...
+}
+SpringApplication.deduceWebApplicationType()，SpringApplication类型推断方法如下：
+private WebApplicationType deduceWebApplicationType() {
+    if (ClassUtils.isPresent("org.springframework.web.reactive.DispatcherHandler", (ClassLoader)null) && !ClassUtils.isPresent("org.springframework.web.servlet.DispatcherServlet", (ClassLoader)null)) {
+        // WebApplicationType.REACTIVE：WebFlux类型：类加载器可以加载到DispatcherHandler并加载不到Servlet的时候，即依赖了spring-boot-starter-webflux包
+        return WebApplicationType.REACTIVE;
+    } else {
+        String[] var1 = WEB_ENVIRONMENT_CLASSES;
+        int var2 = var1.length;
+        for(int var3 = 0; var3 < var2; ++var3) {
+            String className = var1[var3];
+            if (!ClassUtils.isPresent(className, (ClassLoader)null)) {
+                // WebApplicationType.NONE：非web类型：Servlet和ConfigurableWebApplicationContext(spring web上下文)类都不存在，类加载器都加载不到，即没有依赖相关jar包 spring-boot-starter-web和spring-boot-starter-webflux
+                return WebApplicationType.NONE;
+            }
+        }
+        // WebApplicationType.SERVLET：Spring MVC类型，Tomcat会启动；
+        return WebApplicationType.SERVLET;
+    }
+}
+web类型会影响 SpringAppliation.run()返回的上下文类型，跟SpringAppliation.setWebApplicationType(WebApplicationType webApplicationType)
+public void setWebApplicationType(WebApplicationType webApplicationType) {
+    Assert.notNull(webApplicationType, "WebApplicationType must not be null");
+    // 发现webApplicationType可以被调整，说明可能被其他地方利用；选中webApplicationType 右键 Find Usages，看它在哪里被读到了，结果为createApplicationContext()
+    this.webApplicationType = webApplicationType;
+}
+SpringAppliation.createApplicationContext()读 WebApplicationType
+protected ConfigurableApplicationContext createApplicationContext() {
+    Class<?> contextClass = this.applicationContextClass;
+    if (contextClass == null) {
+        try {
+            switch (this.webApplicationType) {
+            case SERVLET:
+                contextClass = Class.forName(DEFAULT_WEB_CONTEXT_CLASS);
+                break;
+            case REACTIVE:
+                contextClass = Class.forName(DEFAULT_REACTIVE_WEB_CONTEXT_CLASS);
+                break;
+            default:
+                contextClass = Class.forName(DEFAULT_CONTEXT_CLASS);
+            }
+        }
+        ...
+    }
+    return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass);
+}
+跟 SpringAppliation.run()方法，会驱动spring上下文的核心引导类：
+public ConfigurableApplicationContext run(String... args) {
+    StopWatch stopWatch = new StopWatch();
+    stopWatch.start();
+    ConfigurableApplicationContext context = null;
+    Collection<SpringBootExceptionReporter> exceptionReporters = new ArrayList<>();
+    configureHeadlessProperty();
+    SpringApplicationRunListeners listeners = getRunListeners(args);
+    listeners.starting();
+    try {
+        ApplicationArguments applicationArguments = new DefaultApplicationArguments(
+                args);
+        ConfigurableEnvironment environment = prepareEnvironment(listeners,
+                applicationArguments);
+        configureIgnoreBeanInfo(environment);
+        Banner printedBanner = printBanner(environment);
+        // 根据不同web类型，创建相应上下文；
+        context = createApplicationContext();
+        exceptionReporters = getSpringFactoriesInstances(
+                SpringBootExceptionReporter.class,
+                new Class[] { ConfigurableApplicationContext.class }, context);
+        prepareContext(context, environment, listeners, applicationArguments,
+                printedBanner);
+        refreshContext(context);
+        afterRefresh(context, applicationArguments);
+        stopWatch.stop();
+        if (this.logStartupInfo) {
+            new StartupInfoLogger(this.mainApplicationClass)
+                    .logStarted(getApplicationLog(), stopWatch);
+        }
+        listeners.started(context);
+        callRunners(context, applicationArguments);
+    }
+    catch (Throwable ex) {
+        handleRunFailure(context, ex, exceptionReporters, listeners);
+        throw new IllegalStateException(ex);
+    }
+
+    try {
+        listeners.running(context);
+    }
+    catch (Throwable ex) {
+        handleRunFailure(context, ex, exceptionReporters, null);
+        throw new IllegalStateException(ex);
+    }
+    return context;
+}
+SpringApplication：springboot应用的引导；
+---
+SpringBoot 的 事件，事件监听者模式，事件源source封装在上下文context里面了，可以简单把context理解为source事件源：
+context.addApplicationListener(...)：上下文context注册监听器，类似于 事件源对象里面注册监听器，组合模式；
+context.publishEvent()：上下文context发布事件，类似于 事件源的业务方法里面调用 监听器的监听方法，参数为事件 event
+创建 package com.gupao.spring.SpringEventListenerDemo;
+public class SpringEventListenerDemo {
+    public static void main(String[] args) {
+        GenericApplicationContext context = new GenericApplicationContext();
+        // 启动 Spring 应用上下文
+        context.refresh();
+        // Spring 应用上下文发布事件
+        context.publishEvent("HelloWorld"); // 发布一个 HelloWorld 内容的事件
+}
+启动main()方法，什么都没发生，不能只发布事件没有监听，因此增加监听器；
+public class SpringEventListenerDemo {
+    public static void main(String[] args) {
+        GenericApplicationContext context = new GenericApplicationContext();
+        // 启动 Spring 应用上下文
+        context.refresh();
+        // 添加事件监听器
+        context.addApplicationListener(new ApplicationListener<ApplicationEvent>() {
+            @Override
+            public void onApplicationEvent(ApplicationEvent event) {
+                System.err.println("监听事件:" + event);
+
+            }
+        });
+        // Spring 应用上下文发布事件
+        // 监听2个事件：分别为ContextRefreshedEvent和PayloadApplicationEvent
+        context.publishEvent("HelloWorld"); // 发布一个 HelloWorld 内容的事件
+}
+自定义事件：创建内部类 MyEvent extends ApplicationEvent
+
+跟 AbstractApplicationContext.refresh()方法，refresh()方法表示启动上下文 ApplicationContext
+public void refresh() throws BeansException, IllegalStateException {
+    Object var1 = this.startupShutdownMonitor;
+    synchronized(this.startupShutdownMonitor) {
+        this.prepareRefresh();
+        ConfigurableListableBeanFactory beanFactory = this.obtainFreshBeanFactory();
+        this.prepareBeanFactory(beanFactory);
+        try {
+            this.postProcessBeanFactory(beanFactory);
+            this.invokeBeanFactoryPostProcessors(beanFactory);
+            this.registerBeanPostProcessors(beanFactory);
+            this.initMessageSource();
+            this.initApplicationEventMulticaster();
+            this.onRefresh();
+            this.registerListeners();
+            this.finishBeanFactoryInitialization(beanFactory);
+            // 跟 finishRefresh()
+            this.finishRefresh();
+        } catch (BeansException var9) {
+            ...
+        } finally {
+            this.resetCommonCaches();
+        }
+    }
+}
+跟AbstractApplicationContext.finishRefresh()方法
+protected void finishRefresh() {
+    this.clearResourceCaches();
+    this.initLifecycleProcessor();
+    this.getLifecycleProcessor().onRefresh();
+    // 发布事件，即调用监听者的监听方法，参数为事件
+    this.publishEvent((ApplicationEvent)(new ContextRefreshedEvent(this)));
+    LiveBeansView.registerApplicationContext(this);
+}
+
+Spring 内部发送事件
+1 ContextRefreshedEvent →继承→ ApplicationContextEvent →继承→ ApplicationEvent
+refresh() -> finishRefresh() -> publishEvent(new ContextRefreshedEvent(this));
+
+2 ContextClosedEvent →继承→ ApplicationContextEvent →继承→ ApplicationEvent
+close() -> doClose() -> publishEvent(new ContextClosedEvent(this));
+
+Spring事件 都是 ApplicationEvent 类型；
+发送 Spring：ApplicationEventMulticaster#multicastEvent(ApplicationEvent, ResolvableType)
+
+Spring 事件的类型：ApplicationEvent；
+Spring 事件监听器：ApplicationListener；
+Spring 事件广播器：ApplicationEventMulticaster；实现类都是：SimpleApplicationEventMulticaster；
+
+Spring 事件理解为消息
+ApplicationEvent 相当于消息内容
+ApplicationListener 相当于消息消费者、订阅者
+ApplicationEventMulticaster 相当于消息生产者、发布者
+
+创建 com.gupao.spring.ApplicationEventMulticasterDemo，简单展示spring事件的使用方法；
+
+创建 com.gupao.microservicesproject.SpringBootEventDemo，在springboot启动过程中增加监听器，监听springboot
+启动各个时间节点，如下：
+}
+监听到事件 ： ApplicationStartingEvent
+监听到事件 ： ApplicationEnvironmentPreparedEvent
+监听到事件 ： ApplicationPreparedEvent
+监听到事件 ： ContextRefreshedEvent
+监听到事件 ： ServletWebServerInitializedEvent
+监听到事件 ： ApplicationStartedEvent
+监听到事件 ： ApplicationReadyEvent
+监听到事件 ： ContextClosedEvent
+
+Spring Boot 事件监听器
+
+org.springframework.context.ApplicationListener=\
+org.springframework.boot.ClearCachesApplicationListener,\
+org.springframework.boot.builder.ParentContextCloserApplicationListener,\
+org.springframework.boot.context.FileEncodingApplicationListener,\
+org.springframework.boot.context.config.AnsiOutputApplicationListener,\
+org.springframework.boot.context.config.ConfigFileApplicationListener,\
+org.springframework.boot.context.config.DelegatingApplicationListener,\
+org.springframework.boot.context.logging.ClasspathLoggingApplicationListener,\
+org.springframework.boot.context.logging.LoggingApplicationListener,\
+org.springframework.boot.liquibase.LiquibaseServiceLocatorApplicationListener
+
+public class ConfigFileApplicationListener implements EnvironmentPostProcessor, SmartApplicationListener, Ordered {
+	...
+	private static final String DEFAULT_NAMES = "application";  // application.yml文件
+	...
+	@Override
+    public void onApplicationEvent(ApplicationEvent event) {
+        if (event instanceof ApplicationEnvironmentPreparedEvent) {
+            // 跟onApplicationEnvironmentPreparedEvent()
+            onApplicationEnvironmentPreparedEvent(
+                    (ApplicationEnvironmentPreparedEvent) event);
+        }
+        if (event instanceof ApplicationPreparedEvent) {
+            onApplicationPreparedEvent(event);
+        }
+    }
+}
+ConfigFileApplicationListener.onApplicationEnvironmentPreparedEvent()
+private void onApplicationEnvironmentPreparedEvent(ApplicationEnvironmentPreparedEvent event) {
+    List<EnvironmentPostProcessor> postProcessors = loadPostProcessors();
+    postProcessors.add(this);
+    AnnotationAwareOrderComparator.sort(postProcessors);
+    for (EnvironmentPostProcessor postProcessor : postProcessors) {
+        // 跟postProcessEnvironment()
+        postProcessor.postProcessEnvironment(event.getEnvironment(),
+                event.getSpringApplication());
+    }
+}
+ConfigFileApplicationListener.postProcessEnvironment()
+@Override
+public void postProcessEnvironment(ConfigurableEnvironment environment,SpringApplication application) {
+    // 跟addPropertySources()
+    addPropertySources(environment, application.getResourceLoader());
+}
+protected void addPropertySources(ConfigurableEnvironment environment,ResourceLoader resourceLoader) {
+    RandomValuePropertySource.addToEnvironment(environment);
+    // 跟 Loader()
+    new Loader(environment, resourceLoader).load();
+}
+Loader.Loader()
+Loader(ConfigurableEnvironment environment, ResourceLoader resourceLoader) {
+    this.environment = environment;
+    this.resourceLoader = (resourceLoader != null ? resourceLoader : new DefaultResourceLoader());
+    this.propertySourceLoaders = SpringFactoriesLoader.
+    loadFactories(PropertySourceLoader.class, getClass().getClassLoader());
+}
+// 跟 PropertySourceLoader的实现类YamlPropertySourceLoader和实现类PropertiesPropertySourceLoader
+private final List<PropertySourceLoader> propertySourceLoaders;
+ConfigFileApplicationListener监听 ApplicationEnvironmentPreparedEvent事件，从而加载application.properties 或者 application.yml 文件
+
+SpringApplication 利用
+1 Spring 应用上下文（ApplicationContext）生命周期控制 注解驱动 Bean；
+2 Spring 事件/监听（ApplicationEventMulticaster）机制加载或者初始化组件；
+SpringBoot就是把Spring的东西搬出来，做一个嵌入式容器，用spring的上下文来驱动这个容器，把bean装载好；
+
+导读 LoggingApplicationListener.onApplicationEvent()，
+
+小结：SpringBoot事件都源于Spring事件；SpringBoot很多组件依赖于SpringBoot事件，SpringBoot可以理解为事件驱动的；

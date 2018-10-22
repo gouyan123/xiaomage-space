@@ -8,6 +8,7 @@ import org.springframework.context.event.SimpleApplicationEventMulticaster;
 public class ApplicationEventMulticasterDemo {
 
     public static void main(String[] args) {
+        // 事件源
         ApplicationEventMulticaster multicaster = new SimpleApplicationEventMulticaster();
 
         // 添加监听器

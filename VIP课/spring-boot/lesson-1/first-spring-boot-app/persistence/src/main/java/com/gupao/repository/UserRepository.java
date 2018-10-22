@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicLong;
  **/
 @Repository
 public class UserRepository {
-
+    /**@Controller都是线程不安全的，处理要写成线程安全*/
     private final ConcurrentMap<Long, User> repository = new ConcurrentHashMap<>();
 
     private final AtomicLong idGenerator = new AtomicLong();
@@ -35,5 +35,4 @@ public class UserRepository {
     public Collection<User> findAll() {
         return repository.values();
     }
-
 }

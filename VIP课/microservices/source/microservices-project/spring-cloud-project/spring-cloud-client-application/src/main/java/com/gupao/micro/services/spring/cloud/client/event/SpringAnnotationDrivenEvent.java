@@ -5,23 +5,17 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.event.EventListener;
 
 public class SpringAnnotationDrivenEvent {
-
     public static void main(String[] args) {
-
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         // SpringAnnotationDrivenEvent 注册为 Spring Bean
         context.register(SpringAnnotationDrivenEvent.class);
-
         context.refresh(); // 启动上下文
         // 确保上下文启动完毕后，再发送事件
         context.publishEvent(new MyApplicationEvent("Hello,World"));
-
         context.close(); // 关闭上下文
-
     }
 
     private static class MyApplicationEvent extends ApplicationEvent {
-
         /**
          * Create a new ApplicationEvent.
          *
