@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/annotation-driven-development.iml" filepath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/annotation-driven-development.iml" />
       <module fileurl="file://$PROJECT_DIR$/公开课/代码/interface-design/interface-design.iml" filepath="$PROJECT_DIR$/公开课/代码/interface-design/interface-design.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/xiaomage-space.iml" filepath="$PROJECT_DIR$/.idea/xiaomage-space.iml" />
     </modules>

@@ -1,0 +1,6 @@
+预期效果：①掌握 Annotation 驱动开发；②更好地理解 Spring Boot 特性；③重视 Java 基础和规范；
+本期议题：①Annotation 装配；②Web 自动装配；③条件装配；
+Annotation 驱动：替代 XML 装配，优势与不足？
+Web 自动装配：①Servlet 3.0 + 自动装配；②Spring Web 自动装配；③实现 Spring Web MVC 自动装配；
+条件装配：Spring 条件装配；@Conditional ；实现 Spring Boot @ConditionalOnClass
+
