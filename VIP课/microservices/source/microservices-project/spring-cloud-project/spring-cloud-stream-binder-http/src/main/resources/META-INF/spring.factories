@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.gupao.micro.services.spring.cloud.stream.binder.http.HttpMessageChannelWebAutoConfiguration

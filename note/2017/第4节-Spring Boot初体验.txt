@@ -1,0 +1,8 @@
+创建 first-spring-boot-app项目，项目位置：VIP课/spring-boot/lesson-1/first-spring-boot-app；
+web子项目中创建 UserController类，代码如下：
+persistence子项目中创建 UserRepository类，代码如下：
+web子项目中创建 WebFluxConfiguration类，演示web flux使用，web flux：function Endpoints，其中有一个RouterFunctions，代码如下：
+注意：目前spring web flux和spring web mvc共同使用；
+web flux：当请求request发送到 webflux时，多个线程执行函数式任务，它是推的方式；Java 9里面 API称之为Flow，
+sub(A) → sub(B) → sub(C)，从A节点流到C节点，通过Subscription消息订阅来实现，就是一个责任链；Reactive是推
+的模式，Iterator是拉的模式；

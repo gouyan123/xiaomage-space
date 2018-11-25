@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+>
+
+    <bean id="user" class="com.gupao.javabeans.User">
+        <property name="id" value="1"/>
+        <property name="name" value="小马哥"/>
+        <property name="date" value="2017-11-25"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="propertyEditorRegistrars">
+            <list>
+                <bean class="com.gupao.javabeans.MyPropertyEditorRegistrar" />
+            </list>
+        </property>
+    </bean>
+
+</beans>
