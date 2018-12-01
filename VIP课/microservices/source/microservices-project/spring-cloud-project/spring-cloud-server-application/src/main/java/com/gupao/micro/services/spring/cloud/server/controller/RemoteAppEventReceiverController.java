@@ -18,8 +18,7 @@ import java.util.Map;
  * 远程事件接收器 控制器
  */
 @RestController
-public class RemoteAppEventReceiverController implements
-        ApplicationEventPublisherAware {
+public class RemoteAppEventReceiverController implements ApplicationEventPublisherAware {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -36,7 +35,7 @@ public class RemoteAppEventReceiverController implements
         String type = (String) data.get("type");
 
         logger.info("接受到事件");
-        // 接受到对象内容，同样也要发送事件到本地，做处理
+        // 接受到对象内容，同样也要发送事件到本地监听器onEvent()，做处理
         publisher.publishEvent(new SenderRemoteAppEvent(sender, value));
         return "received";
     }
@@ -55,6 +54,7 @@ public class RemoteAppEventReceiverController implements
         }
     }
 
+    //监听事件
     @EventListener
     @Async
     public void onEvent(SenderRemoteAppEvent event) {

@@ -21,17 +21,18 @@ import java.util.Map;
  * 远程应用事件控制器
  */
 @RestController
-public class RemoteAppEventSenderController implements
-        ApplicationEventPublisherAware {
+public class RemoteAppEventSenderController implements ApplicationEventPublisherAware {
 
     @Value("${spring.application.name}")
     public String currentAppName;
 
     private ApplicationEventPublisher publisher;
 
+    /**从 注册中心eureka 获取实例信息：discoveryClient.getInstances(appName) appName表示服务名称*/
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    /**发送事件给远程*/
     @GetMapping("/send/remote/event")
     public String sendEvent(@RequestParam String message) {
         publisher.publishEvent(message);
@@ -56,14 +57,16 @@ public class RemoteAppEventSenderController implements
         return "Ok";
     }
 
+    //发送到自己
 //    @PostMapping("/send/remote/event/{appName}/{ip}/{port}")
 //    public String sendAppInstance(@PathVariable String appName,
 //                                  @PathVariable String ip,
 //                                  @PathVariable int port,
 //                                  @RequestBody Object data) {
 //        ServiceInstance serviceInstance = new DefaultServiceInstance(appName, ip, port, false);
+//        //构建事件 RemoteAppEvent
 //        RemoteAppEvent remoteAppEvent = new RemoteAppEvent(data, currentAppName, appName, Arrays.asList(serviceInstance));
-//        // 发送事件当前上下文
+//        // 发送事件到自己当前上下文
 //        publisher.publishEvent(remoteAppEvent);
 //        return "Ok";
 //    }

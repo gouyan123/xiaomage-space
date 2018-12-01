@@ -43,9 +43,8 @@ public void autoRefresh() {
 健康指示器：HealthIndicator；
 HealthEndpoint与HealthIndicator关系：一对多；
 自定义实现HealthIndicator：
-定义 MyHealthIndicator 实现 AbstractHealthIndicator
+lesson2 spring-cloud-config-client-demo中定义 MyHealthIndicator 实现 AbstractHealthIndicator
 public class MyHealthIndicator extends AbstractHealthIndicator {
-
    @Override
    protected void doHealthCheck(Health.Builder builder) throws Exception {
        builder.up().withDetail("MyHealthIndicator","Day Day Up");
@@ -63,7 +62,6 @@ springboot激活 actuator 需要增加 spring-hateoas的依赖；
 设置关键 Endpoints 的敏感性：
 ### 配置客户端配置项
    spring.application.name = config-client
-
    ### 全局关闭 Actuator 安全
    management.security.enabled = false
    ### 细粒度的开放 Actuator Endpoints

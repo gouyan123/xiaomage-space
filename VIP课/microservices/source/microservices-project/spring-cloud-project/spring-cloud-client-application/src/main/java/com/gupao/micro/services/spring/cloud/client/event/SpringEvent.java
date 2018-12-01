@@ -5,7 +5,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
-
 import java.lang.annotation.Annotation;
 
 public class SpringEvent {

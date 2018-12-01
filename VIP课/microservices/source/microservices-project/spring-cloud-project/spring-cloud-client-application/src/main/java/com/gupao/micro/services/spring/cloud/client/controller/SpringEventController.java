@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**实现ApplicationEventPublisherAware接口，覆写setApplicationEventPublisher()方法，获取 publisher对象*/
 @RestController
 public class SpringEventController implements ApplicationEventPublisherAware {
     /*publisher事件发送者，publishEvent(msg)发送事件并携带msg*/
