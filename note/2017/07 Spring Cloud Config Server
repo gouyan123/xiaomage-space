@@ -1,0 +1,138 @@
+跟 RefreshEndpoint
+@ConfigurationProperties(prefix = "endpoints.refresh", ignoreUnknownFields = false)
+@ManagedResource
+public class RefreshEndpoint extends AbstractEndpoint<Collection<String>> {
+    //ContextRefresher 负责刷新上下文
+	private ContextRefresher contextRefresher;
+
+	public RefreshEndpoint(ContextRefresher contextRefresher) {
+		super("refresh");
+		this.contextRefresher = contextRefresher;
+	}
+}
+在spring-cloud-config-client-demo项目启动类SpringCloudConfigClientDemoApplication中定义autoRefresh()
+方法，定时刷新上下文 contextRefresher.refresh();
+@Scheduled(fixedRate = 5 * 1000, initialDelay = 3 * 1000)
+public void autoRefresh() {
+    Set<String> updatedPropertyNames = contextRefresher.refresh();
+    updatedPropertyNames.forEach( propertyName ->
+        System.err.printf("[Thread :%s] 当前配置已更新，具体 Key：%s , Value : %s \n",
+        Thread.currentThread().getName(),
+        propertyName,
+        environment.getProperty(propertyName)
+        ));
+}
+---
+重点：实现定时更新客户端
+
+@Scheduled(fixedRate = 5 * 1000, initialDelay = 3 * 1000)
+public void autoRefresh() {
+   Set<String> updatedPropertyNames = contextRefresher.refresh();
+   updatedPropertyNames.forEach( propertyName ->
+       System.err.printf("[Thread :%s] 当前配置已更新，具体 Key：%s , Value : %s \n",
+       Thread.currentThread().getName(),
+       propertyName,
+       environment.getProperty(propertyName)
+       ));
+}
+---
+健康检查：
+意义：比如应用可以任意地输出业务健康、系统健康等指标；
+端点URI：/health；
+实现类：HealthEndpoint；
+健康指示器：HealthIndicator；
+HealthEndpoint与HealthIndicator关系：一对多；
+自定义实现HealthIndicator：
+定义 MyHealthIndicator 实现 AbstractHealthIndicator
+public class MyHealthIndicator extends AbstractHealthIndicator {
+
+   @Override
+   protected void doHealthCheck(Health.Builder builder) throws Exception {
+       builder.up().withDetail("MyHealthIndicator","Day Day Up");
+   }
+}
+暴露 MyHealthIndicator 为 Bean
+@Bean
+public MyHealthIndicator myHealthIndicator(){
+ return new MyHealthIndicator();
+}
+关闭安全控制
+management.security.enabled = false
+---
+springboot激活 actuator 需要增加 spring-hateoas的依赖；
+设置关键 Endpoints 的敏感性：
+### 配置客户端配置项
+   spring.application.name = config-client
+
+   ### 全局关闭 Actuator 安全
+   management.security.enabled = false
+   ### 细粒度的开放 Actuator Endpoints
+   ### sensitive 关注是敏感性，安全
+   endpoints.env.sensitive = false
+   endpoints.refresh.sensitive = false
+   endpoints.beans.sensitive = false
+   endpoints.health.sensitive = false
+   endpoints.actuator.sensitive = false
+以客户端为例：
+
+{
+    "links": [{
+        "rel": "self",
+        "href": "http://localhost:8080/actuator"
+    }, {
+        "rel": "heapdump",
+        "href": "http://localhost:8080/heapdump"
+    }, {
+        "rel": "beans",
+        "href": "http://localhost:8080/beans"
+    }, {
+        "rel": "resume",
+        "href": "http://localhost:8080/resume"
+    }, {
+        "rel": "autoconfig",
+        "href": "http://localhost:8080/autoconfig"
+    }, {
+        "rel": "refresh",
+        "href": "http://localhost:8080/refresh"
+    }, {
+        "rel": "env",
+        "href": "http://localhost:8080/env"
+    }, {
+        "rel": "auditevents",
+        "href": "http://localhost:8080/auditevents"
+    }, {
+        "rel": "mappings",
+        "href": "http://localhost:8080/mappings"
+    }, {
+        "rel": "info",
+        "href": "http://localhost:8080/info"
+    }, {
+        "rel": "dump",
+        "href": "http://localhost:8080/dump"
+    }, {
+        "rel": "loggers",
+        "href": "http://localhost:8080/loggers"
+    }, {
+        "rel": "restart",
+        "href": "http://localhost:8080/restart"
+    }, {
+        "rel": "metrics",
+        "href": "http://localhost:8080/metrics"
+    }, {
+        "rel": "health",
+        "href": "http://localhost:8080/health"
+    }, {
+        "rel": "configprops",
+        "href": "http://localhost:8080/configprops"
+    }, {
+        "rel": "pause",
+        "href": "http://localhost:8080/pause"
+    }, {
+        "rel": "features",
+        "href": "http://localhost:8080/features"
+    }, {
+        "rel": "trace",
+        "href": "http://localhost:8080/trace"
+    }]
+}
+---

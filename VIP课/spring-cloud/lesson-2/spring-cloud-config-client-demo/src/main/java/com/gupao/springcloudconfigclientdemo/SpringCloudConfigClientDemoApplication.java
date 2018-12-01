@@ -4,6 +4,7 @@ import com.gupao.springcloudconfigclientdemo.health.MyHealthIndicator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.context.refresh.ContextRefresher;
+import org.springframework.cloud.endpoint.RefreshEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -24,6 +25,8 @@ public class SpringCloudConfigClientDemoApplication {
 	}
 
 	public static void main(String[] args) {
+
+
 		SpringApplication.run(SpringCloudConfigClientDemoApplication.class, args);
 	}
 
