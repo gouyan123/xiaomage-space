@@ -2,13 +2,18 @@
 熔断：多个client请求一个service，当client数量过多时，service会负载过大，因此，要对其中一部分client进行熔断，保证其他client可用；
 熔断方式：
 1、超时时间：
-client请求service，service里面有一个线程池，容量为200，当client请求并发量 > 200时，如果前面的200个client不释放线程，后面的client将请求
-不到 service，因此设置client的超时时间为 500ms，当client连接service超过500ms还没有 响应时，service将放弃该client，让其他client连进来
+client请求service，service里面有一个线程池，容量为200，client相当于一个线程任务，当client请求并发量 > 200时，如果前面的200个client不释放线程，后面的
+client将请求不到 service，因此设置client的超时时间为 500ms，当client连接service超过500ms还没有 响应时，service将放弃该client，让其他client连进来
 2、信号量，即单位时间访问量 QPS(Query Per Second)：
 多个client请求service服务，client并发请求超过 5000次/s时，进行部分client熔断，如果 service有2个实例，通过 分布式配置将每个service的信号量设置为
 2500
-熔断service里面的方法：跟spring-cloud-server-application#ServerController，get请求say()方法 http://ip:port/say?message=...，当随机时间>100时，
+##
+熔断service里面的方法：
+跟spring-cloud-server-application#ServerController，get请求say()方法 http://ip:port/say?message=...，当随机时间>100时，
 立即释放当前线程，并调用容错方法errorContent()
+##
+实现服务熔断：
+跟spring-cloud-server-application#ServerController类中 say2()方法，middleSay()方法，advancedSay()方法；
 ## 服务短路（CircuitBreaker）
 QPS: Query Per Second
 TPS: Transaction Per Second
