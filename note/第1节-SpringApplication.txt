@@ -1,4 +1,9 @@
 小马哥新书：SpringBoot编程思想；共5部分，基础，自动装配，外部化配置，
+@EnableAutoConfiguration 作用
+从classpath中搜索所有META-INF/spring.factories配置文件然后，将其中org.springframework.boot.autoconfigure.EnableAutoConfiguration key对应的配置项加载到
+spring容器;例如：
+## MyAutoConfiguration是配置bean，作为jar包被引入新项目时，无法被新项目上下文加载创建实例对象，需要在原项目中定义如下内容，表示这个配置bean在被引入新项目时，可以被新项目上下文加载并实例化bean
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.gouyan.testlog.MyAutoConfiguration
 ---
 项目名称：spring-application
 项目路径：VIP课/microservices/source/microservices-project/spring-application

@@ -3,4 +3,59 @@
 Annotation 驱动：替代 XML 装配，优势与不足？
 Web 自动装配：①Servlet 3.0 + 自动装配；②Spring Web 自动装配；③实现 Spring Web MVC 自动装配；
 条件装配：Spring 条件装配；@Conditional ；实现 Spring Boot @ConditionalOnClass
-
+---
+Spring Boot Features：
+Create stand-alone Spring applications；
+Embed Tomcat, Jetty or Undertow directly (no need to deploy WAR files)：嵌入式tomcat
+Provide opinionated 'starter' dependencies to simplify your build configuration
+Automatically configure Spring and 3rd party libraries whenever possible：自动装配
+Provide production-ready features such as metrics, health checks and externalized configuration
+Absolutely no code generation and no requirement for XML configuration：不需配置文件
+---
+创建 annotation-driven-development项目
+在 /resources/META-INF/spring/路径下 创建 context.xml文件，内容如下：
+<bean name="user" class="com.gupao.annotationdrivendevelopment.domain.User">
+    <property name="name" value="小马哥" />
+</bean>
+创建 om.gupao.annotationdrivendevelopment.domain.User
+public class User {
+    private String name;
+    ...
+}
+创建 ，com.gupao.annotationdrivendevelopment.bootstrap.XmlConfigBootstrap，作为 xml配置引导类，上下文加载配置文件context.xml，将里面配置的对象实例化；
+public class XmlConfigBootstrap {
+    public static void main(String[] args) {
+        // 构建一个 Spring Application 上下文
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext();
+        applicationContext.setConfigLocations("classpath:/META-INF/spring/context.xml");
+        applicationContext.refresh();
+        User user = applicationContext.getBean("user", User.class);
+        System.out.printf("user.getName() = %s \n",user.getName());
+    }
+}
+---
+创建 com.gupao.annotationdrivendevelopment.config.UserConfiguration;@Configuration标志该类是一个配置bean，通过配置bean向spring容器中实例化对象，配置bean替代xml的<bean>；
+@Configuration
+public class UserConfiguration {
+    @Bean(name = "user")
+    public User user(){
+        User user = new User();
+        user.setName("小马哥V5");
+        return user;
+    }
+}
+创建 com.gupao.annotationdrivendevelopment.bootstrap.AnnotationConfigBootstrap，加载上面 配置bean到spring容器中；
+public class AnnotationConfigBootstrap {
+    public static void main(String[] args) {
+        // 构建一个 Spring Application 上下文
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+        // 注册 配置bean：UserConfiguration.class；
+        applicationContext.register(UserConfiguration.class);
+        // 加载配置，启动上下文
+        applicationContext.refresh();
+        User user = applicationContext.getBean("user", User.class);
+        System.out.printf("user.getName() = %s \n",user.getName());
+    }
+}
+---
+发现spring boot中都是使用 Annotation驱动的；

@@ -22,6 +22,21 @@ public class ServerController {
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
+    @HystrixCommand(
+            commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "100")},//设置 熔断超时时间为 100ms
+            fallbackMethod = "errorContent"       //当线程100ms后还没释放，直接释放线程，并调用errorContent()方法
+    )
+    @GetMapping("/say")
+    public String say(@RequestParam String message) throws InterruptedException {
+        // 如果随机时间 大于 100 ，那么触发容错
+        int value = random.nextInt(200);
+        System.out.println("say() costs " + value + " ms.");
+        // 任务线程执行超过100ms，直接释放该线程，并调用容错方法errorContent()
+        Thread.sleep(value);
+        System.out.println("ServerController 接收到消息 - say : " + message);
+        return "Hello, " + message;
+    }
+
     /**
      * 简易版本
      *
@@ -121,32 +136,8 @@ public class ServerController {
         return returnValue;
     }
 
-    @HystrixCommand(
-            fallbackMethod = "errorContent",
-            commandProperties = {
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",
-                            value = "100")
-            }
-
-    )
-    @GetMapping("/say")
-    public String say(@RequestParam String message) throws InterruptedException {
-        // 如果随机时间 大于 100 ，那么触发容错
-        int value = random.nextInt(200);
-
-        System.out.println("say() costs " + value + " ms.");
-
-        // > 100
-        Thread.sleep(value);
-
-        System.out.println("ServerController 接收到消息 - say : " + message);
-        return "Hello, " + message;
-    }
-
     public String errorContent(String message) {
         return "Fault";
     }
-
-
 }
 

@@ -4,10 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
-    <bean name="user"
-          class="com.gupao.annotationdrivendevelopment.domain.User">
+    <bean name="user" class="com.gupao.annotationdrivendevelopment.domain.User">
         <property name="name" value="小马哥" />
     </bean>
-
 </beans>
