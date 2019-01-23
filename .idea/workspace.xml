@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3632c641-c2bf-4ada-871d-11b4e6e19ea6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/咕泡学院 - Spring Cloud 系列（五） Spring Cloud Netflix Hystrix.pptx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/note/第1节-SpringApplication.txt" beforeDir="false" afterPath="$PROJECT_DIR$/note/第1节-SpringApplication.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/XmlConfigBootstrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/XmlConfigBootstrap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/config/UserConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/config/UserConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/resources/META-INF/spring/context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/resources/META-INF/spring/context.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/注解驱动.txt" beforeDir="false" afterPath="$PROJECT_DIR$/公开课/代码/annotation-driven-development/注解驱动.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/公开课/代码/interface-design/target/" />
     <ignored path="$PROJECT_DIR$/公开课/代码/annotation-driven-development/target/" />
@@ -47,7 +35,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
               <first_editor relative-caret-position="198">
-                <caret line="9" column="50" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
+                <caret line="9" column="62" selection-start-line="9" selection-start-column="62" selection-end-line="9" selection-end-column="62" />
                 <folding>
                   <element signature="e#810#811#0" expanded="true" />
                   <element signature="e#840#841#0" expanded="true" />
@@ -65,25 +53,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpringCloudConfigServer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-config-server/src/main/java/com/gupao/micro/services/spring/cloud/config/server/SpringCloudConfigServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
+      <file leaf-file-name="SpringCloudServerApplication.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/SpringCloudServerApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="363">
+              <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+            <state relative-caret-position="-330">
+              <caret line="33" column="54" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
               <folding>
                 <element signature="e#4194#4195#0" expanded="true" />
                 <element signature="e#4224#4225#0" expanded="true" />
@@ -115,8 +103,8 @@
         <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/config/UserConfiguration.java" />
         <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java" />
         <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/注解驱动.txt" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" />
         <option value="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" />
       </list>
     </option>
   </component>
@@ -448,12 +436,12 @@
       <workItem from="1540533671450" duration="71000" />
       <workItem from="1540551589421" duration="3582000" />
       <workItem from="1540861086594" duration="596000" />
-      <workItem from="1548210311085" duration="4170000" />
+      <workItem from="1548210311085" duration="5079000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11023000" />
+    <option name="totallyTimeSpent" value="11932000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -479,7 +467,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
       <window_info anchor="bottom" id="Spring" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.92470586" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.92466766" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.34316355" />
       <window_info anchor="right" id="Bean Validation" order="4" />
       <window_info id="Web" order="3" side_tool="true" />
@@ -620,13 +608,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-config-server/src/main/java/com/gupao/micro/services/spring/cloud/config/server/SpringCloudConfigServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-config-server/src/main/java/com/gupao/micro/services/spring/cloud/config/server/SpringCloudConfigServer.java">
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/SpringCloudServerApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        <state relative-caret-position="363">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -634,7 +629,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
           <first_editor relative-caret-position="198">
-            <caret line="9" column="50" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
+            <caret line="9" column="62" selection-start-line="9" selection-start-column="62" selection-end-line="9" selection-end-column="62" />
             <folding>
               <element signature="e#810#811#0" expanded="true" />
               <element signature="e#840#841#0" expanded="true" />
@@ -653,8 +648,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+        <state relative-caret-position="-330">
+          <caret line="33" column="54" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
           <folding>
             <element signature="e#4194#4195#0" expanded="true" />
             <element signature="e#4224#4225#0" expanded="true" />

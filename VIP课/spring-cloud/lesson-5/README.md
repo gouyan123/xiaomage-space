@@ -7,7 +7,8 @@ client请求service，service里面有一个线程池，容量为200，当client
 2、信号量，即单位时间访问量 QPS(Query Per Second)：
 多个client请求service服务，client并发请求超过 5000次/s时，进行部分client熔断，如果 service有2个实例，通过 分布式配置将每个service的信号量设置为
 2500
-跟spring-cloud-server-application#ServerController，
+熔断service里面的方法：跟spring-cloud-server-application#ServerController，get请求say()方法 http://ip:port/say?message=...，当随机时间>100时，
+立即释放当前线程，并调用容错方法errorContent()
 ## 服务短路（CircuitBreaker）
 QPS: Query Per Second
 TPS: Transaction Per Second
