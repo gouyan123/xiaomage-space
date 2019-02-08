@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3632c641-c2bf-4ada-871d-11b4e6e19ea6" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/公开课/代码/interface-design/target/" />
+    <ignored path="$PROJECT_DIR$/公开课/代码/annotation-driven-development/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-application/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-stream-binder-rocketmq/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-stream-binder-http/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-native-application/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-service-discovery-client/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-mvc-rest/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-mvc-view/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-client-application/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-config-server/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-reactive/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-servlet-gateway/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-config-client/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="165">
+                <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+                <folding>
+                  <element signature="e#810#811#0" expanded="true" />
+                  <element signature="e#840#841#0" expanded="true" />
+                  <element signature="e#0#937#0" expanded="true" />
+                  <element signature="e#858#859#0" expanded="true" />
+                  <element signature="e#930#931#0" expanded="true" />
+                  <element signature="e#383#384#0" expanded="true" />
+                  <element signature="e#468#469#0" expanded="true" />
+                  <element signature="e#553#554#0" expanded="true" />
+                  <element signature="e#640#641#0" expanded="true" />
+                </folding>
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1980">
+              <caret line="97" column="19" selection-start-line="97" selection-start-column="19" selection-end-line="97" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$/../spring-framework" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/公开课/代码/interface-design/note.txt" />
+        <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/resources/META-INF/spring/context.xml" />
+        <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/domain/User.java" />
+        <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/XmlConfigBootstrap.java" />
+        <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/config/UserConfiguration.java" />
+        <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java" />
+        <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/注解驱动.txt" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="F:/ProgramFiles/apache-maven-3.5.4" />
+        <option name="userSettingsFile" value="F:\ProgramFiles\apache-maven-3.5.4\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="annotation-driven-development" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1040" />
+    <option name="height" value="745" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-server-application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-server-application" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-server-application" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-server-application" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-server-application" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-server-application" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-server-application" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../springcloud" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.XmlConfigBootstrap">
+    <configuration name="XmlConfigBootstrap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.gupao.annotationdrivendevelopment.bootstrap.XmlConfigBootstrap" />
+      <module name="annotation-driven-development" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gupao.annotationdrivendevelopment.bootstrap.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="AnnotationDrivenDevelopmentApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="annotation-driven-development" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gupao.annotationdrivendevelopment.AnnotationDrivenDevelopmentApplication" />
+    </configuration>
+    <configuration name="MvcViewApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-mvc-view" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gupao.micro.services.mvc.MvcViewApplication" />
+    </configuration>
+    <configuration name="SpringCloudClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-cloud-client-application" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gupao.micro.services.spring.cloud.client.SpringCloudClientApplication" />
+    </configuration>
+    <configuration name="SpringCloudConfigServer" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-cloud-config-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gupao.micro.services.spring.cloud.config.server.SpringCloudConfigServer" />
+    </configuration>
+    <configuration name="SpringCloudServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-cloud-server-application" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gupao.micro.services.spring.cloud.server.SpringCloudServerApplication" />
+    </configuration>
+    <configuration name="SpringCloudServletGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-cloud-servlet-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gupao.micro.services.spring.cloud.gateway.SpringCloudServletGatewayApplication" />
+    </configuration>
+    <configuration name="WebFluxApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-reactive" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gupao.micro.services.reactive.WebFluxApplication" />
+    </configuration>
+    <configuration name="ZkDSClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="spring-cloud-service-discovery-client" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gupao.micro.services.spring.cloud.ds.client.ZkDSClientApplication" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.AnnotationDrivenDevelopmentApplication" />
+      <item itemvalue="Application.XmlConfigBootstrap" />
+      <item itemvalue="Spring Boot.ZkDSClientApplication" />
+      <item itemvalue="Spring Boot.MvcViewApplication" />
+      <item itemvalue="Spring Boot.SpringCloudClientApplication" />
+      <item itemvalue="Spring Boot.SpringCloudConfigServer" />
+      <item itemvalue="Spring Boot.WebFluxApplication" />
+      <item itemvalue="Spring Boot.SpringCloudServletGatewayApplication" />
+      <item itemvalue="Spring Boot.SpringCloudServerApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.XmlConfigBootstrap" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3632c641-c2bf-4ada-871d-11b4e6e19ea6" name="Default" comment="" />
+      <created>1540172983649</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1540172983649</updated>
+      <workItem from="1540172985198" duration="661000" />
+      <workItem from="1540190166061" duration="896000" />
+      <workItem from="1540278821063" duration="66000" />
+      <workItem from="1540525084038" duration="981000" />
+      <workItem from="1540533671450" duration="71000" />
+      <workItem from="1540551589421" duration="3582000" />
+      <workItem from="1540861086594" duration="596000" />
+      <workItem from="1548210311085" duration="8681000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="15534000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" weight="0.3299356" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="bottom" id="Docker" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="bottom" id="Java Enterprise" order="8" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
+      <window_info anchor="bottom" id="Spring" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.92466766" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.34316355" />
+      <window_info anchor="right" id="Bean Validation" order="4" />
+      <window_info id="Web" order="3" side_tool="true" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="8" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/注解驱动.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1980">
+          <caret line="60" column="33" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/4.3.11.RELEASE/spring-context-4.3.11.RELEASE-sources.jar!/org/springframework/context/support/AbstractApplicationContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13365">
+          <caret line="508" column="16" selection-start-line="508" selection-start-column="16" selection-end-line="508" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/注解驱动.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2460">
+          <caret line="60" column="33" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/4.3.11.RELEASE/spring-context-4.3.11.RELEASE-sources.jar!/org/springframework/context/support/AbstractApplicationContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20828">
+          <caret line="508" column="16" selection-start-line="508" selection-start-column="16" selection-end-line="508" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="902">
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/interface-design/接口设计原则.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/interface-design/接口设计原则.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/interface-design/接口设计原则.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/domain/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="52" selection-start-column="9" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/resources/META-INF/spring/context.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="6" column="4" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="8" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/XmlConfigBootstrap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/config/UserConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/4.3.11.RELEASE/spring-context-4.3.11.RELEASE.jar!/org/springframework/context/support/AbstractApplicationContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="253" column="16" selection-start-line="253" selection-start-column="16" selection-end-line="253" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/4.3.11.RELEASE/spring-context-4.3.11.RELEASE-sources.jar!/org/springframework/context/support/AbstractApplicationContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13365">
+          <caret line="508" column="16" selection-start-line="508" selection-start-column="16" selection-end-line="508" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/注解驱动.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="60" column="33" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-config-server/src/main/java/com/gupao/micro/services/spring/cloud/config/server/SpringCloudConfigServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/SpringCloudServerApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="165">
+            <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+            <folding>
+              <element signature="e#810#811#0" expanded="true" />
+              <element signature="e#840#841#0" expanded="true" />
+              <element signature="e#0#937#0" expanded="true" />
+              <element signature="e#858#859#0" expanded="true" />
+              <element signature="e#930#931#0" expanded="true" />
+              <element signature="e#383#384#0" expanded="true" />
+              <element signature="e#468#469#0" expanded="true" />
+              <element signature="e#553#554#0" expanded="true" />
+              <element signature="e#640#641#0" expanded="true" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1980">
+          <caret line="97" column="19" selection-start-line="97" selection-start-column="19" selection-end-line="97" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>scala-sdk-2.11.2</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>spring-cloud-service-discovery-client</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: javax.servlet:servlet-api:2.5</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

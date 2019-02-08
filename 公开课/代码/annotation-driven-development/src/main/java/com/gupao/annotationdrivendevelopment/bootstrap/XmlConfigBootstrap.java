@@ -12,22 +12,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @date 2017-10-09
  **/
 public class XmlConfigBootstrap {
-
     public static void main(String[] args) {
         // 构建一个 Spring Application 上下文
-        ClassPathXmlApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext();
-
-        applicationContext.setConfigLocations(
-                "classpath:/META-INF/spring/context.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext();
+        applicationContext.setConfigLocations("classpath:/META-INF/spring/context.xml");
         applicationContext.refresh();
-
         User user = applicationContext.getBean("user", User.class);
-
         System.out.printf("user.getName() = %s \n",user.getName());
-
-
-
     }
-
 }

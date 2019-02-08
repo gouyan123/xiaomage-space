@@ -31,7 +31,8 @@ public class SpringCloudConfigClientApplication {
         public PropertySource<?> locate(Environment environment) {
             Map<String, Object> source = new HashMap<>();
             source.put("server.port","9090");
-            MapPropertySource propertySource = new MapPropertySource("my-property-source", source);
+            MapPropertySource propertySource =
+                    new MapPropertySource("my-property-source", source);
             return propertySource;
         }
     }

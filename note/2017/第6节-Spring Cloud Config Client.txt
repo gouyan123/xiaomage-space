@@ -14,9 +14,6 @@ ApplicationEvent extends EventObject；
 ApplicationListener extends EventListener；
 创建 com.gupao.springcloudconfigclient.demo.SpringEventListenerDemo类，观察spring中事件监听；
 ---
-springcloud中如何控制顺序：
-实现 Ordered接口以及 @Order标记，数值越小越优先；
----
 springboot核心事件：
 1、ApplicationEnvironmentPreparedEvent：封装了SpringApplication和ConfigurableEnvironment
 SpringApplication.run(args)方法返回上下文 ConfigurableApplicationContext；
@@ -57,10 +54,6 @@ public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
         if (!environment.getPropertySources().contains("bootstrap")) {
             // 其实现类 AnnotationConfigApplicationContext
             ConfigurableApplicationContext context = null;
-            /*在boostray.yml中配置spring.cloud.bootstrap.name才能被加载到，在application.yml中配置也加载不到
-            *因为BootstrapApplicationListener 比 ConfigFileApplicationListener先加载，加载顺序号定义在
-            *DEFAULT_ORDER 属性中；
-            */
             String configName = environment.resolvePlaceholders("${spring.cloud.bootstrap.name:bootstrap}");
             Iterator var5 = event.getSpringApplication().getInitializers().iterator();
 
@@ -80,7 +73,7 @@ public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
         }
     }
 }
-BootstrapApplicationListener.bootstrapServiceContext()
+BootstrapApplicationListerner.bootstrapServiceContext()
 private ConfigurableApplicationContext bootstrapServiceContext(ConfigurableEnvironment environment, final SpringApplication application,String configName) {
     StandardEnvironment bootstrapEnvironment = new StandardEnvironment();
     MutablePropertySources bootstrapProperties = bootstrapEnvironment
@@ -88,7 +81,8 @@ private ConfigurableApplicationContext bootstrapServiceContext(ConfigurableEnvir
     for (PropertySource<?> source : bootstrapProperties) {
         bootstrapProperties.remove(source.getName());
     }
-    String configLocation = environment.resolvePlaceholders("${spring.cloud.bootstrap.location:}");
+    String configLocation = environment
+            .resolvePlaceholders("${spring.cloud.bootstrap.location:}");
     Map<String, Object> bootstrapMap = new HashMap<>();
     bootstrapMap.put("spring.config.name", configName);
     if (StringUtils.hasText(configLocation)) {
@@ -155,11 +149,11 @@ public void refresh() throws BeansException, IllegalStateException {
             this.initMessageSource();
             // initialize event multicaster for this context
             this.initApplicationEventMulticaster();
-            // initialize other special beans in specific context subclasses,让子类去实现
+            // initialize other special beans in specific context subclasses
             this.onRefresh();
             // Check for listener beans and register them.
             this.registerListeners();
-            // Instantiate all remaining (non-lazy-init 非延迟加载) singletons. Bean的初始化；
+            // Instantiate all remaining (non-lazy-init) singletons. Bean的初始化；
             this.finishBeanFactoryInitialization(beanFactory);
             // Last step: publish corresponding event.
             this.finishRefresh();
@@ -199,39 +193,3 @@ public interface BeanDefinitionRegistryPostProcessor extends BeanFactoryPostProc
 	void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException;
 }
 
-在 ApplicationListener的类名上，右键，find usages，发现 /META-INF/spring.factories中定义内容如下：
-org.springframework.context.ApplicationListener=\
-org.springframework.cloud.bootstrap.BootstrapApplicationListener,\
-org.springframework.cloud.bootstrap.LoggingSystemShutdownListener,\
-org.springframework.cloud.context.restart.RestartListener
-BootstrapApplicationListener，LoggingSystemShutdownListener，RestartListener要实现 Ordered接口，然后
-加载key为ApplicationListener的类时，会按照顺序加载以上三个类；
-可以自己扩展：在/META-INF/spring.factories里面的 关键字org.springframework.context.ApplicationListener
-后面加上自己定义的类，并实现Ordered接口，表示加载顺序，即可被自动加载；注意 优先级很重要
-
----
-actuator包下：
-Env端点：EnvironmentEndpoint，Environment关联多个带名称的PropertySource，观察initPropertySources()方法；
-Environment结构：
-    -AbstractEnvironment：聚合一个PropertySources，包含多个PropertySource并且有优先级
-        -普通类型：StandardEnvironment；
-        -web类型：ServletEnvironment；
----
----实现自定义配置
-在 spring-cloud-config-client项目的启动类 SpringCloudConfigClientApplication中定义 MyPropertySourceLocator
-@Configuration  //暴露 MyPropertySourceLocator为一个 spring bean
-@Order(Ordered.HIGHEST_PRECEDENCE)  //定义最高优先级，最先被加载
-public static class MyPropertySourceLocator implements PropertySourceLocator {
-    @Override
-    public PropertySource<?> locate(Environment environment) {
-        Map<String, Object> source = new HashMap<>();
-        source.put("server.port","9090");
-        MapPropertySource propertySource = new MapPropertySource("my-property-source", source);
-        return propertySource;
-    }
-}
-并在 /META-INF/spring.factories中定义 *.MyPropertySourceLocator，当初始化的时候加载MyPropertySourceLocator
-org.springframework.cloud.bootstrap.BootstrapConfiguration=\
-com.gupao.springcloudconfigclient.SpringCloudConfigClientApplication.MyPropertySourceLocator
-注意：Environment中允许 属性值重名，使用优先级高的；
----

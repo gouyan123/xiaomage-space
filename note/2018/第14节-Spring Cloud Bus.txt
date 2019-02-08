@@ -1,13 +1,7 @@
 代码位置：VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-client-application
----目录
-Java 事件/监听者模式；
-Spring 事件；
-SpringBoot 事件；
-EventBus 事件总线；
----
 ---
 Java事件：
-事件：所有事件类型扩展 java.util.EventObject；
+事件：所有事件类型扩展 java.util.Event；
 事件监听器套路：
 1 参数类型：java.util.Event对象及其子类；事件源 JPA EntityListener；
 2 监听方法没有返回值：例外 Spring @EventListener；
@@ -45,20 +39,14 @@ public interface Lifecycle {
 创建 com.gupao.micro.services.spring.cloud.client.controller.SpringEventController发个事件给自己，自己
 去监听；要启动 zookeepr(注册中心)和rabbitmq；多个应用之间通过发送事件，实现交互，体现了 面向事件编程的思想；
 
----Event Bus：面向事件编程
-spring-cloud-client-application项目中
-创建远程事件 com.gupao.micro.services.spring.cloud.client.event.RemoteAppEvent
-创建远程事件发送器 com.gupao.micro.services.spring.cloud.client.controller.RemoteAppEventSenderController
-其中，publisher.publishEvent(message); publisher将事件发送给listener，listener再将事件发送给另一端；
-创建listener com.gupao.micro.services.spring.cloud.client.event.HttpRemoteAppEventListener：
-将事件数据发送 HTTP 请求到目标机器；
-spring-cloud-server-application项目中
-创建远程事件接收者 com.gupao.micro.services.spring.cloud.server.controller.RemoteAppEventReceiverController
-分别启动spring-cloud-client-application和spring-cloud-server-application
-curl -X POST http://localhost:8888/send/remote/event/spring-cloud-server-application/
--d '{"name": "gy"}' -H "content-type:application/json;charset=UTF-8"  注意：content-type封装在 MediaType
 
----
-文件监听接口 WatchService；
----
+Spring 事件监听器
+
+所有 Spring 事件监听器实现 ApplicationListener
+
+SpringBoot事件：
+
+SpringCloud事件：
+
+Event Bus 事件总线：
 

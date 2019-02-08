@@ -17,11 +17,10 @@ import java.util.Map;
 
 /**
  * {@link RemoteAppEvent} 监听器，将事件数据发送 HTTP 请求到目标机器
- * 监听 {@link ContextRefreshedEvent} 获取上下文
- * SmartApplicationListener 监听多个事件
+ * 监听 {@link ContextRefreshedEvent}
  */
 public class HttpRemoteAppEventListener implements SmartApplicationListener {
-    /**真正将事件发送到远程*/
+
     private RestTemplate restTemplate = new RestTemplate();
 
     // 得到 DiscoveryClient Bean
@@ -33,7 +32,7 @@ public class HttpRemoteAppEventListener implements SmartApplicationListener {
         Object source = event.getSource();
         String appName = event.getAppName();
         List<ServiceInstance> serviceInstances = discoveryClient.getInstances(appName);
-        /**真正将事件 event发送到远程*/
+
         for (ServiceInstance s : serviceInstances) {
 
             String rootURL = s.isSecure() ?
@@ -54,7 +53,6 @@ public class HttpRemoteAppEventListener implements SmartApplicationListener {
 
     @Override
     public boolean supportsEventType(Class<? extends ApplicationEvent> eventType) {
-        /**a.isAssignableFrom(b) 含义：继承关系上 a >= b*/
         return RemoteAppEvent.class.isAssignableFrom(eventType)
                 || ContextRefreshedEvent.class.isAssignableFrom(eventType);
     }
@@ -73,9 +71,8 @@ public class HttpRemoteAppEventListener implements SmartApplicationListener {
             onContextRefreshedEvent((ContextRefreshedEvent) event);
         }
     }
-    /**/
+
     private void onContextRefreshedEvent(ContextRefreshedEvent event) {
-        /**从事件中获取上下文*/
         ApplicationContext applicationContext = event.getApplicationContext();
         this.discoveryClient = applicationContext.getBean(DiscoveryClient.class);
         this.currentAppName = applicationContext.getEnvironment().getProperty("spring.application.name");

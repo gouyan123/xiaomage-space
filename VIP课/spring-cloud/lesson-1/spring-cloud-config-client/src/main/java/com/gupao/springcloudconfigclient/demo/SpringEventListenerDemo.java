@@ -9,9 +9,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class SpringEventListenerDemo {
     public static void main(String[] args) {
         // Annotation 驱动的 Spring 上下文
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext();
         // 注册监听器，该监听器只关注 MyApplicationEvent这个事件；
-        context.addApplicationListener(new ApplicationListener<MyApplicationEvent>() {
+        context.addApplicationListener(
+                new ApplicationListener<MyApplicationEvent>() {
                     /**监听器得到事件；@param event*/
                     @Override
                     public void onApplicationEvent(MyApplicationEvent event) {

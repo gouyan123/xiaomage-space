@@ -22,13 +22,22 @@ public class ServerController {
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-    /**
-     * 简易版本
-     *
-     * @param message
-     * @return
-     * @throws InterruptedException
-     */
+    @HystrixCommand(
+            commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "100")},//设置 熔断超时时间为 100ms
+            fallbackMethod = "errorContent"       //当线程100ms后还没释放，直接释放线程，并调用errorContent()方法
+    )
+    @GetMapping("/say")
+    public String say(@RequestParam String message) throws InterruptedException {
+        // 如果随机时间 大于 100 ，那么触发容错
+        int value = random.nextInt(200);
+        System.out.println("say() costs " + value + " ms.");
+        // 任务线程执行超过100ms，直接释放该线程，并调用容错方法errorContent()
+        Thread.sleep(value);
+        System.out.println("ServerController 接收到消息 - say : " + message);
+        return "Hello, " + message;
+    }
+
+    /**简易版本-熔断*/
     @GetMapping("/say2")
     public String say2(@RequestParam String message) throws Exception {
         Future<String> future = executorService.submit(() -> {
@@ -46,13 +55,7 @@ public class ServerController {
     }
 
 
-    /**
-     * 中级版本
-     *
-     * @param message
-     * @return
-     * @throws InterruptedException
-     */
+    /**中级版本-熔断*/
     @GetMapping("/middle/say")
     public String middleSay(@RequestParam String message) throws Exception {
         Future<String> future = executorService.submit(() -> {
@@ -71,25 +74,13 @@ public class ServerController {
     }
 
 
-    /**
-     * 高级版本
-     *
-     * @param message
-     * @return
-     * @throws InterruptedException
-     */
+    /**高级版本-熔断*/
     @GetMapping("/advanced/say")
     public String advancedSay(@RequestParam String message) throws Exception {
         return doSay2(message);
     }
 
-    /**
-     * 高级版本 + 注解（超时）
-     *
-     * @param message
-     * @return
-     * @throws InterruptedException
-     */
+    /**高级版本 + 注解（超时）-熔断*/
     @GetMapping("/advanced/say2")
     @TimeoutCircuitBreaker(timeout = 100)
     public String advancedSay2(@RequestParam String message) throws Exception {
@@ -97,13 +88,7 @@ public class ServerController {
     }
 
 
-    /**
-     * 高级版本 + 注解（信号量）
-     *
-     * @param message
-     * @return
-     * @throws InterruptedException
-     */
+    /**高级版本 + 注解（信号量）-熔断*/
     @GetMapping("/advanced/say3")
     @SemaphoreCircuitBreaker(1)
     public String advancedSay3(@RequestParam String message) throws Exception {
@@ -121,32 +106,8 @@ public class ServerController {
         return returnValue;
     }
 
-    @HystrixCommand(
-            fallbackMethod = "errorContent",
-            commandProperties = {
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",
-                            value = "100")
-            }
-
-    )
-    @GetMapping("/say")
-    public String say(@RequestParam String message) throws InterruptedException {
-        // 如果随机时间 大于 100 ，那么触发容错
-        int value = random.nextInt(200);
-
-        System.out.println("say() costs " + value + " ms.");
-
-        // > 100
-        Thread.sleep(value);
-
-        System.out.println("ServerController 接收到消息 - say : " + message);
-        return "Hello, " + message;
-    }
-
     public String errorContent(String message) {
         return "Fault";
     }
-
-
 }
 

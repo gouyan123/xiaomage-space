@@ -2,12 +2,13 @@ package com.gupao.micro.services.spring.cloud.client.event;
 
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.context.ApplicationEvent;
+
 import java.util.List;
 
 public class RemoteAppEvent extends ApplicationEvent {
 
     /**
-     * 事件传输类型 HTTP、RPC、MQ；为了实现可插拔；
+     * 事件传输类型 HTTP、RPC、MQ
      */
     private String type;
 
@@ -27,7 +28,6 @@ public class RemoteAppEvent extends ApplicationEvent {
      * @param isCluster
      */
     public RemoteAppEvent(Object source, String appName, boolean isCluster) {
-        //source表示 事件源
         super(source);
         this.appName = appName;
         this.isCluster = isCluster;
