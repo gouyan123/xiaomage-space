@@ -16,7 +16,7 @@ XML-RPC -> XML 方法描述、方法参数 -> WSDL（WebServices 定义语言）
 
 WebServices -> SOAP（HTTP、SMTP） -> 文本协议（头部分、体部分）
 
-REST -> JSON/XML( Schema ：类型、结构) -> 文本协议（HTTP Header、Body）
+REST -> 数据格式：JSON/XML( 通过Schema来定义类型和结构) -> 传输方式：文本协议（HTTP Header、Body）
 
 W3C Schema ：xsd:string 原子类型，自定义自由组合原子类型
 
