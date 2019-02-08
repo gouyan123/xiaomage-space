@@ -1,3 +1,32 @@
+#ppt内容：
+##主要议题：
+Eureka 高可用
+RestTemplate
+整合 Netflix Ribbon
+###Eureka 高可用
+####Eureka 客户端高可用
+高可用注册中心集群
+获取注册信息时间间隔
+实例信息复制时间间隔
+实例Id
+####实例端点映射
+
+###Spring RestTemplate
+HttpMessageConvertor
+ClientHttpRequestFactory
+ClientHttpRequestInterceptor
+
+###整合 Netflix Ribbon
+激活
+负载均衡器
+负载均衡客户端
+自动装配
+源码分析
+
+
+Eureka 服务端高可用
+
+
 # Spring Cloud Netflix Ribbon
 
 

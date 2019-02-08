@@ -22,9 +22,9 @@ W3C Schema ：xsd:string 原子类型，自定义自由组合原子类型
 
 Java POJO : int、String
 
-Response Header -> Content-Type: application/json;charset=UTF-8
+响应头里定义 内容类型：Response Header -> Content-Type: application/json;charset=UTF-8
 
-Dubbo：Hession、 Java Serialization（二进制），跨语言不变，一般通过 Client（Java、C++）
+Dubbo支持协议：Hession、 Java Serialization（二进制），跨语言不变，一般通过 Client（Java、C++）
 
 > 二进制的性能是非常好（字节流，免去字符流（字符编码），免去了字符解释，机器友好、对人不友好）
 
@@ -38,19 +38,9 @@ Dubbo：Hession、 Java Serialization（二进制），跨语言不变，一般�
 
 
 
-URI：统一资源定位符
+URI：用于网络资源定位的描述 Universal Resource Identifier，资源需要消费媒介；
 
-http://git.gupaoedu.com/vip/xiaomage-space/tree/master/VIP课/spring-cloud/lesson-3
-
-URI：用于网络资源定位的描述 Universal Resource Identifier
-
-URL: Universal Resource Locator
-
-网络是通讯方式
-
-资源是需要消费媒介
-
-定位是路由
+URL: 统一资源定位符，网络是通讯方式；
 
 
 
@@ -68,21 +58,17 @@ Broker：包括路由，并且管理，老的称谓（MOM）
 
 可用性比率：通过时间来计算（一年或者一月）
 
-比如：一年 99.99 % 
+假设：一年可用性比率为 99.99 %，那么一年内的可用时间和不可用时间如下：
 
 可用时间：365 * 24  * 3600 * 99.99% 
 
 不可用时间：365 * 24  * 3600 * 0.01% = 3153.6 秒 < 一个小时
 
-不可以时间：1个小时 推算一年 1 / 24 / 365 = 0.01 %
+由 一年内不可用时间 推算不可用率：假设一年内有1个小时不可用，则不可用率为 1 / 24 / 365 = 0.01 %；
 
 
 
-单台机器不可用比率：1%
-
-两台机器不可用比率：1% * 1%
-
-N 机器不可用比率：1% ^ n
+集群规模增大不可用率降低：单台机器不可用比率为1%，两台机器不可用比率为1% * 1%，N 机器不可用比率：1% ^ n；
 
 
 
@@ -90,14 +76,12 @@ N 机器不可用比率：1% ^ n
 
 微服务里面的问题：
 
-一次调用：
+一次调用：A服务 调用 B服务，B服务调用C服务，每个服务实例的可用度 都为 99%，则完整调用可用度为 99% * 99% * 99% = 97%
+A ->       B    ->  C
+99% * 99% * 99% = 97%
 
-   A ->       B    ->  C
-
-99% -> 99% -> 99% = 97%
-
-   A ->     B    ->  C -> D
-
+当调用链增长时，完整调用 可用度会降低：
+A ->     B    ->  C -> D
 99% -> 99% -> 99%  -> 99% = 96%
 
 
