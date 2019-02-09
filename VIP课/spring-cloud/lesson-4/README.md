@@ -24,7 +24,7 @@ ClientHttpRequestInterceptor
 源码分析
 
 
-Eureka 服务端高可用
+####Eureka 服务端高可用
 
 
 # Spring Cloud Netflix Ribbon
@@ -49,28 +49,27 @@ eureka.client.serviceUrl.defaultZone=\
 
 
 
-#### 配置源码（EurekaClientConfigBean）
+#### eureka客户端配置源码（EurekaClientConfigBean）
 
 
 
-配置项 `eureka.client.serviceUrl` 实际映射的字段为 `serviceUrl` `，它是 Map 类型，Key 为自定义，默认值“defaultZone”，value 是需要配置的Eureka 注册服务器URL。
+配置项 `eureka.client.serviceUrl` 映射属性 `serviceUrl` `，它是 Map 类型，Key 为自定义，默认值为“defaultZone”，value 是Eureka服务端URL。
 
-```java
+```EurekaClientConfigBean中 serviceUrl属性源码如下：
 private Map<String, String> serviceUrl = new HashMap<>();
-
 {
   this.serviceUrl.put(DEFAULT_ZONE, DEFAULT_URL);
 }
 ```
 
-value 可以是多值字段，通过“,” 分割：
+value 可以是多值字段，通过 "," 分割：
 
-```java
-String serviceUrls = this.serviceUrl.get(myZone);
+```EurekaClientConfigBean中获取 serviceUrls[eureka服务端url]方法如下：
+String serviceUrls = this.serviceUrl.get(myZone);   //serviceUrl为map类型；
 if (serviceUrls == null || serviceUrls.isEmpty()) {
    serviceUrls = this.serviceUrl.get(DEFAULT_ZONE);
 }
-if (!StringUtils.isEmpty(serviceUrls)) {
+if (!StringUtils.isEmpty(serviceUrls)) {    //serviceUrls中可能有多个eureka服务端地址，以","分隔，所以要分割字符串
    final String[] serviceUrlsSplit = StringUtils.commaDelimitedListToStringArray(serviceUrls);
 }
 ```
@@ -79,15 +78,15 @@ if (!StringUtils.isEmpty(serviceUrls)) {
 
 
 
-### 获取注册信息时间间隔
+### 配置 eureka客户端 获取注册信息 时间间隔
 
 
 
-Eureka 客户端需要获取 Eureka 服务器注册信息，这个方便服务调用。
+Eureka 客户端需要获取 Eureka 服务器注册信息，来调用服务实例；
 
 
 
-Eureka 客户端：`EurekaClient`,关联应用集合：`Applications`
+Eureka 客户端类：`EurekaClient`，该类关联了应用集合：`Applications`
 
 单个应用信息：`Application`，关联多个应用实例
 
@@ -189,7 +188,8 @@ eureka.instance.statusPageUrlPath = /health
 ### Eureka Server 应用名称
 spring.application.name = spring-cloud-eureka-server
 ### Eureka Server 服务端口
-server.port= 9090
+
+server.port= 9090   # server.port= ${random.int[7070,7079]} 端口取随机值
 ### 取消服务器自我注册
 eureka.client.register-with-eureka=true
 ### 注册中心的服务器，没有必要再去检索服务
