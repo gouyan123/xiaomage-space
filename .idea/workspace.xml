@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ed5c5ce-c22a-4ff3-86af-e9fea3bf2286" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/spring-cloud-eureka-client-demo/user-api/src/test/java/com/gupao/user/test/RestTemplateDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/spring-cloud-eureka-client-demo/user-api/src/test/java/com/gupao/user/test/RestTemplateDemo.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/公开课/代码/interface-design/target/" />
     <ignored path="$PROJECT_DIR$/公开课/代码/annotation-driven-development/target/" />
@@ -55,19 +54,19 @@
         <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="270">
-                <caret line="84" column="37" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
+              <first_editor relative-caret-position="306">
+                <caret line="307" selection-start-line="307" selection-end-line="307" />
               </first_editor>
               <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EurekaClient.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/com/netflix/eureka/eureka-client/1.6.2/eureka-client-1.6.2.jar!/com/netflix/discovery/EurekaClient.class">
+      <file leaf-file-name="ClientHttpRequestInterceptor.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.7.RELEASE/spring-web-5.0.7.RELEASE.jar!/org/springframework/http/client/ClientHttpRequestInterceptor.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+            <state relative-caret-position="210">
+              <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -99,6 +98,7 @@
         <option value="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-3/README.md" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/spring-cloud-eureka-server-demo/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/spring-cloud-eureka-client-demo/user-api/src/test/java/com/gupao/user/test/RestTemplateDemo.java" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/README.md" />
       </list>
     </option>
@@ -136,7 +136,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="101" />
     <option name="y" value="96" />
     <option name="width" value="830" />
@@ -181,7 +181,7 @@
               <item name="VIP课" type="462c0819:PsiDirectoryNode" />
               <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
               <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-eureka-server-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
@@ -189,7 +189,17 @@
               <item name="VIP课" type="462c0819:PsiDirectoryNode" />
               <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
               <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-eureka-server-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="user-api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
+              <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="user-api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -198,9 +208,10 @@
               <item name="VIP课" type="462c0819:PsiDirectoryNode" />
               <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
               <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-eureka-server-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="user-api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
@@ -208,10 +219,24 @@
               <item name="VIP课" type="462c0819:PsiDirectoryNode" />
               <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
               <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-eureka-server-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="user-api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
+              <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
+              <item name="user-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -245,7 +270,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.XmlConfigBootstrap">
+  <component name="RunManager" selected="Spring Boot.SpringCloudEurekaServerDemoApplication (1)">
     <configuration name="XmlConfigBootstrap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.gupao.annotationdrivendevelopment.bootstrap.XmlConfigBootstrap" />
       <module name="annotation-driven-development" />
@@ -291,6 +316,16 @@
     <configuration name="SpringCloudConfigServer" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="spring-cloud-config-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.gupao.micro.services.spring.cloud.config.server.SpringCloudConfigServer" />
+    </configuration>
+    <configuration name="SpringCloudEurekaServerDemoApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="spring-cloud-eureka-server-demo (1)" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gupao.springcloudeurekaserverdemo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gupao.springcloudeurekaserverdemo.SpringCloudEurekaServerDemoApplication" />
     </configuration>
     <configuration name="SpringCloudEurekaServerDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="spring-cloud-eureka-server-demo" />
@@ -355,9 +390,11 @@
       <item itemvalue="Spring Boot.UserServiceProviderBootstrap" />
       <item itemvalue="Spring Boot.UserServiceConsumerBootstrap" />
       <item itemvalue="Application.XmlConfigBootstrap" />
+      <item itemvalue="Spring Boot.SpringCloudEurekaServerDemoApplication (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.SpringCloudEurekaServerDemoApplication (1)" />
         <item itemvalue="Application.XmlConfigBootstrap" />
       </list>
     </recent_temporary>
@@ -380,12 +417,12 @@
       <workItem from="1540551589421" duration="3582000" />
       <workItem from="1540861086594" duration="596000" />
       <workItem from="1548210311085" duration="8681000" />
-      <workItem from="1549677107216" duration="2620000" />
+      <workItem from="1549677107216" duration="13218000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24928000" />
+    <option name="totallyTimeSpent" value="35526000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1040" height="744" extended-state="6" />
@@ -403,17 +440,19 @@
       <window_info id="UI Designer" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="8" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3281787" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.92466766" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.9243986" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.34285715" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.5652921" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -421,10 +460,8 @@
       <window_info anchor="bottom" id="Docker" order="9" />
       <window_info anchor="bottom" id="Problems" order="7" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,46 +471,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-2/spring-cloud-config-server-demo/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1170" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-2/spring-cloud-config-client-demo/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="31" column="38" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/note/2017/07 Spring Cloud Config Server">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-178">
-          <caret line="63" column="42" selection-start-line="63" selection-start-column="42" selection-end-line="63" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SECOND">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-3/spring-cloud-eureka-server-demo/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/note/2017/08 Spring Cloud Netflix Eureka">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-client-application/src/main/java/com/gupao/micro/services/spring/cloud/client/event/GUIEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-client-application/src/main/java/com/gupao/micro/services/spring/cloud/client/event/SpringEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-210">
@@ -744,16 +741,65 @@
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/netflix/eureka/eureka-client/1.6.2/eureka-client-1.6.2.jar!/com/netflix/discovery/EurekaClient.class">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/netflix/eureka/eureka-client/1.6.2/eureka-client-1.6.2.jar!/com/netflix/discovery/shared/LookupService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/netflix/eureka/eureka-client/1.6.2/eureka-client-1.6.2.jar!/com/netflix/discovery/shared/Applications.class">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
-          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/netflix/eureka/eureka-client/1.6.2/eureka-client-1.6.2.jar!/com/netflix/appinfo/InstanceInfo.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9625">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-netflix-eureka-client/1.3.5.RELEASE/spring-cloud-netflix-eureka-client-1.3.5.RELEASE.jar!/org/springframework/cloud/netflix/eureka/EurekaInstanceConfigBean.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9060">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/spring-cloud-eureka-client-demo/user-api/src/test/java/com/gupao/user/test/RestTemplateDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.3.12.RELEASE/spring-web-4.3.12.RELEASE.jar!/org/springframework/web/client/RestTemplate.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="51" column="43" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.7.RELEASE/spring-web-5.0.7.RELEASE.jar!/org/springframework/http/client/ClientHttpRequestInterceptor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="270">
-            <caret line="84" column="37" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
+          <first_editor relative-caret-position="306">
+            <caret line="307" selection-start-line="307" selection-end-line="307" />
           </first_editor>
           <second_editor />
         </state>

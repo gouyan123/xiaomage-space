@@ -18,7 +18,7 @@ public class RestTemplateDemo {
         RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 //        Map<String,Object> data = restTemplate.getForObject("http://localhost:8080/env",Map.class);
 //        System.out.println(data);
-
+        //String 表示请求返回类型；
         System.out.println(restTemplate.getForObject("http://localhost:8080/env",String.class));
     }
 
