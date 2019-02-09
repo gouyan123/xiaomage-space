@@ -1,3 +1,26 @@
+-----
+ppt内容：
+主要议题：Spring Cloud技术体系，Spring/Spring Boot事件机制，Bootstrap配置属性，理解Environment端点；
+1、Spring Cloud技术体系：
+2、Spring/Spring Boot事件机制：
+①设计模式：观察者模式，事件/监听器模式；
+②Spring核心接口：ApplicationEvent，ApplicationListener；
+③Spring Boot核心事件：
+    ApplicationEnvironmentPreparedEvent
+    ApplicationPreparedEvent
+    ApplicationStartingEvent
+    ApplicationReadyEvent
+    ApplicationFailedEvent
+3、Bootstrap配置属性：
+①Bootstrap配置文件路径：spring.cloud.bootstrap.location；
+②覆盖远程配置属性：spring.cloud.config.allowOverride；
+③自定义Bootstrap配置：@BootstrapConfiguration；
+④自定义Bootstrap配置属性源：PropertySourceLocator；
+4、理解 Environment端点：
+①Spring Boot Actuator：endpoint : "/env"；
+②Spring Framework：Environment  API；
+
+-----
 # Spring Cloud Config Client
 
 

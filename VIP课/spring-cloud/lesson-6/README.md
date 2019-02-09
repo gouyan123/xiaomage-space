@@ -1,3 +1,9 @@
+-----
+ppt内容：
+1、主要议题：技术回顾，Feign 基本使用，Ribbon 整合，Hystrix 整合；
+2、技术回顾：Netflix Eureka，RestTemplate，Netflix Ribbon，Netflix Hystrix；
+-----
+
 # Spring Cloud Feign
 
 

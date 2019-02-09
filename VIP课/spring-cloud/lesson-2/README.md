@@ -1,3 +1,25 @@
+-----
+ppt内容：
+主要议题：介绍 Environment仓储，Spring Cloud分布式配置，动态配置属性 Bean，健康指标；
+1、介绍 Environment仓储：
+①{application}：配置使用客户端应用名称；
+②{profile}：客户端 spring.profiles.active配置；
+③{label}：服务端配置文件版本标识；
+2、Spring Cloud分布式配置：
+①config服务端配置
+spring.cloud.config.server.git.uri
+spring.cloud.config.server.git.*
+②config客户端配置
+spring.cloud.config.uri
+spring.cloud.config.name
+spring.cloud.config.profile
+spring.cloud.config.label
+3、动态配置属性 Bean：
+@RefreshScope，RefreshEndpoint，ContextRefresher；
+4、健康检查：
+/health，HealthEndpoint，HealthIndicator；
+
+-----
 # Spring Cloud Config Server
 
 

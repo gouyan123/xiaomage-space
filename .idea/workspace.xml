@@ -3,8 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="7ed5c5ce-c22a-4ff3-86af-e9fea3bf2286" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/spring-cloud-eureka-client-demo/user-api/src/test/java/com/gupao/user/test/RestTemplateDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/spring-cloud-eureka-client-demo/user-api/src/test/java/com/gupao/user/test/RestTemplateDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-1/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-1/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-1/咕泡学院 - Spring Cloud 系列（一） Spring Cloud Config Client.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-2/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-2/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-2/咕泡学院 - Spring Cloud 系列（二） Spring Cloud Config Server.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/咕泡学院 - Spring Cloud 系列（五） Spring Cloud Netflix Hystrix.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/咕泡学院 - Spring Cloud 系列（六） Spring Cloud Feign.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-7/咕泡学院 - Spring Cloud 系列（七） Spring Cloud Zuul.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/咕泡学院 - Spring Cloud 系列（八） Spring Cloud Stream.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/公开课/代码/interface-design/target/" />
     <ignored path="$PROJECT_DIR$/公开课/代码/annotation-driven-development/target/" />
@@ -50,23 +60,65 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/README.md">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-2/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="306">
-                <caret line="307" selection-start-line="307" selection-end-line="307" />
+              <first_editor relative-caret-position="350">
+                <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+                <folding>
+                  <element signature="e#167#168#0" expanded="true" />
+                  <element signature="e#196#197#0" expanded="true" />
+                </folding>
               </first_editor>
               <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientHttpRequestInterceptor.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.7.RELEASE/spring-web-5.0.7.RELEASE.jar!/org/springframework/http/client/ClientHttpRequestInterceptor.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="60">
+                <caret line="2" column="104" selection-start-line="2" selection-start-column="104" selection-end-line="2" selection-end-column="104" />
+                <folding>
+                  <element signature="e#810#811#0" expanded="true" />
+                  <element signature="e#840#841#0" expanded="true" />
+                  <element signature="e#0#937#0" expanded="true" />
+                  <element signature="e#858#859#0" expanded="true" />
+                  <element signature="e#930#931#0" expanded="true" />
+                  <element signature="e#383#384#0" expanded="true" />
+                  <element signature="e#468#469#0" expanded="true" />
+                  <element signature="e#553#554#0" expanded="true" />
+                  <element signature="e#640#641#0" expanded="true" />
+                </folding>
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="210">
+                <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="90">
+                <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -94,12 +146,17 @@
         <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/config/UserConfiguration.java" />
         <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java" />
         <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/注解驱动.txt" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" />
         <option value="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-3/README.md" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/spring-cloud-eureka-server-demo/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/spring-cloud-eureka-client-demo/user-api/src/test/java/com/gupao/user/test/RestTemplateDemo.java" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-1/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-2/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md" />
       </list>
     </option>
   </component>
@@ -173,70 +230,7 @@
               <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
               <item name="VIP课" type="462c0819:PsiDirectoryNode" />
               <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="user-api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="user-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="user-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="user-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-4" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-eureka-client-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="user-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="lesson-9" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -417,12 +411,12 @@
       <workItem from="1540551589421" duration="3582000" />
       <workItem from="1540861086594" duration="596000" />
       <workItem from="1548210311085" duration="8681000" />
-      <workItem from="1549677107216" duration="13218000" />
+      <workItem from="1549677107216" duration="14493000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35526000" />
+    <option name="totallyTimeSpent" value="36801000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1040" height="744" extended-state="6" />
@@ -449,7 +443,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.3281787" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.9243986" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.34285715" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34285715" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.5652921" />
@@ -471,41 +465,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-client-application/src/main/java/com/gupao/micro/services/spring/cloud/client/event/SpringEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-210">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Repositories/org/springframework/spring-context/5.0.7.RELEASE/spring-context-5.0.7.RELEASE.jar!/org/springframework/context/support/GenericApplicationContext.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="34" column="40" lean-forward="true" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Repositories/org/springframework/spring-context/5.0.7.RELEASE/spring-context-5.0.7.RELEASE.jar!/org/springframework/context/support/AbstractApplicationContext.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-732">
-          <caret line="72" column="22" selection-start-line="72" selection-start-column="22" selection-end-line="72" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Repositories/org/springframework/spring-core/5.0.7.RELEASE/spring-core-5.0.7.RELEASE-sources.jar!/org/springframework/core/io/DefaultResourceLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-363">
-          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Repositories/org/springframework/spring-context/5.0.7.RELEASE/spring-context-5.0.7.RELEASE.jar!/org/springframework/context/annotation/AnnotationConfigApplicationContext.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-client-application/src/main/java/com/gupao/micro/services/spring/cloud/client/event/SpringAnnotationDrivenEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8">
@@ -681,16 +640,6 @@
     <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="165">
-            <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1980">
@@ -798,8 +747,111 @@
     <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="306">
-            <caret line="307" selection-start-line="307" selection-end-line="307" />
+          <first_editor relative-caret-position="-84">
+            <caret line="294" column="47" lean-forward="true" selection-start-line="294" selection-start-column="2" selection-end-line="294" selection-end-column="47" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="120">
+            <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+            <folding>
+              <element signature="e#664#665#0" expanded="true" />
+              <element signature="e#714#715#0" expanded="true" />
+              <element signature="e#782#783#0" expanded="true" />
+              <element signature="e#831#832#0" expanded="true" />
+              <element signature="e#887#888#0" expanded="true" />
+              <element signature="e#933#934#0" expanded="true" />
+              <element signature="e#642#643#0" expanded="true" />
+              <element signature="e#715#716#0" expanded="true" />
+              <element signature="e#1017#1018#0" expanded="true" />
+              <element signature="e#1083#1084#0" expanded="true" />
+              <element signature="e#1229#1230#0" expanded="true" />
+              <element signature="e#1268#1269#0" expanded="true" />
+              <element signature="e#491#492#0" expanded="true" />
+              <element signature="e#573#574#0" expanded="true" />
+              <element signature="e#851#852#0" expanded="true" />
+              <element signature="e#925#926#0" expanded="true" />
+              <element signature="e#996#997#0" expanded="true" />
+              <element signature="e#1047#1048#0" expanded="true" />
+              <element signature="e#460#461#0" expanded="true" />
+              <element signature="e#488#489#0" expanded="true" />
+              <element signature="e#544#545#0" expanded="true" />
+              <element signature="e#590#591#0" expanded="true" />
+              <element signature="e#998#999#0" expanded="true" />
+              <element signature="e#1072#1073#0" expanded="true" />
+              <element signature="e#1143#1144#0" expanded="true" />
+              <element signature="e#1194#1195#0" expanded="true" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-1/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="320">
+            <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-2/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="350">
+            <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <folding>
+              <element signature="e#167#168#0" expanded="true" />
+              <element signature="e#196#197#0" expanded="true" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="60">
+            <caret line="2" column="104" selection-start-line="2" selection-start-column="104" selection-end-line="2" selection-end-column="104" />
+            <folding>
+              <element signature="e#810#811#0" expanded="true" />
+              <element signature="e#840#841#0" expanded="true" />
+              <element signature="e#0#937#0" expanded="true" />
+              <element signature="e#858#859#0" expanded="true" />
+              <element signature="e#930#931#0" expanded="true" />
+              <element signature="e#383#384#0" expanded="true" />
+              <element signature="e#468#469#0" expanded="true" />
+              <element signature="e#553#554#0" expanded="true" />
+              <element signature="e#640#641#0" expanded="true" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="210">
+            <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="90">
+            <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
           </first_editor>
           <second_editor />
         </state>
