@@ -4,7 +4,7 @@
     <list default="true" id="7ed5c5ce-c22a-4ff3-86af-e9fea3bf2286" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/service/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/service/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/hystrix/PersonServiceFallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/hystrix/PersonServiceFallback.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/公开课/代码/interface-design/target/" />
     <ignored path="$PROJECT_DIR$/公开课/代码/annotation-driven-development/target/" />
@@ -50,51 +50,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="240">
-                <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+              <first_editor relative-caret-position="180">
+                <caret line="352" column="56" selection-start-line="352" selection-start-column="56" selection-end-line="352" selection-end-column="56" />
                 <folding>
                   <element signature="imports" expanded="true" />
-                  <element signature="e#524#525#0" expanded="true" />
-                  <element signature="e#574#575#0" expanded="true" />
-                  <element signature="e#642#643#0" expanded="true" />
-                  <element signature="e#691#692#0" expanded="true" />
-                  <element signature="e#747#748#0" expanded="true" />
-                  <element signature="e#793#794#0" expanded="true" />
-                  <element signature="imports" expanded="true" />
-                  <element signature="e#563#564#0" expanded="true" />
-                  <element signature="e#636#637#0" expanded="true" />
-                  <element signature="imports" expanded="true" />
-                  <element signature="e#831#832#0" expanded="true" />
-                  <element signature="e#897#898#0" expanded="true" />
-                  <element signature="e#990#991#0" expanded="true" />
-                  <element signature="e#1029#1030#0" expanded="true" />
-                  <element signature="imports" expanded="true" />
-                  <element signature="e#491#492#0" expanded="true" />
-                  <element signature="e#573#574#0" expanded="true" />
                   <element signature="imports" expanded="true" />
                   <element signature="imports" expanded="true" />
-                  <element signature="e#851#852#0" expanded="true" />
-                  <element signature="e#925#926#0" expanded="true" />
-                  <element signature="e#996#997#0" expanded="true" />
-                  <element signature="e#1047#1048#0" expanded="true" />
                   <element signature="imports" expanded="true" />
                   <element signature="imports" expanded="true" />
-                  <element signature="e#460#461#0" expanded="true" />
-                  <element signature="e#488#489#0" expanded="true" />
-                  <element signature="e#544#545#0" expanded="true" />
-                  <element signature="e#590#591#0" expanded="true" />
                   <element signature="imports" expanded="true" />
-                  <element signature="e#998#999#0" expanded="true" />
-                  <element signature="e#1072#1073#0" expanded="true" />
-                  <element signature="e#1143#1144#0" expanded="true" />
-                  <element signature="e#1194#1195#0" expanded="true" />
+                  <element signature="imports" expanded="true" />
+                  <element signature="imports" expanded="true" />
+                  <element signature="imports" expanded="true" />
                 </folding>
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PersonServiceFallback.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/hystrix/PersonServiceFallback.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -135,6 +118,7 @@
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-10/README.md" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/service/PersonService.java" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/hystrix/PersonServiceFallback.java" />
       </list>
     </option>
   </component>
@@ -474,11 +458,12 @@
       <workItem from="1548210311085" duration="8681000" />
       <workItem from="1549677107216" duration="15287000" />
       <workItem from="1549763854348" duration="5802000" />
+      <workItem from="1549776926539" duration="2495000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43397000" />
+    <option name="totallyTimeSpent" value="45892000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1040" height="744" extended-state="6" />
@@ -563,13 +548,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-client-application/src/main/java/com/gupao/micro/services/spring/cloud/client/controller/RemoteAppEventSenderController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="68" column="20" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://F:/Program Files/Java/jdk1.8.0_101/src.zip!/java/awt/PageAttributes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -909,47 +887,28 @@
     <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="240">
-            <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <first_editor relative-caret-position="180">
+            <caret line="352" column="56" selection-start-line="352" selection-start-column="56" selection-end-line="352" selection-end-column="56" />
             <folding>
               <element signature="imports" expanded="true" />
-              <element signature="e#524#525#0" expanded="true" />
-              <element signature="e#574#575#0" expanded="true" />
-              <element signature="e#642#643#0" expanded="true" />
-              <element signature="e#691#692#0" expanded="true" />
-              <element signature="e#747#748#0" expanded="true" />
-              <element signature="e#793#794#0" expanded="true" />
-              <element signature="imports" expanded="true" />
-              <element signature="e#563#564#0" expanded="true" />
-              <element signature="e#636#637#0" expanded="true" />
-              <element signature="imports" expanded="true" />
-              <element signature="e#831#832#0" expanded="true" />
-              <element signature="e#897#898#0" expanded="true" />
-              <element signature="e#990#991#0" expanded="true" />
-              <element signature="e#1029#1030#0" expanded="true" />
-              <element signature="imports" expanded="true" />
-              <element signature="e#491#492#0" expanded="true" />
-              <element signature="e#573#574#0" expanded="true" />
               <element signature="imports" expanded="true" />
               <element signature="imports" expanded="true" />
-              <element signature="e#851#852#0" expanded="true" />
-              <element signature="e#925#926#0" expanded="true" />
-              <element signature="e#996#997#0" expanded="true" />
-              <element signature="e#1047#1048#0" expanded="true" />
               <element signature="imports" expanded="true" />
               <element signature="imports" expanded="true" />
-              <element signature="e#460#461#0" expanded="true" />
-              <element signature="e#488#489#0" expanded="true" />
-              <element signature="e#544#545#0" expanded="true" />
-              <element signature="e#590#591#0" expanded="true" />
               <element signature="imports" expanded="true" />
-              <element signature="e#998#999#0" expanded="true" />
-              <element signature="e#1072#1073#0" expanded="true" />
-              <element signature="e#1143#1144#0" expanded="true" />
-              <element signature="e#1194#1195#0" expanded="true" />
+              <element signature="imports" expanded="true" />
+              <element signature="imports" expanded="true" />
+              <element signature="imports" expanded="true" />
             </folding>
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/hystrix/PersonServiceFallback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
         </state>
       </provider>
     </entry>
