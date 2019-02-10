@@ -9,14 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
-/**
- * {@link Person} 服务
- *
- * @author 小马哥 QQ 1191971402
- * @copyright 咕泡学院出品
- * @since 2017/11/5
- */
-@FeignClient(value = "person-service",fallback = PersonServiceFallback.class) // 服务提供方应用的名称
+//"person-service"为服务提供者 服务名称，调用 PersonService接口的save()方法 相当于 调用 person-service服务的/person/save接口
+@FeignClient(value = "person-service",fallback = PersonServiceFallback.class)
 public interface PersonService {
 
     /**

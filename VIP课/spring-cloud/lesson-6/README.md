@@ -3,7 +3,11 @@ ppt内容：
 1、主要议题：技术回顾，Feign 基本使用，Ribbon 整合，Hystrix 整合；
 2、技术回顾：Netflix Eureka，RestTemplate，Netflix Ribbon，Netflix Hystrix；
 -----
-
+学到内容：
+1、feign使用方法：在java接口上面定义@Feign注解，在java接口方法上面定义 调用路径 /.../...;
+2、feign作用：    将要调用的服务 映射为 java接口，将服务提供的服务 映射为 java接口方法；
+                 总结：将java接口方法调用 转换为 http接口调用；详见 模块person-api中`PersonService`类
+-----
 # Spring Cloud Feign
 
 
@@ -30,31 +34,40 @@ ppt内容：
 
 ### [Netflix Hystrix](http://git.gupaoedu.com/vip/xiaomage-space/tree/master/VIP%E8%AF%BE/spring-cloud/lesson-5)
 
-注意：Hystrix 可以是服务端实现，也可以是客户端实现，类似于 AOP 封装：正常逻辑、容错处理。
+注意：Hystrix 可以是服务端实现，也可以是客户端实现，类似于 AOP 封装：正常逻辑、容错处理；
 
 
 
 
 
-## 申明式 Web 服务客户端：Feign
+## 申明式 Web 服务客户端 Feign，解释如下：
 
-申明式：接口声明、Annotation 驱动
+1、申明式：接口声明、Annotation驱动；
 
-Web 服务：HTTP 的方式作为通讯协议
+2、Web 服务：HTTP 的方式作为通讯协议；
 
-客户端：用于服务调用的存根
+3、客户端：用于服务调用的存根；
 
-Feign：原生并不是 Spring Web MVC的实现，基于JAX-RS（Java REST 规范）实现。Spring Cloud 封装了Feign ，使其支持 Spring Web MVC。`RestTemplate`、`HttpMessageConverter`
+Feign：原生feign并不是 Spring Web MVC的实现，而是基于JAX-RS（Java REST 规范）的实现，即Spring Cloud封装了Feign实现 ，使feign支持 Spring Web MVC。
 
-> `RestTemplate `以及 Spring Web MVC 可以显示地自定义 `HttpMessageConverter `实现。
-
-
-
-假设，有一个Java 接口 `PersonService`, Feign 可以将其声明它是以 HTTP 方式调用的。
+> `RestTemplate `以及 Spring Web MVC 可以显示地自定义 `HttpMessageConverter `实现，前提是基于http协议。
 
 
 
-### 注册中心（Eureka Server）：服务发现和注册
+假设，有一个Java 接口 `PersonService`, Feign可以声明 该`PersonService`接口是以 HTTP方式调用的；
+
+## SOA需要服务组件：
+1、注册中心 eureka：用于服务注册和发现；
+
+2、Feign声明 Java强类型接口 即契约，将java接口方法调用 转换为 http接口调用；
+
+3、feign服务端 即服务提供者：**不一定强制实现feign申明接口**；
+
+4、feign声明http接口 即契约：定义一种 java强类型接口（强类型：参数类型固定，返回值类型固定，异常固定）；
+
+注意：feign客户端 即服务消费者，feign服务端 即服务提供者，feign声明http接口 即契约
+
+### 1、注册中心（Eureka Server）：服务发现和注册
 
 a. 应用名称：spring-cloud-eureka-server
 
@@ -77,7 +90,7 @@ management.security.enabled = false
 
 
 
-### Feign 声明接口（契约）：定义一种 Java 强类型接口
+### 2、Feign声明 Java强类型接口 即契约，将java接口方法调用 转换为 http接口调用；
 
 #### 模块：person-api
 
@@ -94,47 +107,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
-/**
- * {@link Person} 服务
- *
- * @author 小马哥 QQ 1191971402
- * @copyright 咕泡学院出品
- * @since 2017/11/5
- */
+//"person-service"为服务提供者 服务名称，调用 PersonService接口的save()方法 相当于 调用 person-service服务的/person/save接口
 @FeignClient(value = "person-service") // 服务提供方应用的名称
 public interface PersonService {
 
-    /**
-     * 保存
-     *
-     * @param person {@link Person}
-     * @return 如果成功，<code>true</code>
-     */
     @PostMapping(value = "/person/save")
     boolean save(@RequestBody Person person);
 
-    /**
-     * 查找所有的服务
-     *
-     * @return
-     */
     @GetMapping(value = "/person/find/all")
     Collection<Person> findAll();
-
 }
 ```
 
-
-
-### Feign 客户（服务消费）端：调用Feign 申明接口
+### 3、Feign客户端 即服务消费者，调用 Feign申明的 java接口：
 
 #### 应用名称：person-client
 
 #### 依赖：person-api
 
-
-
-##### 创建客户端 Controller
+##### 创建客户端 Controller：这只是其中一种方式，也可以不用这种方式；
 
 ```java
 package com.gupao.spring.cloud.feign.client.web.controller;
@@ -143,16 +134,8 @@ import com.gupao.spring.cloud.feign.api.domain.Person;
 import com.gupao.spring.cloud.feign.api.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
 
-/**
- * {@link PersonClientController} 实现 {@link PersonService}
- *
- * @author 小马哥 QQ 1191971402
- * @copyright 咕泡学院出品
- * @since 2017/11/5
- */
 @RestController
 public class PersonClientController implements PersonService {
 
@@ -187,13 +170,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
-/**
- * Person Client 应用程序
- *
- * @author 小马哥 QQ 1191971402
- * @copyright 咕泡学院出品
- * @since 2017/11/5
- */
+/**Person Client 应用程序*/
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients(clients = PersonService.class)
@@ -219,17 +196,11 @@ eureka.client.serviceUrl.defaultZone=\
 management.security.enabled = false
 ```
 
-
-
-
-
-### Feign 服务（服务提供）端：**不一定强制实现 Feign 申明接口**
+### 4、Feign服务端 即服务提供者，**不一定强制实现 Feign申明的java接口**
 
 #### 应用名称：person-service
 
 #### 依赖：person-api
-
-
 
 #### 创建 `PersonServiceController`
 
@@ -242,54 +213,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * {@link PersonService} 提供者控制器（可选实现{@link PersonService}）
- *
- * @author 小马哥 QQ 1191971402
- * @copyright 咕泡学院出品
- * @since 2017/11/5
- */
+/**{@link PersonService} 提供者控制器（可选实现{@link PersonService}）*/
 @RestController
 public class PersonServiceProviderController {
 
     private final Map<Long, Person> persons = new ConcurrentHashMap<>();
 
-    /**
-     * 保存
-     *
-     * @param person {@link Person}
-     * @return 如果成功，<code>true</code>
-     */
     @PostMapping(value = "/person/save")
     public boolean savePerson(@RequestBody Person person) {
         return persons.put(person.getId(), person) == null;
     }
 
-    /**
-     * 查找所有的服务
-     *
-     * @return
-     */
     @GetMapping(value = "/person/find/all")
     public Collection<Person> findAllPersons() {
         return persons.values();
     }
-
-
 }
 
 ```
 
-
-
 #### 创建服务端应用
-
-
 
 ```java
 package com.gupao.spring.cloud.feign.person.service.provider;
