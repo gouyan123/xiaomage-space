@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ed5c5ce-c22a-4ff3-86af-e9fea3bf2286" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/hystrix/PersonServiceFallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/hystrix/PersonServiceFallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-7/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-7/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/src/main/java/com/gupao/springcloudstreamkafka/SpringCloudStreamKafkaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/src/main/java/com/gupao/springcloudstreamkafka/SpringCloudStreamKafkaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/公开课/代码/interface-design/target/" />
     <ignored path="$PROJECT_DIR$/公开课/代码/annotation-driven-development/target/" />
@@ -41,6 +45,7 @@
     <ignored path="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/target/" />
     <ignored path="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-client/target/" />
     <ignored path="$PROJECT_DIR$/VIP课/spring-cloud/lesson-7/spring-cloud-config-server-demo/target/" />
+    <ignored path="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,33 +56,34 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md">
+        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="180">
-                <caret line="352" column="56" selection-start-line="352" selection-start-column="56" selection-end-line="352" selection-end-column="56" />
-                <folding>
-                  <element signature="imports" expanded="true" />
-                  <element signature="imports" expanded="true" />
-                  <element signature="imports" expanded="true" />
-                  <element signature="imports" expanded="true" />
-                  <element signature="imports" expanded="true" />
-                  <element signature="imports" expanded="true" />
-                  <element signature="imports" expanded="true" />
-                  <element signature="imports" expanded="true" />
-                  <element signature="imports" expanded="true" />
-                </folding>
+              <first_editor relative-caret-position="-1134">
+                <caret line="119" column="31" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="31" />
               </first_editor>
               <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PersonServiceFallback.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/hystrix/PersonServiceFallback.java">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="-60">
+                <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KafkaProducerController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/src/main/java/com/gupao/springcloudstreamkafka/web/controller/KafkaProducerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+            <state relative-caret-position="360">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -113,12 +119,14 @@
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-1/README.md" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-2/README.md" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/README.md" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-10/README.md" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/service/PersonService.java" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/hystrix/PersonServiceFallback.java" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-7/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/src/main/java/com/gupao/springcloudstreamkafka/SpringCloudStreamKafkaApplication.java" />
+        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md" />
       </list>
     </option>
   </component>
@@ -192,92 +200,15 @@
               <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
               <item name="VIP课" type="462c0819:PsiDirectoryNode" />
               <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-6" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-6" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-feign-demo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-6" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-feign-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="person-api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-6" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-feign-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="person-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-6" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-feign-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="person-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-6" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-feign-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="person-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-6" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-feign-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="person-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
-              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-6" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud-feign-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="person-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="lesson-9" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -289,11 +220,11 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-7/spring-cloud-config-server-demo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
@@ -458,16 +389,18 @@
       <workItem from="1548210311085" duration="8681000" />
       <workItem from="1549677107216" duration="15287000" />
       <workItem from="1549763854348" duration="5802000" />
-      <workItem from="1549776926539" duration="2495000" />
+      <workItem from="1549776926539" duration="6015000" />
+      <workItem from="1549789686435" duration="972000" />
+      <workItem from="1549798439608" duration="2781000" />
+      <workItem from="1549801293078" duration="3479000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45892000" />
+    <option name="totallyTimeSpent" value="56644000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1040" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -489,7 +422,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.3281787" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.9243986" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.35" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.35714287" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="3" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -548,48 +481,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://F:/Program Files/Java/jdk1.8.0_101/src.zip!/java/awt/PageAttributes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="241" column="65" selection-start-line="241" selection-start-column="65" selection-end-line="241" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/note/2018/第14节-Spring Cloud Bus.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/RemoteAppEventReceiverController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="56" column="10" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-client-application/src/main/java/com/gupao/micro/services/spring/cloud/client/event/HttpRemoteAppEventListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Repositories/org/springframework/spring-web/4.3.12.RELEASE/spring-web-4.3.12.RELEASE-sources.jar!/org/springframework/http/MediaType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="94" column="75" selection-start-line="94" selection-start-column="45" selection-end-line="94" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/注解驱动.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="60" column="33" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/4.3.11.RELEASE/spring-context-4.3.11.RELEASE-sources.jar!/org/springframework/context/support/AbstractApplicationContext.java" />
     <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -839,26 +730,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="210">
-            <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="150">
-            <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-10/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
@@ -884,31 +755,86 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/hystrix/PersonServiceFallback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="180">
-            <caret line="352" column="56" selection-start-line="352" selection-start-column="56" selection-end-line="352" selection-end-column="56" />
-            <folding>
-              <element signature="imports" expanded="true" />
-              <element signature="imports" expanded="true" />
-              <element signature="imports" expanded="true" />
-              <element signature="imports" expanded="true" />
-              <element signature="imports" expanded="true" />
-              <element signature="imports" expanded="true" />
-              <element signature="imports" expanded="true" />
-              <element signature="imports" expanded="true" />
-              <element signature="imports" expanded="true" />
-            </folding>
+          <first_editor relative-caret-position="240">
+            <caret line="372" column="36" selection-start-line="372" selection-start-column="36" selection-end-line="372" selection-end-column="36" />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/person-api/src/main/java/com/gupao/spring/cloud/feign/api/hystrix/PersonServiceFallback.java">
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-7/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="-1164">
+            <caret line="408" column="62" selection-start-line="408" selection-start-column="62" selection-end-line="408" selection-end-column="62" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/kafka/spring-kafka/1.1.7.RELEASE/spring-kafka-1.1.7.RELEASE.jar!/org/springframework/kafka/core/KafkaOperations.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+        <state relative-caret-position="180">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.0.3.RELEASE/spring-boot-autoconfigure-2.0.3.RELEASE.jar!/org/springframework/boot/autoconfigure/kafka/KafkaAutoConfiguration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2196">
+          <caret line="30" selection-start-line="30" selection-end-line="30" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/src/main/java/com/gupao/springcloudstreamkafka/SpringCloudStreamKafkaApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#278#279#0" expanded="true" />
+            <element signature="e#353#354#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/src/main/java/com/gupao/springcloudstreamkafka/web/controller/KafkaProducerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="-1134">
+            <caret line="119" column="31" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="31" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="-60">
+            <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
@@ -953,7 +879,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>1.8 (1)</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -965,7 +891,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>spring-cloud-config-server-demo</last-edited>
+          <last-edited>spring-cloud-stream-kafka-demo</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
