@@ -9,23 +9,7 @@
         <option value="$PROJECT_DIR$/公开课/代码/interface-design/pom.xml" />
         <option value="$PROJECT_DIR$/公开课/代码/annotation-driven-development/pom.xml" />
         <option value="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/pom.xml" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-3/spring-cloud-eureka-server-demo/pom.xml" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-3/spring-cloud-eureka-client-demo/pom.xml" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/spring-cloud-eureka-client-demo/pom.xml" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-4/spring-cloud-eureka-server-demo/pom.xml" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/spring-cloud-hystrix-client-demo/pom.xml" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-5/spring-cloud-hystrix-dashboard-demo/pom.xml" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-eureka-server-demo/pom.xml" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-6/spring-cloud-feign-demo/pom.xml" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-7/spring-cloud-config-server-demo/pom.xml" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/pom.xml" />
       </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-2/spring-cloud-config-client-demo/pom.xml" />
-        <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-2/spring-cloud-config-server-demo/pom.xml" />
-      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />

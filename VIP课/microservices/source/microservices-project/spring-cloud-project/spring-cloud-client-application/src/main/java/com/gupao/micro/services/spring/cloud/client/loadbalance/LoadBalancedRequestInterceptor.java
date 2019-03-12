@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 public class LoadBalancedRequestInterceptor implements ClientHttpRequestInterceptor {
 
-    // Map Key service Name , Value URLs
+    // key:spring.application.name, value:实例集合，实例包含 实例ip，实例port，实例id
     private volatile Map<String, Set<String>> targetUrlsCache = new HashMap<>();
 
     @Autowired

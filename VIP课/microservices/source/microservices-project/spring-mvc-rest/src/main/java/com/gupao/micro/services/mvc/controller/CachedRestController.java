@@ -1,15 +1,12 @@
 package com.gupao.micro.services.mvc.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.gupao.micro.services.mvc.annotation.OptionsMapping;
-import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 @SpringBootApplication
 @Controller
 public class CachedRestController{
