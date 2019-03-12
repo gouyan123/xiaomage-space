@@ -109,8 +109,7 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
   * OkHttp
     * OkHttp3ClientHttpRequestFactory
     * OkHttpClientHttpRequestFactory
-微服务要使用轻量级的协议，比如 REST
-Spring Cloud `RestTemplate` 核心的调用器
+微服务要使用轻量级的协议，例如REST，Spring遵从该原则，使用`RestTemplate`作为Spring Cloud的核心的调用器；
 企业整合模型（叫好，不叫座） -> Spring Integration
 DDD
 #### `RestTemplate` 整合 Zookeeper
@@ -132,6 +131,45 @@ Set<Object>
 ## 下节预习
 ### 回顾去年 VIP
 [第五节 Spring Cloud Hystrix](http://git.gupaoedu.com/vip/xiaomage-space/tree/master/VIP%E8%AF%BE/spring-cloud/lesson-5)
+
+自定义 负载均衡：
+代码见：microservices-project/spring-cloud-project/spring-cloud-client-application项目；
+创建 com.gupao.micro.services.spring.cloud.client.controller.ClientController类，invokeSay()方法调用 say()方法
+
+ClientController中：将RestTemplate实例化到 IOC容器，再把RestTemplate 注入到 ClientController类中；
+@Bean
+public RestTemplate restTemplate() {
+    return new RestTemplate();
+}
+@Autowired 
+private RestTemplate restTemplate;
+
+创建 microservices-project/spring-cloud-project/spring-cloud-server-application项目                                 
+使用RestTemplate调用其他服务如下，引用要获取 服务实例列表，所以注入@Autowired DiscoveryClient discoveryClient;
+@GetMapping("/invoke/say") // -> /say
+    public String invokeSay(@RequestParam String message) {
+        // 服务器列表快照
+        List<String> targetUrls = new ArrayList<>(this.targetUrls);
+        int size = targetUrls.size();
+        // size =3 , index =0 -2
+        int index = new Random().nextInt(size);
+        // 选择其中一台服务器
+        String targetURL = targetUrls.get(index);
+        // RestTemplate 发送请求到服务器
+        // 输出响应
+        return restTemplate.getForObject(targetURL + "/say?message=" + message, String.class);
+}
+
+缓存 服务调用的 http请求：
+private volatile Set<String> targetUrls = new HashSet<>();
+
+RestTemplate实现负载均衡核心思想：
+restTemplate.getForObject("http://spring.application.name/hi")，在eureka注册中心，一个服务名下面有多个实例，选择服务名称对应的 多个实例中的一个，
+取出其 ip，port，替代 服务名spring.application.name，然后发送http请求；
+
+spring-cloud-client-application项目中创建 拦截器如下，实现负载均衡，拦截器实现ClientHttpRequestInterceptor接口：
+com.gupao.micro.services.spring.cloud.client.loadbalance.LoadBalancedRequestInterceptor
+
 
 
 
