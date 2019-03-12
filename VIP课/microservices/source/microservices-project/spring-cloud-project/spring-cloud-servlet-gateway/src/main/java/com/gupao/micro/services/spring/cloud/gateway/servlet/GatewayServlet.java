@@ -90,6 +90,7 @@ public class GatewayServlet extends HttpServlet {
         urlBuilder.append(serviceInstance.isSecure() ? "https://" : "http://")
                 .append(serviceInstance.getHost()).append(":").append(serviceInstance.getPort())
                 .append(serviceURI);
+        //http://ip:port/...?xxx=xxx，?后面都是 queryString
         String queryString = request.getQueryString();
         if (StringUtils.hasText(queryString)) {
             urlBuilder.append("?").append(queryString);

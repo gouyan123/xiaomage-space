@@ -46,7 +46,8 @@ Zuul 实现原理：
 `/say` 是 `spring-cloud-server-application` 的服务 URI
 
 创建 microservices-project/spring-cloud-project/spring-cloud-servlet-gateway项目：
-创建 GatewayServlet类进行路由，启动spring-cloud-server-application和spring-cloud-client-application
+创建 GatewayServlet，利用Servlet实现路由，启动spring-cloud-server-application和spring-cloud-client-application
+通过spring-cloud-servlet-gateway网关访问spring-cloud-server-application：http://localhost:20000/gateway/spring-cloud-server-application/say
 ```java
 /**
  * 服务网关的路由规则
@@ -173,20 +174,10 @@ public class GatewayServlet extends HttpServlet {
 }
 ```
 
-
-
-
-
 ### 整合负载均衡(Ribbon)
 
 #### [官方实现](http://cloud.spring.io/spring-cloud-static/Finchley.SR1/single/spring-cloud.html#_ribbon_with_zookeeper)
-
-
-
 #### 实现 `ILoadBalancer`
-
-
-
 #### 实现 `IRule`
 
 
