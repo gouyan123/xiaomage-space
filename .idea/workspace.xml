@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ed5c5ce-c22a-4ff3-86af-e9fea3bf2286" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-7/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-7/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/src/main/java/com/gupao/springcloudstreamkafka/SpringCloudStreamKafkaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/src/main/java/com/gupao/springcloudstreamkafka/SpringCloudStreamKafkaApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/公开课/代码/interface-design/target/" />
     <ignored path="$PROJECT_DIR$/公开课/代码/annotation-driven-development/target/" />
@@ -59,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="-1134">
+              <first_editor relative-caret-position="3570">
                 <caret line="119" column="31" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="31" />
               </first_editor>
               <second_editor />
@@ -67,16 +61,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="-60">
+              <first_editor relative-caret-position="30">
                 <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
               </first_editor>
               <second_editor />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="xiaomage-space.iml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/xiaomage-space.iml">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="KafkaProducerController.java" pinned="false" current-in-tab="false">
@@ -177,6 +176,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -206,9 +208,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -220,7 +219,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../general" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -393,14 +392,17 @@
       <workItem from="1549789686435" duration="972000" />
       <workItem from="1549798439608" duration="2781000" />
       <workItem from="1549801293078" duration="3479000" />
+      <workItem from="1550413866790" duration="93000" />
+      <workItem from="1552394666655" duration="288000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56644000" />
+    <option name="totallyTimeSpent" value="57025000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1040" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -422,7 +424,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.3281787" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.9243986" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.35714287" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14897959" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="3" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -481,7 +483,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/4.3.11.RELEASE/spring-context-4.3.11.RELEASE-sources.jar!/org/springframework/context/support/AbstractApplicationContext.java" />
     <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="627">
@@ -800,11 +801,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#278#279#0" expanded="true" />
-            <element signature="e#353#354#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -821,7 +817,7 @@
     <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="-1134">
+          <first_editor relative-caret-position="3570">
             <caret line="119" column="31" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="31" />
           </first_editor>
           <second_editor />
@@ -831,12 +827,15 @@
     <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="-60">
+          <first_editor relative-caret-position="30">
             <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           </first_editor>
           <second_editor />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/xiaomage-space.iml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
