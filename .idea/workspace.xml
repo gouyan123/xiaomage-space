@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ed5c5ce-c22a-4ff3-86af-e9fea3bf2286" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/microservices/lesson-12/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/microservices/lesson-12/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-servlet-gateway/src/main/java/com/gupao/micro/services/spring/cloud/gateway/servlet/GatewayServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-servlet-gateway/src/main/java/com/gupao/micro/services/spring/cloud/gateway/servlet/GatewayServlet.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/公开课/代码/interface-design/target/" />
     <ignored path="$PROJECT_DIR$/公开课/代码/annotation-driven-development/target/" />
@@ -50,39 +52,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md">
+        <entry file="file://$PROJECT_DIR$/VIP课/microservices/lesson-12/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="3570">
-                <caret line="119" column="31" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="31" />
+              <first_editor relative-caret-position="300">
+                <caret line="146" column="15" selection-start-line="146" selection-start-column="15" selection-end-line="146" selection-end-column="15" />
               </first_editor>
               <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="30">
-                <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="xiaomage-space.iml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.idea/xiaomage-space.iml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="KafkaProducerController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/src/main/java/com/gupao/springcloudstreamkafka/web/controller/KafkaProducerController.java">
+      <file leaf-file-name="GatewayServlet.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-servlet-gateway/src/main/java/com/gupao/micro/services/spring/cloud/gateway/servlet/GatewayServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            <state relative-caret-position="-210">
+              <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -126,6 +111,8 @@
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/README.md" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-8/spring-cloud-stream-kafka-demo/src/main/java/com/gupao/springcloudstreamkafka/SpringCloudStreamKafkaApplication.java" />
         <option value="$PROJECT_DIR$/VIP课/spring-cloud/lesson-9/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/microservices/lesson-12/README.md" />
+        <option value="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-servlet-gateway/src/main/java/com/gupao/micro/services/spring/cloud/gateway/servlet/GatewayServlet.java" />
       </list>
     </option>
   </component>
@@ -195,14 +182,142 @@
               <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
               <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
               <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
               <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
               <item name="VIP课" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-cloud" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson-9" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="lesson-7" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="lesson-8" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="lesson-12" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-servlet-gateway" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-servlet-gateway" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-servlet-gateway" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-servlet-gateway" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-servlet-gateway" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gateway" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-servlet-gateway" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gateway" type="462c0819:PsiDirectoryNode" />
+              <item name="loadbalancer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xiaomage-space" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xiaomage-space" type="462c0819:PsiDirectoryNode" />
+              <item name="VIP课" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices" type="462c0819:PsiDirectoryNode" />
+              <item name="source" type="462c0819:PsiDirectoryNode" />
+              <item name="microservices-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-project" type="462c0819:PsiDirectoryNode" />
+              <item name="spring-cloud-servlet-gateway" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gateway" type="462c0819:PsiDirectoryNode" />
+              <item name="servlet" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -393,12 +508,12 @@
       <workItem from="1549798439608" duration="2781000" />
       <workItem from="1549801293078" duration="3479000" />
       <workItem from="1550413866790" duration="93000" />
-      <workItem from="1552394666655" duration="288000" />
+      <workItem from="1552394666655" duration="7183000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57025000" />
+    <option name="totallyTimeSpent" value="63920000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1040" height="744" extended-state="6" />
@@ -424,7 +539,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.3281787" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.9243986" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14897959" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.4265306" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="3" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -483,42 +598,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/注解驱动.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2460">
-          <caret line="60" column="33" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/4.3.11.RELEASE/spring-context-4.3.11.RELEASE-sources.jar!/org/springframework/context/support/AbstractApplicationContext.java" />
-    <entry file="file://$PROJECT_DIR$/公开课/代码/annotation-driven-development/src/main/java/com/gupao/annotationdrivendevelopment/bootstrap/AnnotationConfigBootstrap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="902">
-          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/公开课/代码/interface-design/接口设计原则.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/公开课/代码/interface-design/接口设计原则.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/公开课/代码/interface-design/接口设计原则.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="82">
@@ -836,6 +915,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/xiaomage-space.iml">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/lesson-7/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/lesson-8/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/cloud/spring-cloud-commons/2.0.0.RELEASE/spring-cloud-commons-2.0.0.RELEASE.jar!/org/springframework/cloud/client/discovery/EnableDiscoveryClient.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-servlet-gateway/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1170" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/lesson-12/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="300">
+            <caret line="146" column="15" selection-start-line="146" selection-start-column="15" selection-end-line="146" selection-end-column="15" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-servlet-gateway/src/main/java/com/gupao/micro/services/spring/cloud/gateway/servlet/GatewayServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-210">
+          <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">

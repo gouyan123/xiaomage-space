@@ -1,105 +1,52 @@
 # 第十二节 Spring Cloud Gateway
-
-
-
 ### 上周六的问题
-
 接口方法参数名称在 `ParameterNameDiscoverer ` 找不到
-
 类方法参数名称在 `ParameterNameDiscoverer` 可以找到
-
-
-
 javac -g  编译时带有debug 信息
-
 javac -g:none 编译时不带有debug信息
 
-
-
 ## Spring Cloud Gateway
-
-Spring WebFlux
-
-目的：去 Servlet 化（Java EE Web 技术中心）
-
-技术：Reactor + Netty + Lambda
-
+与Spring WebFlux类似；目的：去 Servlet 化（Java EE Web 技术中心）；技术：Reactor + Netty + Lambda
 最新技术：Spring Cloud Function
 
-
-
 ### 小马哥 Java 语言技术预判
-
-函数式编程（Java Lambda、Koltin、Scala、Groovy）
-
-网络编程（Old Java BIO、Java 1.4 NIO( Reactor 模式)、Java 1.7 NIO2 和 AIO、Netty）
-
-Reactive：编程模型（非阻塞 + 异步） + 对象设计模式（观察者模式）
+1、函数式编程（Java Lambda、Koltin、Scala、Groovy）
+2、网络编程（Old Java BIO、Java 1.4 NIO( 就是Reactor 反应堆模式)、Java 1.7 NIO2 和 AIO、Netty）
+3、Reactive：编程模型（非阻塞 + 异步） + 对象设计模式（观察者模式）
 
 典型的技术代表：
-
 * 单机版（函数式、并发编程）
   * Reactor
   * RxJava
   * Java 9 Flow API
 * 网络版（函数式、并发编程、网络编程）
-  * Netty + Reactor -> WebFlux、Spring Cloud Gateway
+  * Netty + Reactor 延伸出 WebFlux、Spring Cloud Gateway
   * Vert.x （Netty）
+## Netty很重要；
+## Gateway 主要内容
+### Gateway 取代 Zuul 1.x，Zuul1.x是基于 Servlet的；
+Resin Servlet容器号称可以与Nginx匹敌
+Tomcat Servlet容器的连接器：Java Blocking Connector；Java Non Blocking Connector；APR/native Connector
+其他Servlet容器还有 JBoss，Weblogic；
 
+Zuul编程模型：一个框架会有一个限定的范围，Zuul是 Netflix自己实现的，实现的API不是非常友好；
 
-
-## 主要内容
-
-
-
-### 取代 Zuul 1.x（基于 Servlet）
-
-* Resin Servlet 容器
-  * 可以 Nginx 匹敌
-
-* Tomcat Servlet 容器
-  * 连接器
-    * Java Blocking Connector
-    * Java Non Blocking Connector
-    * APR/native Connector
-* JBoss
-* Weblogic
-
-
-
-* Netflix Zuul 自己的实现
-  * 实现 API 不是非常友好
-
-#### Zuul 实现原理
-
-*  `@Enable` 模块装配
-  * `@EnableZuulProxy`
-  * 配合注解：`@Import`
-* 依赖服务发现
+Zuul 实现原理：
+* `@EnableXxx`装配：`@EnableZuulProxy`，配合注解：`@Import`，将依赖包里面的 配置bean 实例化到 当前IOC容器；
+* 依赖服务发现：Registration；
   * 我是谁
   * 目的服务在哪里
-* 依赖服务路由
+* 依赖服务路由：ServiceRouteMapper；
   * URI 映射到目的服务
 * 依赖服务熔断（可选）
-
-
-
-### 服务发现
-
-
-
-#### 举例说明
-
+### 整合服务发现，整合负载均衡，举例说明
 假设 URI : `/gateway/spring-cloud-server-application/say`
-
 其中 Servlet Path ：`/gateway`
-
 `spring-cloud-server-application` 是服务的应用名称
-
 `/say` 是 `spring-cloud-server-application` 的服务 URI
 
-
-
+创建 microservices-project/spring-cloud-project/spring-cloud-servlet-gateway项目：
+创建 GatewayServlet类进行路由，启动spring-cloud-server-application和spring-cloud-client-application
 ```java
 /**
  * 服务网关的路由规则
@@ -197,7 +144,7 @@ public class GatewayServlet extends HttpServlet {
      *
      * @param responseEntity
      * @param response
-     * @throws IOException
+     * @throws 
      */
     private void writeBody(ResponseEntity<byte[]> responseEntity, HttpServletResponse response) throws IOException {
         if (responseEntity.hasBody()) {
