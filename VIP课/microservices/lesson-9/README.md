@@ -170,6 +170,9 @@ restTemplate.getForObject("http://spring.application.name/hi")，在eureka注册
 spring-cloud-client-application项目中创建 拦截器如下，实现负载均衡，拦截器实现ClientHttpRequestInterceptor接口：
 com.gupao.micro.services.spring.cloud.client.loadbalance.LoadBalancedRequestInterceptor
 
+自定义注解 com.gupao.micro.services.spring.cloud.client.annotation.CustomizedLoadBalanced，利用注解实现过滤如下，从IOC容器中选加了@CustomizedLoadBalanced注解的RestTemplate类的实例对象
+public Object customizer(@CustomizedLoadBalanced Collection<RestTemplate> restTemplates,ClientHttpRequestInterceptor interceptor)
+
 
 
 
