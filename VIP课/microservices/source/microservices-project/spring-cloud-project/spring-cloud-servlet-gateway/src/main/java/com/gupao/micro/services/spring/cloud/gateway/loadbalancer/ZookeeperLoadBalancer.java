@@ -24,7 +24,7 @@ public class ZookeeperLoadBalancer extends BaseLoadBalancer {
 
     public ZookeeperLoadBalancer(DiscoveryClient discoveryClient) {
         this.discoveryClient = discoveryClient;
-        //
+        //更新所有服务器
         updateServers();
     }
 
@@ -43,10 +43,9 @@ public class ZookeeperLoadBalancer extends BaseLoadBalancer {
      */
     @Scheduled(fixedRate = 5000)
     public void updateServers() {
+        //取出注册中心所有 微服务名称
         discoveryClient.getServices().stream().forEach(serviceName -> {
-
             BaseLoadBalancer loadBalancer = new BaseLoadBalancer();
-
             loadBalancerMap.put(serviceName, loadBalancer);
             List<ServiceInstance> serviceInstances = discoveryClient.getInstances(serviceName);
             serviceInstances.forEach(serviceInstance -> {
