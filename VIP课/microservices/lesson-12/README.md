@@ -244,7 +244,7 @@ public class BaseLoadBalancer extends AbstractLoadBalancer implements PrimeConne
 spring-cloud-servlet-gateway项目下：
 创建ZookeeperLoadBalancer类实现`ILoadBalancer`，直接实现这个顶层接口不太好，可以扩展ILoadBalancer接口的实现类BaseLoadBalancer
 创建RibbonGatewayServlet类，持有ZookeeperLoadBalancer类，实现有负载均衡功能的路由，GatewayServlet只有路由功能，没有负载均衡功能
-通过spring-cloud-servlet-gateway网关访问spring-cloud-server-application：http://localhost:20000/ribbon/gateway/spring-cloud-server-application/say?message=world
+通过spring-cloud-servlet-gateway网关访问spring-cloud-server-application：
 访问spring-cloud-client-application：http://localhost:20000/ribbon/gateway/spring-cloud-client-application/rest/say?message=world
 #### 
 

@@ -5,8 +5,7 @@
 ## 主要内容
 ### RestTemplate 原理与扩展；目的：将 java对象 转换为 自定义类型，不一定非要转换为 json或者 xml类型；
 Spring 核心 HTTP消息转换器 `HttpMessageConverter`
-REST 有自描述消息，其中包括 媒体类型(`MediaType`)：text/html;text/xml;application/json；为什么需要 媒体类型描述呢？因为 Http协议特点，具体如下：
-HTTP 协议特点：传输的是纯文本，需要自我描述，否则无法区分；
+REST 有自描述消息，其中包括 媒体类型(`MediaType`)：text/html;text/xml;application/json；为什么需要 媒体类型描述呢？因为 Http协议特点：http传输的是纯文本，需要自我描述，否则无法区分；
 REST分为2个端：服务端，客户端；
 * REST 服务端：要将 文本 转换成 对象[反序列化]，或者将 对象 转换为 文本[序列化]；
 * REST 客户端：要将 文本 转换成 对象[反序列化]，或者将 对象 转换为 文本[序列化]；
@@ -53,8 +52,8 @@ public class RestTemplate extends InterceptingHttpAccessor implements RestOperat
     private final List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
     public RestTemplate() {
         //Start 添加内建 `HttpMessageConvertor` 实现
-		this.messageConverters.add(new ByteArrayHttpMessageConverter());
-		this.messageConverters.add(new StringHttpMessageConverter());
+		this.messageConverters.add(new ByteArrayHttpMessageConverter());        //http文本协议 转换为 字节数组
+		this.messageConverters.add(new StringHttpMessageConverter());           //http文本协议 转换为 字符串
 		this.messageConverters.add(new ResourceHttpMessageConverter(false));
 		this.messageConverters.add(new SourceHttpMessageConverter<>());
 		this.messageConverters.add(new AllEncompassingFormHttpMessageConverter());
@@ -120,7 +119,7 @@ DDD
 `LoadBalancerClient`
 #### 负载均衡上下文
 `LoadBalancerContext`
-#### 负载均衡规则
+#### 负载均衡器
 `ILoadBalancer`
 Q: @Qualifier为什么选择了自定义的RestTemplate而不是lbRestTemplate呢？是按照先后set的吗 
 `@Qualifier` “父”注解，`@Qualifier` , `@LoadBalanced`
@@ -134,44 +133,56 @@ Set<Object>
 
 自定义 负载均衡：
 代码见：microservices-project/spring-cloud-project/spring-cloud-client-application项目；
-创建 com.gupao.micro.services.spring.cloud.client.controller.ClientController类，invokeSay()方法调用 say()方法
-
-ClientController中：将RestTemplate实例化到 IOC容器，再把RestTemplate 注入到 ClientController类中；
-@Bean
-public RestTemplate restTemplate() {
-    return new RestTemplate();
+创建 com.gupao.micro.services.spring.cloud.client.controller.ClientController类，controller类只负责调用 restTemplate.getForObject()，不管负载均衡
+restTemplate里面负责 负载均衡，restTemplate怎么实现负载均衡？
+RestTemplate extends InterceptingHttpAccessor，RestTemplate继承InterceptingHttpAccessor的 getInterceptors()方法，代码如下：
+```java
+public abstract class InterceptingHttpAccessor extends HttpAccessor {
+	private final List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+	public List<ClientHttpRequestInterceptor> getInterceptors() {
+        return this.interceptors;
+    }
+    public void setInterceptors(List<ClientHttpRequestInterceptor> interceptors) {
+    		// Take getInterceptors() List as-is when passed in here
+    		if (this.interceptors != interceptors) {
+    			this.interceptors.clear();
+    			this.interceptors.addAll(interceptors);
+    			AnnotationAwareOrderComparator.sort(this.interceptors);
+    		}
+    	}
 }
-@Autowired 
-private RestTemplate restTemplate;
-
-创建 microservices-project/spring-cloud-project/spring-cloud-server-application项目                                 
-使用RestTemplate调用其他服务如下，引用要获取 服务实例列表，所以注入@Autowired DiscoveryClient discoveryClient;
-@GetMapping("/invoke/say") // -> /say
-    public String invokeSay(@RequestParam String message) {
-        // 服务器列表快照
-        List<String> targetUrls = new ArrayList<>(this.targetUrls);
-        int size = targetUrls.size();
-        // size =3 , index =0 -2
-        int index = new Random().nextInt(size);
-        // 选择其中一台服务器
-        String targetURL = targetUrls.get(index);
-        // RestTemplate 发送请求到服务器
-        // 输出响应
-        return restTemplate.getForObject(targetURL + "/say?message=" + message, String.class);
-}
-
-缓存 服务调用的 http请求：
-private volatile Set<String> targetUrls = new HashSet<>();
-
+```
 RestTemplate实现负载均衡核心思想：
 restTemplate.getForObject("http://spring.application.name/hi")，在eureka注册中心，一个服务名下面有多个实例，选择服务名称对应的 多个实例中的一个，
 取出其 ip，port，替代 服务名spring.application.name，然后发送http请求；
 
-spring-cloud-client-application项目中创建 拦截器如下，实现负载均衡，拦截器实现ClientHttpRequestInterceptor接口：
-com.gupao.micro.services.spring.cloud.client.loadbalance.LoadBalancedRequestInterceptor
+RestTemplate服务调用器 与 拦截器ClientHttpRequestInterceptor关系？将拦截器设置到RestTemplate中，当RestTemplate调用服务时，首先会调用拦截器的
+intercepter()方法，再调用RestTemplate.getForObject("http://...")方法
+spring-cloud-client-application项目中创建 拦截器 LoadBalancedRequestInterceptor类，实现ClientHttpRequestInterceptor接口，拦截器可以参考官方的
+LoadBalancerInterceptor；
+在ClientController类中，将 拦截器LoadBalancedRequestInterceptor设置到 RestTemplate中，代码如下：
+```java
+public class ClientController {
+    @Bean
+    @Autowired
+    public RestTemplate restTemplate(ClientHttpRequestInterceptor interceptor){
+        Template template = new Template();
+        /**restTemplate添加拦截器*/
+        restTemplate.setInterceptors(Arrays.asList(interceptor));
+        return restTemplate;
+    }
+}
+```
 
 自定义注解 com.gupao.micro.services.spring.cloud.client.annotation.CustomizedLoadBalanced，利用注解实现过滤如下，从IOC容器中选加了@CustomizedLoadBalanced注解的RestTemplate类的实例对象
 public Object customizer(@CustomizedLoadBalanced Collection<RestTemplate> restTemplates,ClientHttpRequestInterceptor interceptor)
+
+测试：
+1、开启spring-cloud-server-application服务，开启spring-cloud-client-application服务
+2、请求 http://localhost:8888/invoke/spring-cloud-server-application/say?message=world：访问spring-cloud-client-application服务的ClientController类的
+/invoke/spring-cloud-server-application/say绑定的方法invokeSay()，invokeSay()方法里面通过 restTemplate.getForObject()调用spring-cloud-server-application
+服务的 服务uri /say
+3、发送请求后，会被 LoadBalancedRequestInterceptor implements ClientHttpRequestInterceptor拦截器的 interceptor()方法拦截
 
 
 
