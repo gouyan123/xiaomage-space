@@ -132,10 +132,15 @@ Set<Object>
 [第五节 Spring Cloud Hystrix](http://git.gupaoedu.com/vip/xiaomage-space/tree/master/VIP%E8%AF%BE/spring-cloud/lesson-5)
 
 自定义 负载均衡：
+
+RestTemplate实现负载均衡核心思想：
+restTemplate.getForObject("http://spring.application.name/hi")，在eureka注册中心，一个服务名下面有多个实例，选择服务名称对应的 多个实例中的一个，
+取出其 ip，port，替代 服务名spring.application.name，然后发送http请求；
+
 代码见：microservices-project/spring-cloud-project/spring-cloud-client-application项目；
-创建 com.gupao.micro.services.spring.cloud.client.controller.ClientController类，controller类只负责调用 restTemplate.getForObject()，不管负载均衡
-restTemplate里面负责 负载均衡，restTemplate怎么实现负载均衡？
-RestTemplate extends InterceptingHttpAccessor，RestTemplate继承InterceptingHttpAccessor的 getInterceptors()方法，代码如下：
+创建 ClientController类，controller类只负责调用 restTemplate.getForObject()，不管负载均衡restTemplate里面负责 负载均衡，restTemplate怎么实现负载均衡？
+RestTemplate extends InterceptingHttpAccessor，RestTemplate继承InterceptingHttpAccessor的 getInterceptors()方法，由RestTemplate#setInterceptors()
+可知RestTemplate类里面可以设置interceptors：
 ```java
 public abstract class InterceptingHttpAccessor extends HttpAccessor {
 	private final List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
@@ -144,17 +149,9 @@ public abstract class InterceptingHttpAccessor extends HttpAccessor {
     }
     public void setInterceptors(List<ClientHttpRequestInterceptor> interceptors) {
     		// Take getInterceptors() List as-is when passed in here
-    		if (this.interceptors != interceptors) {
-    			this.interceptors.clear();
-    			this.interceptors.addAll(interceptors);
-    			AnnotationAwareOrderComparator.sort(this.interceptors);
-    		}
-    	}
+    }
 }
 ```
-RestTemplate实现负载均衡核心思想：
-restTemplate.getForObject("http://spring.application.name/hi")，在eureka注册中心，一个服务名下面有多个实例，选择服务名称对应的 多个实例中的一个，
-取出其 ip，port，替代 服务名spring.application.name，然后发送http请求；
 
 RestTemplate服务调用器 与 拦截器ClientHttpRequestInterceptor关系？将拦截器设置到RestTemplate中，当RestTemplate调用服务时，首先会调用拦截器的
 intercepter()方法，再调用RestTemplate.getForObject("http://...")方法
@@ -163,6 +160,14 @@ LoadBalancerInterceptor；
 在ClientController类中，将 拦截器LoadBalancedRequestInterceptor设置到 RestTemplate中，代码如下：
 ```java
 public class ClientController {
+    @Autowired
+    private RestTemplate restTemplate;/**里面设置了自定义的拦截器LoadBalancedRequestInterceptor*/
+    
+    @Bean
+    public ClientHttpRequestInterceptor interceptor(){
+        new LoadBalancedRequestInterceptor();
+    }
+    
     @Bean
     @Autowired
     public RestTemplate restTemplate(ClientHttpRequestInterceptor interceptor){
@@ -171,18 +176,85 @@ public class ClientController {
         restTemplate.setInterceptors(Arrays.asList(interceptor));
         return restTemplate;
     }
+    @GetMapping("/invoke/{serviceName}/say")
+    public String invokeSay(@PathVariable String serviceName,@RequestParam String message) {
+        /**restTemplate设置了拦截器intercepter，restTemplate.getForObject()会被 LoadBalancedRequestInterceptor#intercept()拦截，拦截器会直接发送
+        * restTemplate.getForObject()调用
+        * */
+        return restTemplate.getForObject("/" + serviceName + "/say?message=" + message, String.class);
+    }
+    /**Start
+    * 上面 public RestTemplate restTemplate(ClientHttpRequestInterceptor interceptor){}的另一种写法
+    * */
+    @Bean
+    @Autowired
+    @Qualifier  //@Qualifier有过滤作用，当IOC容器中 同一个类型clazz的实例有多个时，只选择符合条件的实例；
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+    @Bean
+    @Autowired //当restTemplates，interceptor实例化到IOC容器后，自动执行该方法
+    public Object customizer(@Qualifier Collection<RestTemplate> restTemplates,ClientHttpRequestInterceptor interceptor) {
+        restTemplates.forEach(r -> {
+            r.setInterceptors(Arrays.asList(interceptor));
+        });
+        return new Object();
+    }
+    /**End*/
+}
+```
+测试：
+开启spring-cloud-server-application服务，开启spring-cloud-client-application服务
+浏览器请求spring-cloud-client-application服务的 /invoke/{serviceName}/say接口，该接口里面调用 spring-cloud-server-application服务的服务uri /say
+测试链接：http://localhost:8888/invoke/spring-cloud-client-application/say?message=world，返回world；
+
+使用@LoadBalanced注解 注释 RestTemplate：
+```java
+public class ClientController {
+    @Autowired
+    @LoadBalanced   //利用注解进行过滤，因为继承@Qualifier注释，有过滤作用
+    private RestTemplate lbRestTemplate;
+    
+    @GetMapping("/lb/invoke/{serviceName}/say") // -> /say
+    public String lbInvokeSay(@PathVariable String serviceName,@RequestParam String message) {
+        return lbRestTemplate.getForObject("http://" + serviceName + "/say?message=" + message, String.class);
+    }
+}
+```
+测试：
+开启spring-cloud-server-application服务，开启spring-cloud-client-application服务
+浏览器请求spring-cloud-client-application服务的 /lb/invoke/{serviceName}/say接口，该接口里面调用 spring-cloud-server-application服务的服务uri /say
+测试链接：http://localhost:8888/lb/invoke/spring-cloud-server-application/say?message=world
+
+自定义注解 CustomizedLoadBalanced，并替代ClientController类中的@Qualifier注解，自定义注解不重要，可以不看：
+```java
+@Target({ ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@Qualifier  //IOC容器中同一类型的实例有多个时，选择满足条件的实例对象，起过滤作用；注解具有继承性，因此@CustomizedLoadBalanced也具有过滤作用
+public @interface CustomizedLoadBalanced {
+    
+}
+
+public class ClientController {
+    @Bean
+    @Autowired
+    @CustomizedLoadBalanced  //@CustomizedLoadBalanced继承@Qualifier
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+    @Bean
+    @Autowired //当restTemplates，interceptor实例化到IOC容器后，自动执行该方法
+    public Object customizer(@CustomizedLoadBalanced Collection<RestTemplate> restTemplates,ClientHttpRequestInterceptor interceptor) {
+        restTemplates.forEach(r -> {
+            r.setInterceptors(Arrays.asList(interceptor));
+        });
+        return new Object();
+    }
 }
 ```
 
-自定义注解 com.gupao.micro.services.spring.cloud.client.annotation.CustomizedLoadBalanced，利用注解实现过滤如下，从IOC容器中选加了@CustomizedLoadBalanced注解的RestTemplate类的实例对象
-public Object customizer(@CustomizedLoadBalanced Collection<RestTemplate> restTemplates,ClientHttpRequestInterceptor interceptor)
-
-测试：
-1、开启spring-cloud-server-application服务，开启spring-cloud-client-application服务
-2、请求 http://localhost:8888/invoke/spring-cloud-server-application/say?message=world：访问spring-cloud-client-application服务的ClientController类的
-/invoke/spring-cloud-server-application/say绑定的方法invokeSay()，invokeSay()方法里面通过 restTemplate.getForObject()调用spring-cloud-server-application
-服务的 服务uri /say
-3、发送请求后，会被 LoadBalancedRequestInterceptor implements ClientHttpRequestInterceptor拦截器的 interceptor()方法拦截
 
 
 
