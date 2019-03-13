@@ -36,12 +36,15 @@ import java.util.Random;
  * /{service-name}/{service-uri}
  * /gateway/rest-api/hello-world-> http://127.0.0.1:8080/hello-world
  */
-@WebServlet(name = "gateway", urlPatterns = "/gateway/*")
+@WebServlet(name = "gateway", urlPatterns = "/gateway/*") //启动类需要@ServletComponent注解
 public class GatewayServlet extends HttpServlet {
 
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    /**
+     * 一个服务名称 对应 多个 实例，负载均衡就是选择其中一个实例
+     * */
     private ServiceInstance randomChoose(String serviceName) {
         // 获取服务实例列表（服务IP、端口、是否为HTTPS）
         List<ServiceInstance> serviceInstances = discoveryClient.getInstances(serviceName);
@@ -54,16 +57,17 @@ public class GatewayServlet extends HttpServlet {
 
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // ${service-name}/${service-uri}
+        // req.getUri: /gateway/rest-api/hello-world; req.getPathInfo(): /rest-api/hello-world
+        // ${service-name}/${service-uri}，即/rest-api/hello-world
         String pathInfo = request.getPathInfo();
         String[] parts = StringUtils.split(pathInfo.substring(1), "/");
-        // 获取服务名称
+        // 获取服务名称，即 rest-api
         String serviceName = parts[0];
-        // 获取服务 URI
+        // 获取服务 URI，即 /hello-world
         String serviceURI = "/" + parts[1];
         // 随机选择一台服务实例
         ServiceInstance serviceInstance = randomChoose(serviceName);
-        // 构建目标服务 URL -> scheme://ip:port/serviceURI
+        // 构建目标服务 URL: scheme://ip:port/serviceURI
         String targetURL = buildTargetURL(serviceInstance, serviceURI, request);
 
         // 创建转发客户端
@@ -86,6 +90,7 @@ public class GatewayServlet extends HttpServlet {
         urlBuilder.append(serviceInstance.isSecure() ? "https://" : "http://")
                 .append(serviceInstance.getHost()).append(":").append(serviceInstance.getPort())
                 .append(serviceURI);
+        //http://ip:port/...?xxx=xxx，?后面都是 queryString
         String queryString = request.getQueryString();
         if (StringUtils.hasText(queryString)) {
             urlBuilder.append("?").append(queryString);
