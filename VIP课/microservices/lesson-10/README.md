@@ -1,16 +1,15 @@
 # 第十节 Spring Cloud 服务熔断：熔断是一种 对服务的保护；
 > * 熔断描述1：3个client 并发调用 serviceA时，性能不受影响，当4个client 并发调用 serviceA时，性能会受到影响，因此应该对第4个client请求进行限制，因此可以
-通过限制 最大并发访问数 对部分client访问进行熔断并返回容错对象，保护serviceA；
+通过限制 最大并发访问数 对部分client访问进行熔断并返回容错方法，保护serviceA；
 > * 熔断描述2：client 访问 serviceA，访问有超时时间，serviceA里面有线程池 处理client请求线程，serviceA里面线程池大小为200，理论上serviceA可以处理
 200个并发，当并发数量超过200时，其他client请求线程会在任务队列里面排队等待，如果一个请求线程占用连接时间太久，影响serviceA性能，因此，限制client连接
 时间，对连接超时的client进行熔断并返回容错对象；
-> * 熔断策略：1、控制并发请求数量 即信号量Semaphore；2、设置请求连接超时时间；见下图；
+> * 熔断策略：1、控制并发请求数量 即信号量Semaphore；2、设置请求连接超时时间 即timeout；见下图；
 
 ![1533656373153](assets\1533656373153.png)
 
 ##实战演练
-> * 启动zk服务端 即注册中心：zkServer.cmd；启动 spring-cloud-config-server项目 即配置中心，启动 spring-cloud-server-application项目 即服务提供者，
-启动 spring-cloud-client-application项目 即服务消费者；
+> * 启动zk服务端 即注册中心：zkServer.cmd；启动 spring-cloud-server-application项目；
 spring-cloud-server-application项目中 对ServerController#say()方法进行熔断，当连接超过100ms时，进行熔断，代码如下：
 测试：访问 http://localhost:9090/say?message=world，返回 world说明没有熔断，返回 Fault说明熔断了；
 ```java
@@ -35,7 +34,7 @@ public class ServerController {
 ### Spring Cloud Hystrix Client
 > * 注意：方法签名：访问限定符，方法返回类型，方法名称(编译时预留，给dubug，ide的，不属于方法签名)，方法参数(数量一致 + 类型一致 + 顺序一致)
 
-### 实现服务熔断：核心原理 任务提交给线程池ExecutorService执行，future.get(timeout)去拿结果 如果超时，会报异常，捕获异常并调熔断方法
+### 实现服务熔断：核心原理 普通方法封装到线程对象里 提交给线程池ExecutorService执行，future.get(timeout)去拿结果 如果超时，会报异常，捕获异常并调熔断方法
 #### 低级版本（有容错实现）
 > * spring-cloud-server-application项目中 创建ServerController#say2()方法，绑定/say2访问路径；
 > * 测试：访问 http://localhost:9090/say2?message=world，返回 world说明没有熔断，返回 Fault说明熔断了；
@@ -67,7 +66,7 @@ public class ServerController {
         // 100 毫秒超时
         String returnValue = null;
         try {
-            //100s不返回就 超时
+            //100s不返回就 报超时异常
             returnValue = future.get(100, TimeUnit.MILLISECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             // 超时就调用 容错方法 errorContent(message)
@@ -87,7 +86,7 @@ public class ServerController {
 }
 ```
 
-#### 中级版本
+#### 中级版本，实现连接超时熔断
 > * spring-cloud-server-application项目中 创建CircuitBreakerHandlerInterceptor类实现org.springframework.web.servlet.HandlerInterceptor接口，
 拦截web请求，并重写afterCompletion()方法，并创建WebMvcConfig类，将CircuitBreakerHandlerInterceptor拦截器注册上去；
 > * 测试：访问 http://localhost:9090/middle/say?message=world，返回 world说明没有熔断，返回 Fault说明熔断了；
@@ -146,8 +145,9 @@ public class ServerController {
     }
 }
 ```
-
-#### 高级版本，用AOP实现无侵入性，不使用注解 实现熔断
+#### 高级版本，用AOP实现 目标方法拦截 无侵入性，不使用注解 实现连接超时熔断
+> * 创建 切面类ServerControllerAspect的切面方法，拦截 ServerController类的方法 即切入点，当http请求ServerController时，会触发切面方法，重点：切面方法将 目标方法封装到线程对象中，然后提交给ExecutorService线程池
+> * @Around表示 切面方法 对 切入点方法 进行 环绕处理，point表示代理对象，point.getTarget()表示目标类，point.proceed()执行代理方法，里面会调目标方法；
 > * 测试：启动zk，启动spring-cloud-server-application，访问 http://localhost:9090/advanced/say?message=world
 ```java
 /**@Aspect切面类 里面 定义 切面方法，切面方法上定义 切入点，切入点即某个类的某个方法，当切入点方法执行时，自动执行切面方法*/
@@ -199,7 +199,8 @@ public class SpringCloudServerApplication {
     //
 }
 ```
-#### 高级版本，用AOP实现无侵入性，使用注解 实现熔断
+#### 高级版本，用AOP实现无侵入性，使用注解 实现连接超时熔断
+> * 创建 @interface TimeoutCircuitBreaker，用于存 超时时间timeout，在环绕方法中，通过反射取出该注解
 ```java
 @Target(ElementType.METHOD) // 标注在方法
 @Retention(RetentionPolicy.RUNTIME) // 运行时保存注解信息
@@ -222,49 +223,70 @@ public class ServerControllerAspect {
     @Around("execution(* com.gupao.micro.services.spring.cloud.server.controller.ServerController.advancedSay2(..)) && args(message) ")
     public Object advancedSay2InTimeout(ProceedingJoinPoint point,String message) throws Throwable {
          long timeout = -1;
-         /**此方法 复用性不强，最好用反射实现
+         /**
          * point.getTarget().getClass().newInstance(); point为代理对象，point.getTarget()为目标对象
          * */
-         if (point instanceof MethodInvocationProceedingJoinPoint) {
-             MethodInvocationProceedingJoinPoint methodPoint = (MethodInvocationProceedingJoinPoint) point;
-             MethodSignature signature = (MethodSignature) methodPoint.getSignature();
-             Method method = signature.getMethod();
-             TimeoutCircuitBreaker circuitBreaker = method.getAnnotation(TimeoutCircuitBreaker.class);
-             timeout = circuitBreaker.timeout();
-         }
-         return doInvoke(point, message, timeout);
+//        if (point instanceof MethodInvocationProceedingJoinPoint) {
+//            MethodInvocationProceedingJoinPoint methodPoint = (MethodInvocationProceedingJoinPoint) point;
+//            MethodSignature signature = (MethodSignature) methodPoint.getSignature();
+//            Method method = signature.getMethod();
+//            TimeoutCircuitBreaker circuitBreaker = method.getAnnotation(TimeoutCircuitBreaker.class);
+//            timeout = circuitBreaker.timeout();
+//        }
+//        return doInvoke(point, message, timeout);
+        //用反射 获取方法上的注解
+        Method method = point.getTarget().getClass().getDeclaredMethod("advancedSay2",new Class[]{String.class});
+        TimeoutCircuitBreaker timeoutCircuitBreaker = method.getAnnotation(TimeoutCircuitBreaker.class);
+        timeout = timeoutCircuitBreaker.timeout();
+        return doInvoke(point, message, timeout);
     }
 }
 ```
 #### 高级版本（信号灯实现 = 单机版限流方案）
-
+> * semaphore.tryAcquire()获取到信号，就调用服务方法，然后释放信号 semaphore.release()，如果semaphore.tryAcquire()获取不到信号，就调用 容错方法
 ```java
-    @Around("execution(* com.gupao.micro.services.spring.cloud." +
-            "server.controller.ServerController.advancedSay3(..))" +
-            " && args(message)" +
-            " && @annotation(circuitBreaker) ")
-    public Object advancedSay3InSemaphore(ProceedingJoinPoint point,
-                                          String message,
-                                          SemaphoreCircuitBreaker circuitBreaker) throws Throwable {
+@Target(ElementType.METHOD) // 标注在方法
+@Retention(RetentionPolicy.RUNTIME) // 运行时保存注解信息
+@Documented
+public @interface SemaphoreCircuitBreaker {
+    /**信号量：限制并发量*/
+    int value();
+}
+
+@Aspect
+@Component
+public class ServerControllerAspect {
+    //信号量
+    private volatile Semaphore semaphore = null;
+    @Around("execution(* com.gupao.micro.services.spring.cloud.server.controller.ServerController.advancedSay3(..)) && args(message) && @annotation(circuitBreaker) ")
+    public Object advancedSay3InSemaphore(ProceedingJoinPoint point,String message,SemaphoreCircuitBreaker circuitBreaker) throws Throwable {
         int value = circuitBreaker.value();
         if (semaphore == null) {
             semaphore = new Semaphore(value);
         }
         Object returnValue = null;
         try {
-            if (semaphore.tryAcquire()) {
+            if (semaphore.tryAcquire()) {/**semaphore.tryAcquire() 获得信号 相当于 获取锁*/
                 returnValue = point.proceed(new Object[]{message});
                 Thread.sleep(1000);
-            } else {
+            } else {/**获取到 信号semaphore 就调 服务方法，获取不到信号量就调  熔断方法*/
                 returnValue = errorContent("");
             }
         } finally {
-            semaphore.release();
+            semaphore.release();/**semaphore.release() 释放信号 相当于 释放锁*/
         }
-
         return returnValue;
-
     }
+}
+@RestController
+public class ServerController {
+    /**高级版本 + 注解（信号量）-熔断*/
+    @GetMapping("/advanced/say3")
+    @SemaphoreCircuitBreaker(1)
+    public String advancedSay3(@RequestParam String message) throws Exception {
+        return doSay2(message);
+    }
+}
 ```
 
 ## 下节预习

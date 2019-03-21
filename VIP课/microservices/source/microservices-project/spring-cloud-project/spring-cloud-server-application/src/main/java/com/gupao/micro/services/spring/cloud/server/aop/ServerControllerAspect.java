@@ -61,14 +61,9 @@ public class ServerControllerAspect {
         return doInvoke(point, message, timeout);
     }
 
-    @Around("execution(* com.gupao.micro.services.spring.cloud." +
-            "server.controller.ServerController.advancedSay3(..))" +
-            " && args(message)" +
-            " && @annotation(circuitBreaker) ")
-    public Object advancedSay3InSemaphore(ProceedingJoinPoint point,
-                                          String message,
-                                          SemaphoreCircuitBreaker circuitBreaker) throws Throwable {
-        int value = circuitBreaker.value();
+    @Around("execution(* com.gupao.micro.services.spring.cloud.server.controller.ServerController.advancedSay3(..)) && args(message) && @annotation(semaphoreCircuitBreaker) ")
+    public Object advancedSay3InSemaphore(ProceedingJoinPoint point,String message,SemaphoreCircuitBreaker semaphoreCircuitBreaker) throws Throwable {
+        int value = semaphoreCircuitBreaker.value();
         if (semaphore == null) {
             semaphore = new Semaphore(value);
         }
@@ -83,9 +78,7 @@ public class ServerControllerAspect {
         } finally {
             semaphore.release();
         }
-
         return returnValue;
-
     }
 
     public String errorContent(String message) {

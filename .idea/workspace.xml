@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ed5c5ce-c22a-4ff3-86af-e9fea3bf2286" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VIP课/microservices/lesson-10/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/microservices/lesson-10/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/SpringCloudServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/SpringCloudServerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/aop/ServerControllerAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/aop/ServerControllerAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/web/mvc/CircuitBreakerControllerAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/web/mvc/CircuitBreakerControllerAdvice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/web/mvc/CircuitBreakerHandlerInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/web/mvc/CircuitBreakerHandlerInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/resources/application.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/公开课/代码/interface-design/target/" />
     <ignored path="$PROJECT_DIR$/公开课/代码/annotation-driven-development/target/" />
@@ -60,8 +54,8 @@
         <entry file="file://$PROJECT_DIR$/VIP课/microservices/lesson-10/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="231">
-                <caret line="37" column="68" selection-start-line="37" selection-start-column="68" selection-end-line="37" selection-end-column="68" />
+              <first_editor relative-caret-position="266">
+                <caret line="149" column="100" selection-start-line="149" selection-start-column="100" selection-end-line="149" selection-end-column="100" />
                 <folding>
                   <element signature="e#666#667#0" expanded="true" />
                   <element signature="e#696#697#0" expanded="true" />
@@ -80,12 +74,21 @@
       <file leaf-file-name="ServerControllerAspect.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/aop/ServerControllerAspect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1485">
-              <caret line="59" column="11" lean-forward="true" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="11" />
+            <state relative-caret-position="198">
+              <caret line="26" column="4" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="27" selection-end-column="48" />
               <folding>
                 <element signature="e#3780#3781#0" expanded="true" />
                 <element signature="e#3822#3823#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SemaphoreCircuitBreaker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/annotation/SemaphoreCircuitBreaker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="217">
+              <caret line="7" column="41" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -102,8 +105,8 @@
       <file leaf-file-name="ServerController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-132">
-              <caret line="85" column="30" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="30" />
+            <state relative-caret-position="-264">
+              <caret line="14" selection-start-line="14" selection-end-line="15" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -557,12 +560,12 @@
       <workItem from="1552541511045" duration="12014000" />
       <workItem from="1553049727011" duration="7476000" />
       <workItem from="1553073987128" duration="981000" />
-      <workItem from="1553130552701" duration="9795000" />
+      <workItem from="1553130552701" duration="15250000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118526000" />
+    <option name="totallyTimeSpent" value="123981000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -589,7 +592,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.577548" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.9243986" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.92319053" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="3" side_tool="true" />
@@ -713,13 +716,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-servlet-gateway/src/main/java/com/gupao/micro/services/spring/cloud/gateway/servlet/RibbonGatewayServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="57" column="13" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/8.5.31/tomcat-embed-core-8.5.31.jar!/org/apache/catalina/core/ApplicationFilterChain.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
@@ -1060,10 +1056,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/annotation/SemaphoreCircuitBreaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="7" column="41" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-264">
+          <caret line="14" selection-start-line="14" selection-end-line="15" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/aop/ServerControllerAspect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1485">
-          <caret line="59" column="11" lean-forward="true" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="11" />
+        <state relative-caret-position="198">
+          <caret line="26" column="4" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="27" selection-end-column="48" />
           <folding>
             <element signature="e#3780#3781#0" expanded="true" />
             <element signature="e#3822#3823#0" expanded="true" />
@@ -1071,18 +1081,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/VIP课/microservices/source/microservices-project/spring-cloud-project/spring-cloud-server-application/src/main/java/com/gupao/micro/services/spring/cloud/server/controller/ServerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-132">
-          <caret line="85" column="30" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/VIP课/microservices/lesson-10/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="231">
-            <caret line="37" column="68" selection-start-line="37" selection-start-column="68" selection-end-line="37" selection-end-column="68" />
+          <first_editor relative-caret-position="266">
+            <caret line="149" column="100" selection-start-line="149" selection-start-column="100" selection-end-line="149" selection-end-column="100" />
             <folding>
               <element signature="e#666#667#0" expanded="true" />
               <element signature="e#696#697#0" expanded="true" />
