@@ -1,72 +1,17 @@
 # 第七节 Spring Cloud 配置管理
 
-
-
 ## 分布式配置
 
-
-
 ### 国内知名开源项目
-
-百度 Disconf
-
-携程 Apollo
-
-阿里 Nacos
-
-
+> * 百度 Disconf，携程 Apollo，阿里 Nacos
 
 ### 国外知名开源项目
-
-Spring Cloud Config
-
-Netfix [Archaius](http://cloud.spring.io/spring-cloud-static/Finchley.RELEASE/single/spring-cloud.html#_external_configuration_archaius) 
-
-Apache Zookeeper
-
-
-
-
-
-
+> * Spring Cloud Config，Netfix Archaius，Apache Zookeeper
 
 ### 客户端
-
-
-
-#### 配置三方库
-
-
-
-#####  `commons-configuration`
-
-* `Configuration` : 提供大多数常见类型的 Value 转换
-
-  * `PropertiesConfiguration`: 将 Properties 作为 `Configuration` 配置
-
-  * `MapConfiguration`
-
-    * `EnvironmentConfiguration` ： OS 环境变量
-    * `SystemConfiguration` : Java 系统属性
-
-  * `CompositeConfiguration`
-
-    
-
-
-
-核心概念：配置源、以及它们优先次序、配置转换能力
-
-
-
-HTTP 资源算不算一个配置？
-
-配置源：文件、HTTP 资源、数据源、 Git ->
-
-URL -> file:/// , http://, jdbc:// , git://
-
-
-
+> * 一般：配置客户端 → HTTP1.1 Pull → 配置服务端； HTTP1.1特点：无状态短连接；
+> * springcloud：配置客户端 → 启动服务时加载 通过 HTTP1.1 Pull → 配置服务端 → git/本地文件file/DB；
+> * Java Client自行读取 HttpClient；Apache Commons Configuration；
 ##### Spring Environment
 
 
@@ -84,21 +29,30 @@ MutablePropertySources -> List PropertySource : 包含多个 PropertySource
 * `CompositePropertySource` : 组合
 * `SystemEnvironmentPropertySource` 环境变量
 
-
-
-
-
 Spring Cloud 客户端配置定位扩展 : `PropertySourceLocator`
 
-
-
-
-
-
-
+#### 创建 spring-cloud-config-client，从 配置中心，获取自己的配置文件
+> * 配置三方库 `commons-configuration`
+> * `org.apache.commons.configuration.Configuration` : 提供大多数常见类型的 Value 转换，其派生类 如下，Configuration表示接口，各实现类表示各种不同的来源
+  * `PropertiesConfiguration`: 将 Properties 作为 `Configuration` 数据来源
+  * `MapConfiguration`
+    * `EnvironmentConfiguration` ： 将 OS环境变量 作为 `Configuration` 数据来源；
+    * `SystemConfiguration` : 将 Java 系统属性 作为 `Configuration` 数据来源；
+  * `CompositeConfiguration` ： 将各种配置源数据 封装到 Configuration，然后根据key获取 配置的值value；
+  
+spring-cloud-config-client项目的 pom.xml 引入依赖
+```xml
+    <dependency>
+        <groupId>commons-configuration</groupId>
+        <artifactId>commons-configuration</artifactId>
+        <version>1.9</version>
+    </dependency>
+```
+> * HTTP资源 算不算一个配置源？提到资源必须注意，具体如下：
+> * 资源 包括 文件，HTTP资源，jdbc资源，Git；这些归根结底都是 URL；URL -> file:/// , http://, jdbc:// , git://；小结：所有资源 都是 URL；
+> * HTTP里面 存在不存在 PULL 给客户端？websocket也可以这么做，但是 客户端实现比较麻烦，java有很多websocket客户端，大多数通过浏览器实现，因为
+浏览器第一次访问时，用http访问，然后进行协议转换，从http协议转换为 websocket协议，怎么和spring整合的呢？
 ### 服务端
-
-
 
 #### 基于 Git 实现
 
