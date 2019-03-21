@@ -10,9 +10,7 @@ import java.util.concurrent.TimeoutException;
 
 public class CircuitBreakerHandlerInterceptor implements HandlerInterceptor {
 
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-                                Object handler,
-                                @Nullable Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response,Object handler,@Nullable Exception ex) throws Exception {
 //        if ("/middle/say".equals(request.getRequestURI()) && ex instanceof TimeoutException) {
 //            Writer writer = response.getWriter();
 //            writer.write(errorContent(""));
