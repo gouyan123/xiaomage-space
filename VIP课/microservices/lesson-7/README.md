@@ -56,8 +56,41 @@ MutablePropertySources持有 List<PropertySource<?>> propertySourceList 属性 :
 * `SystemEnvironmentPropertySource`：将 环境变量类型的资源URL 封装到SystemEnvironmentPropertySource；
 * 重点：也可以弄一个 XxxPropertySource：将 配置中心的资源URL 封装到XxxPropertySource中，并且 XxxPropertySource第一个存到MutablePropertySources
 的propertySourceList中，加载到第一个 PropertySource后，后面的就不会再加载了；
+> * AbstractApplicationContext类设置 父上下文时，要合并 父上下文的环境ConfigurableEnvironment，AbstractApplicationContext是一个抽象类，不能实例化，
+当调用其 setParent(ApplicationContext parent)时，相当于调用其实现子类的setParent()方法，代码如下：
+```java
+public abstract class AbstractApplicationContext extends DefaultResourceLoader implements ConfigurableApplicationContext, DisposableBean {
+    @Override
+    public void setParent(ApplicationContext parent) {
+        this.parent = parent;
+        if (parent != null) {
+            Environment parentEnvironment = parent.getEnvironment();
+            if (parentEnvironment instanceof ConfigurableEnvironment) {
+                getEnvironment().merge((ConfigurableEnvironment) parentEnvironment);
+            }
+        }
+    }
+}
+```
 Spring Cloud 客户端配置定位扩展 : `PropertySourceLocator`
-### 服务端
+### 创建 spring-cloud-config-server 作为配置服务端，既然是服务端，就有HTTP端点 endpoint，配置客户端 向 配置服务端 请求配置信息，配置服务端再 向配置中心 请求配置信息
+> * pom.xml 只依赖 spring-cloud-config-server
+```xml
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-config-server</artifactId>
+    </dependency>
+```
+ * 创建 resources/configs/config.properties为 本地git仓库，模拟 配置中心，并启动 项目，模拟配置客户端 请求spring-cloud-config-server，获取配置信息；
+```properties
+spring.application.name = config-server
+server.port = 10086
+## 配置服务器 git 本地文件系统路径，并在configs目录下设置git环境：git init; git commit -a -m config.properties;
+spring.cloud.config.server.git.uri = \
+${user.dir}/spring-cloud-project/spring-cloud-config-server/src/main/resources/configs/
+```
+> * 请求http://localhost:10086/config/default 获取 config.properties配置文件
+> * 请求http://localhost:10086/config/test 获取 config-test.properties配置文件
 
 #### 基于 Git 实现
 
