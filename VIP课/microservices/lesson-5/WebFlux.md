@@ -51,6 +51,7 @@ doLoad -> loadOrders : 耗时 3s
 > CompletableFuture特点：
 >- 任务Future之间有依赖关系，第一步的结果，是第二步的输入；
 >- 提供异步操作，提供 Future 链式操作，提供函数式编程；
+>- 函数式编程 + Reactive：重点；
 ```java
 public class CompletableFutureDemo {
     public static void main(String[] args) {
@@ -62,7 +63,7 @@ public class CompletableFutureDemo {
             println("第二步");
             return result + " World";               //第二步以第一步返回结果 为输入
         }).thenAccept(CompletableFutureDemo::println)
-        .join();                                    //等待执行结束
+        .join();                                    //等待Thread-0线程执行结束，主线程再继续执行，类似 CountDownLatch
     }
     private static void println(String message) {
         System.out.printf("[线程 : %s] %s\n",Thread.currentThread().getName(), message);
@@ -94,51 +95,54 @@ thenApplyAsync -> thenAccept
 >结果分析：虽然是异步操作，但是 都是 同一个线程 Thread-0执行的，为什么呢？
 >- 如上图所示，main()方法调用 supplyAsync()方法，然后main()方法再调用thenApplyAsync()方法，后一个方法thenApplyAsync()方法 依赖前一个方法supplyAsync()的返回值，因此，异步切换线程 没有意义
 
-函数式编程 + Reactive
+### Reactive + 函数式编程
+> 传统三段式编程 属于 命令式编程(Imperative programming) 即一行一行的执行，属于非流式
+>- 业务执行
+>- 业务执行完成
+>- 异常处理
+```text
+    try {
+        业务执行
+    }catch (Exception e){
+        异常处理
+    }finally {
+        业务执行完成
+    }
+```
+
+> Reactive 编程 属于 流式编程，Fluent 流畅的，Streams 流式的，好处是什么？
+> 大多数业务逻辑属于 数据操作，数据操作有如下几种类型：
+>- 消费 数据：Consumer
+>- 转换 数据类型：Function
+>- 增加/减少 数据维度：map/flatMap/reduce
+>- 业务效果：实现业务流程编排
 
 
-Reactive programming
-编程风格
+> 函数式语言特性（Java 8+）
+>- 生产类型 Supplier
+>- 转换类型  Function
+>- 消费类型  Consumer
+>- 判断类型 Predicate
+>- 提升/减少维度 map/reduce/flatMap
 
-
-Fluent 流畅的
-Streams 流式的
-
-
-业务效果
-
-
-流程编排
-大多数业务逻辑是数据操作
-
-
-函数式语言特性（Java 8+）
-
-
-消费类型  Consumer
-
-生产类型 Supplier
-
-转换类型  Function
-
-判断类型 Predicate
-
-提升/减少维度 map/reduce/flatMap
-
-
-
-
-
-        // 是不是非常直观? Java/C#/JS/Python/Scale/Koltin -> Reactive/Stream
-        Stream.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) // 0-9 集合
-                .filter(v -> v % 2 == 1) // 判断数值->获取奇数
-                .map(v -> v - 1) // 奇数变偶数
-                .reduce(Integer::sum) // 聚合操作
-                .ifPresent(System.out::println) // 输出 0 + 2 + 4 + 6 + 8
-Stream 是 Iterator 模式，数据已完全准备，拉模式（Pull）
-
-Reactive 是观察者模式，来一个算一个，推模式（Push），当有数据变化的时候，作出反应（Reactor）
-
+`代码见 spring-reactive项目 StreamDemo类 `
+```java
+/**java,c#,js,python,scala,koltin 都使用 Reactive + Stream的模式*/
+public class StreamDemo {
+    public static void main(String[] args) {
+        Stream.of(0,1,2,3,4,5,6,7,8,9)              //Supplier 生产数据
+                .filter(v -> v % 2 == 0)            //Predicate 判断数据
+                .map(v -> v + 1)                    //Function 改变数据维度
+                .reduce(Integer::sum)               //聚合操作
+                .ifPresent(System.out::println);    //Consumer 消费数据
+//                .forEach(System.out::println);      //Consumer
+    }
+}
+```
+```text
+Stream 是 Iterator 模式，数据已完全准备，Pull拉模式；
+Reactive 是观察者模式，数据来一个算一个，Push推模式，当有数据变化的时候，作出反应（Reactor）
+```
 React（反应）
 
 

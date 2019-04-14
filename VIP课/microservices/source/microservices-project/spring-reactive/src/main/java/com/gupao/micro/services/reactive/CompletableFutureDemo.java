@@ -14,9 +14,18 @@ public class CompletableFutureDemo {
         }).thenApplyAsync(result -> {
             println("第二步");
             return result + " World";               //第二步以第一步返回值 为输入
-        }).thenAccept(CompletableFutureDemo::println)
-        .join();                                    //等待执行结束
+        }).thenAccept(CompletableFutureDemo::println).
+        whenComplete((v,error) -> {
+            println("执行结束");
+        }).
+        join();                                    //等待执行结束
+        try {
 
+        }catch (Exception e){
+
+        }finally {
+
+        }
     }
     private static void println(String message) {
         System.out.printf("[线程 : %s] %s\n",Thread.currentThread().getName(), message);
@@ -44,7 +53,7 @@ public class CompletableFutureDemo {
 //                .whenComplete((v, error) -> { // 返回值 void, 异常 -> 结束状态
 //                    println("执行结束!");
 //                })
-//                .join() // 等待执行结束
+////                .join() // 等待执行结束
 //        ;
 //        // 三段式编程
 //        // 业务执行
