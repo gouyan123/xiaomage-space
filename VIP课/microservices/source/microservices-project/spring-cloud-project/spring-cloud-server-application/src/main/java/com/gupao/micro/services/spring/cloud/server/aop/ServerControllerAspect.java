@@ -22,9 +22,9 @@ import static java.util.concurrent.Executors.newFixedThreadPool;
 @Aspect
 @Component
 public class ServerControllerAspect {
-
-    private ExecutorService executorService = newFixedThreadPool(20);
-
+    //线程池
+    private ExecutorService executorService = Executors.newFixedThreadPool(20);
+    //信号量
     private volatile Semaphore semaphore = null;
 
     @Around("execution(* com.gupao.micro.services.spring.cloud." +
@@ -44,28 +44,26 @@ public class ServerControllerAspect {
 
     @Around("execution(* com.gupao.micro.services.spring.cloud." +
             "server.controller.ServerController.advancedSay2(..)) && args(message) ")
-    public Object advancedSay2InTimeout(ProceedingJoinPoint point,
-                                        String message) throws Throwable {
-
+    public Object advancedSay2InTimeout(ProceedingJoinPoint point,String message) throws Throwable {
         long timeout = -1;
-        if (point instanceof MethodInvocationProceedingJoinPoint) {
-            MethodInvocationProceedingJoinPoint methodPoint = (MethodInvocationProceedingJoinPoint) point;
-            MethodSignature signature = (MethodSignature) methodPoint.getSignature();
-            Method method = signature.getMethod();
-            TimeoutCircuitBreaker circuitBreaker = method.getAnnotation(TimeoutCircuitBreaker.class);
-            timeout = circuitBreaker.timeout();
-        }
+//        if (point instanceof MethodInvocationProceedingJoinPoint) {
+//            MethodInvocationProceedingJoinPoint methodPoint = (MethodInvocationProceedingJoinPoint) point;
+//            MethodSignature signature = (MethodSignature) methodPoint.getSignature();
+//            Method method = signature.getMethod();
+//            TimeoutCircuitBreaker circuitBreaker = method.getAnnotation(TimeoutCircuitBreaker.class);
+//            timeout = circuitBreaker.timeout();
+//        }
+//        return doInvoke(point, message, timeout);
+        //用反射 获取方法上的注解
+        Method method = point.getTarget().getClass().getDeclaredMethod("advancedSay2",new Class[]{String.class});
+        TimeoutCircuitBreaker timeoutCircuitBreaker = method.getAnnotation(TimeoutCircuitBreaker.class);
+        timeout = timeoutCircuitBreaker.timeout();
         return doInvoke(point, message, timeout);
     }
 
-    @Around("execution(* com.gupao.micro.services.spring.cloud." +
-            "server.controller.ServerController.advancedSay3(..))" +
-            " && args(message)" +
-            " && @annotation(circuitBreaker) ")
-    public Object advancedSay3InSemaphore(ProceedingJoinPoint point,
-                                          String message,
-                                          SemaphoreCircuitBreaker circuitBreaker) throws Throwable {
-        int value = circuitBreaker.value();
+    @Around("execution(* com.gupao.micro.services.spring.cloud.server.controller.ServerController.advancedSay3(..)) && args(message) && @annotation(semaphoreCircuitBreaker) ")
+    public Object advancedSay3InSemaphore(ProceedingJoinPoint point,String message,SemaphoreCircuitBreaker semaphoreCircuitBreaker) throws Throwable {
+        int value = semaphoreCircuitBreaker.value();
         if (semaphore == null) {
             semaphore = new Semaphore(value);
         }
@@ -80,22 +78,20 @@ public class ServerControllerAspect {
         } finally {
             semaphore.release();
         }
-
         return returnValue;
-
     }
 
     public String errorContent(String message) {
         return "Fault";
     }
 
+    /**spring容器关闭之前，关闭线程池*/
     @PreDestroy
     public void destroy() {
         executorService.shutdown();
     }
 
-    private Object doInvoke(ProceedingJoinPoint point,
-                            String message, long timeout) throws Throwable {
+    private Object doInvoke(ProceedingJoinPoint point,String message, long timeout) throws Throwable {
 
         Future<Object> future = executorService.submit(() -> {
             Object returnValue = null;

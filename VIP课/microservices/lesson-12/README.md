@@ -32,7 +32,7 @@ Tomcat Servlet容器的连接器：Java Blocking Connector；Java Non Blocking C
 Zuul编程模型：一个框架会有一个限定的范围，Zuul是 Netflix自己实现的，实现的API不是非常友好；
 
 Zuul 实现原理：
-* `@EnableXxx`装配：`@EnableZuulProxy`，配合注解：`@Import`，将依赖包里面的 配置bean 实例化到 当前IOC容器；
+* `@EnableXxx`装配模块：`@EnableZuulProxy`，配合注解：`@Import`，将依赖包里面的 配置bean 实例化到 当前IOC容器；
 * 依赖服务发现：Registration；
   * 我是谁
   * 目的服务在哪里
@@ -46,8 +46,8 @@ Zuul 实现原理：
 `/say` 是 `spring-cloud-server-application` 的服务 URI
 
 创建 microservices-project/spring-cloud-project/spring-cloud-servlet-gateway项目：
-创建 GatewayServlet，利用Servlet实现路由，启动spring-cloud-server-application和spring-cloud-client-application
-通过spring-cloud-servlet-gateway网关访问spring-cloud-server-application：http://localhost:20000/gateway/spring-cloud-server-application/say
+创建 GatewayServlet，利用Servlet实现路由，没有负载均衡，启动spring-cloud-server-application和spring-cloud-client-application
+通过spring-cloud-servlet-gateway网关访问spring-cloud-server-application：http://localhost:20000/gateway/spring-cloud-server-application/say?message=world
 ```java
 /**
  * 服务网关的路由规则
@@ -174,22 +174,82 @@ public class GatewayServlet extends HttpServlet {
 }
 ```
 
-### 整合负载均衡(Ribbon)
-
+### 整合负载均衡(Ribbon)分析
+RestTemplate增加一个LoadBalancerInterceptor，调用Netflix中的LoadBalancer实现，选择服务名下面的一个 ip:port；
+跟LoadBalancerInterceptor，该类拦截http请求，将request对象修改后，再调后面service(req,resp)方法，代码如下：
+```java
+public class LoadBalancerInterceptor implements ClientHttpRequestInterceptor {
+    /**跟*/
+	private LoadBalancerClient loadBalancer;
+    //
+}
+```
+跟 LoadBalancerClient接口，该接口的实现类 RibbonLoadBalancerClient
+```java
+public interface LoadBalancerClient extends ServiceInstanceChooser {
+	<T> T execute(String serviceId, LoadBalancerRequest<T> request) throws IOException;
+}
+public class RibbonLoadBalancerClient implements LoadBalancerClient {
+    public <T> T execute(String serviceId, LoadBalancerRequest<T> request) throws IOException {
+        /**跟*/
+        ILoadBalancer loadBalancer = this.getLoadBalancer(serviceId);
+        /**看一下 Server类*/
+        Server server = this.getServer(loadBalancer);
+        if (server == null) {
+            throw new IllegalStateException("No instances available for " + serviceId);
+        } else {
+            RibbonLoadBalancerClient.RibbonServer ribbonServer = new RibbonLoadBalancerClient.RibbonServer(serviceId, server, this.isSecure(server, serviceId), this.serverIntrospector(serviceId).getMetadata(server));
+            return this.execute(serviceId, ribbonServer, request);
+        }
+    }
+}
+```
+跟 ILoadBalancer接口，该接口有很多实现类
+```java
+public interface ILoadBalancer {
+	public void addServers(List<Server> newServers);
+	/**一个服务名有多个实例，从中选择一个*/
+	public Server chooseServer(Object key);
+	public void markServerDown(Server server);
+	@Deprecated
+	public List<Server> getServerList(boolean availableOnly);
+    public List<Server> getReachableServers();
+	public List<Server> getAllServers();
+}
+```
+跟chooseServer()的实现类 BaseLoadBalancer#chooseServer()
+```java
+public class BaseLoadBalancer extends AbstractLoadBalancer implements PrimeConnections.PrimeConnectionListener, IClientConfigAware {
+    public Server chooseServer(Object key) {
+        if (counter == null) {
+            counter = createCounter();
+        }
+        counter.increment();
+        if (rule == null) {
+            return null;
+        } else {
+            try {
+                /**rule是IRule接口的默认实现类RoundRobinRule*/
+                return rule.choose(key);
+            } catch (Exception e) {
+                logger.warn("LoadBalancer [{}]:  Error choosing server for key {}", name, key, e);
+                return null;
+            }
+        }
+    }
+}
+```
 #### [官方实现](http://cloud.spring.io/spring-cloud-static/Finchley.SR1/single/spring-cloud.html#_ribbon_with_zookeeper)
-#### 实现 `ILoadBalancer`
-#### 实现 `IRule`
-
-
-
-
-
-
+###自定义负载均衡器：实现 `ILoadBalancer` 实现 `IRule`
+spring-cloud-servlet-gateway项目下：
+创建ZookeeperLoadBalancer类实现`ILoadBalancer`，直接实现这个顶层接口不太好，可以扩展ILoadBalancer接口的实现类BaseLoadBalancer
+创建RibbonGatewayServlet类，持有ZookeeperLoadBalancer类，实现有负载均衡功能的路由，GatewayServlet只有路由功能，没有负载均衡功能
+通过spring-cloud-servlet-gateway网关访问spring-cloud-server-application：
+访问spring-cloud-client-application：http://localhost:20000/ribbon/gateway/spring-cloud-client-application/rest/say?message=world
+#### 
 
 ## 下节预习
-
 ### 去年 VIP Spring Cloud [第八节 Spring Cloud Stream (上)](http://git.gupaoedu.com/vip/xiaomage-space/tree/master/VIP%E8%AF%BE/spring-cloud/lesson-8)
-
 ### 去年 VIP Spring Cloud [第九节 Spring Cloud Stream (下)](http://git.gupaoedu.com/vip/xiaomage-space/tree/master/VIP%E8%AF%BE/spring-cloud/lesson-9)
 
 

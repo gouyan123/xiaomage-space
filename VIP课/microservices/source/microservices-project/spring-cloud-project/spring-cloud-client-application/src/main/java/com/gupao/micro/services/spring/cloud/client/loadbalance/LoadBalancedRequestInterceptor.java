@@ -35,7 +35,7 @@ public class LoadBalancedRequestInterceptor implements ClientHttpRequestIntercep
 
     @Scheduled(fixedRate = 10 * 1000) // 10 秒钟更新一次缓存
     public void updateTargetUrlsCache() { // 更新目标 URLs
-        // 获取当前应用的机器列表
+        // discoveryClient.getServices()返回所有注册的服务的 服务名
         // http://${ip}:${port}
         Map<String, Set<String>> newTargetUrlsCache = new HashMap<>();
         discoveryClient.getServices().forEach(serviceName -> {
@@ -70,19 +70,14 @@ public class LoadBalancedRequestInterceptor implements ClientHttpRequestIntercep
         String targetURL = targetUrls.get(index);
         // 最终服务器 URL
         String actualURL = targetURL + "/" + uri + "?" + requestURI.getQuery();
-        // 执行请求
-
+        // 执行请求，请求actualURL
         System.out.println("本次请求的 URL : " + actualURL);
-
         URL url = new URL(actualURL);
-
         URLConnection urlConnection = url.openConnection();
-
-        // 响应头
+        // 响应头，简化了，httpHeader里面都是 key-value 对
         HttpHeaders httpHeaders = new HttpHeaders();
         // 响应主体
         InputStream responseBody = urlConnection.getInputStream();
-
         return new SimpleClientHttpResponse(httpHeaders, responseBody);
     }
 

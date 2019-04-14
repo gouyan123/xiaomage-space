@@ -19,7 +19,7 @@
 		@Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
 		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
 public @interface SpringBootApplication {
-    ...
+    //
 }
 ```
 
@@ -58,12 +58,12 @@ public @interface SpringBootApplication {
 
   * `ClassPathScanningCandidateComponentProvider`
 
-    ```java
-    	protected void registerDefaultFilters() {
-    		this.includeFilters.add(new AnnotationTypeFilter(Component.class));
-        	...
-    	}
-    ```
+```java
+    protected void registerDefaultFilters() {
+        this.includeFilters.add(new AnnotationTypeFilter(Component.class));
+        //
+    }
+```
 
     Dubbo `@Service` -> 2.5.7 -> `new AnnotationTypeFilter(Service.class);`
 

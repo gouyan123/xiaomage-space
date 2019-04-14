@@ -79,8 +79,11 @@ public class ZkDSClientApplication {
 
 ⑤注意事项：注册增加 service Id 计算
 获取应该去重
-```
-```
+
+##Nacos注册配置中心
+1、注册实例信息：将实例信息 注册到 eureka上；
+2、拉取实例信息：定时将eureka上实例信息同步到 服务元信息网关，去该 服务元信息网关拉取实例实现，该 服务元信息网关可以将eureka中数据缓存在redis中，并
+持久化到DB中；
 Eureka 2.0 不开源，Eureka 1.x 还可以用的
 ## 下节预习
 

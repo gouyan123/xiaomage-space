@@ -13,8 +13,7 @@ import java.util.concurrent.TimeoutException;
 public class CircuitBreakerControllerAdvice {
 
     @ExceptionHandler
-    public void onTimeoutException(TimeoutException timeoutException,
-                                   Writer writer) throws IOException {
+    public void onTimeoutException(TimeoutException timeoutException,Writer writer) throws IOException {
         writer.write(errorContent("")); // 网络 I/O 被容器
         writer.flush();
         writer.close();
