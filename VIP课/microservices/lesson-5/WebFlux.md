@@ -141,12 +141,31 @@ public class StreamDemo {
 ```
 ```text
 Stream 是 Iterator 模式，数据已完全准备，Pull拉模式；
-Reactive 是观察者模式，数据来一个算一个，Push推模式，当有数据变化的时候，作出反应（Reactor）
+Reactive 是观察者模式，数据来一个算一个，Push推模式，当有数据变化的时候，作出反应 Reactor
 ```
-React（反应）
+>- ReactiveX，Reactor 都是 Reactive的实现；
 
 
-WebFlux 使用场景
+### WebFlux 使用场景
+```java
+public class ReactorDemo {
+    public static void main(String[] args) {
+        Flux.just(0,1,2,3,4,5,6,7,8,9)              //Flux是一个 reactor
+                .filter(v -> v % 2 == 1)
+                .map(v -> v - 1)
+                .reduce(Integer::sum)
+                //main线程里面 新启一个线程 运行观察者，观察者还没开始运行，main线程就结束了，观察者线程也跟着结束了
+                .subscribeOn(Schedulers.elastic())  
+                .subscribe(ReactorDemo::println);   //订阅才执行
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+/**返回结果：[线程 : elastic-2] 20，由main线程 跨到了 elastic-2线程*/
+```
 
 长期异步执行，一旦提交，慢慢操作。是否适合 RPC 操作？
 
