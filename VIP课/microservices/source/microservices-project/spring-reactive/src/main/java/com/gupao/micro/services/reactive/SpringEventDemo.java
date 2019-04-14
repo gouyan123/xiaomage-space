@@ -12,11 +12,11 @@ public class SpringEventDemo {
 
     public static void main(String[] args) {
 
-        // 默认是同步非阻塞
+        // 创建事件广播器，默认是同步非阻塞
         SimpleApplicationEventMulticaster multicaster = new SimpleApplicationEventMulticaster();
         // 构建线程池
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        // 切换成异步非阻塞
+        // 切换成异步非阻塞(线程直接执行属于同步，线程作为任务提交到线程池中，由线程池中工作线程执行属于异步)
         multicaster.setTaskExecutor(executor);
 
         // 增加事件监听器

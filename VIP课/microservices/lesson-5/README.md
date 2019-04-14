@@ -11,38 +11,29 @@
 >- 阻塞导致性能瓶颈和浪费资源：
 >>- 任何代码都是阻塞的，因为指令是串行的；
 >>- 非阻塞从实现来说，就是回调(当前不阻塞，事后 数据要操作的数据准备好了 再来执行)，非阻塞(Spring事件就是 非阻塞)
+>- 增加线程可能会引起资源竞争和并发问题：通用问题
+>- 并行的方式不是银弹，不能解决所有问题，废话
+
+
 ```puml
 title 阻塞
-load -> loadConfigurations
-loadConfigurations -> loadUsers
-loadUsers -> loadOrders
+load -> doLoad
+doLoad -> loadConfigurations : 耗时 1s
+loadConfigurations -> loadUsers : 耗时 2s
+loadUsers -> loadOrders : 耗时 3s
 ```
+`同步 代码见 spring-reactive项目 DataLoader类，异步 代码见ParallelDataLoader`
 
-```text
-1、同步回调非阻塞(回调实现非阻塞)
-2、异步回调非阻塞(回调实现非阻塞)
-
-```
-
-
-
-增加线程可能会引起资源竞争和并发问题
-通用问题
-并行的方式不是银弹（不能解决所有问题）
-
-```puml
-load -> loadConfigurations
-loadConfigurations -> loadUsers
-loadUsers -> loadOrders
-```
-
-Reactor 认为异步不一定能够救赎
-
-再次将以上观点归纳，它认为：
+>同步/异步 非阻塞
+>- 同步回调非阻塞(回调实现非阻塞)
+>- 异步回调非阻塞(回调实现非阻塞)
+>- `代码见 spring-reactive项目 SpringEventDemo类`
 
 
-Callbacks 是解决非阻塞的方案，然而他们之间很难组合，并且快速地将代码引导至 "Callback Hell" 的不归路
-Futures  相对于 Callbacks 好一点，不过还是无法组合，不过  CompletableFuture 能够提升这方面的不足
+
+>Reactor 认为异步不一定能够救赎，再次将以上观点归纳，它认为：
+>- Callbacks 是解决非阻塞的方案，然而他们之间很难组合，并且快速地将代码引导至 "Callback Hell" 的不归路
+>- Futures  相对于 Callbacks 好一点，不过还是无法组合，不过  CompletableFuture 能够提升这方面的不足
 
 
 
