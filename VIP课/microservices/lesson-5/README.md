@@ -22,6 +22,13 @@ doLoad -> loadConfigurations : 耗时 1s
 loadConfigurations -> loadUsers : 耗时 2s
 loadUsers -> loadOrders : 耗时 3s
 ```
+```puml
+title 非阻塞
+load -> doLoad
+doLoad -> loadConfigurations : 耗时 1s
+doLoad -> loadUsers : 耗时 2s
+doLoad -> loadOrders : 耗时 3s
+```
 `同步 代码见 spring-reactive项目 DataLoader类，异步 代码见ParallelDataLoader`
 
 >同步/异步 非阻塞
@@ -30,45 +37,62 @@ loadUsers -> loadOrders : 耗时 3s
 >- `代码见 spring-reactive项目 SpringEventDemo类`
 
 
-
 >Reactor 认为异步不一定能够救赎，再次将以上观点归纳，它认为：
 >- Callbacks 是解决非阻塞的方案，然而他们之间很难组合，并且快速地将代码引导至 "Callback Hell" 的不归路
 >- Futures  相对于 Callbacks 好一点，不过还是无法组合，不过  CompletableFuture 能够提升这方面的不足
 
 
 
-CompletableFuture
+### CompletableFuture
+> Future 的局限性：
+>- future.get() 方法是阻塞的；
+>- Future 没有办法组合；
 
+> CompletableFuture特点：
+>- 任务Future之间有依赖关系，第一步的结果，是第二步的输入；
+>- 提供异步操作，提供 Future 链式操作，提供函数式编程；
+```java
+public class CompletableFutureDemo {
+    public static void main(String[] args) {
+        println("当前线程");
+        CompletableFuture.supplyAsync(() -> {
+           println("第一步");
+           return "Hello";                          //第一步返回 Hello
+        }).thenApplyAsync(result -> {
+            println("第二步");
+            return result + " World";               //第二步以第一步返回结果 为输入
+        }).thenAccept(CompletableFutureDemo::println)
+        .join();                                    //等待执行结束
+    }
+    private static void println(String message) {
+        System.out.printf("[线程 : %s] %s\n",Thread.currentThread().getName(), message);
+    }
+}
+/**
+返回结果如下，虽然是异步操作，但是 都是 同一个线程 Thread-0执行的
+*[线程 : main] 当前线程
+*[线程 : Thread-0] 第一步
+*[线程 : Thread-0] 第二步
+*[线程 : Thread-0] Hello World
+*/
+```
 
-Future 限制
+```puml
+title 代码表面
+main -> supplyAsync
+main -> thenApplyAsync
+main -> thenAccept
+```
+>* supplyAsync()方法，thenApplyAsync()，thenAccept()是并行的，但是 `后面的方法要等前面的返回结果`，因此 `并行 相当于 串行`
 
-
-
-get() 方法是阻塞的
-
-Future 没有办法组合
-
-
-任务Future之间由依赖关系
-第一步的结果，是第二部的输入
-
-
-
-
-CompletableFuture
-
-
-提供异步操作
-提供 Future 链式操作
-提供函数式编程
-
-
-main() -> supplyAsync(): 异步操作
-
-supplyAsync() -> thenApplyAsync() : 
-
-thenApplyAsync() -> thenAccept() : 
-
+```puml
+title 实质
+main -> supplyAsync
+supplyAsync -> thenApplyAsync : thenApplyAsync方法 以前一步supplyAsync方法 输出结果为 输入参数，使用多线程没意义
+thenApplyAsync -> thenAccept
+```
+>结果分析：虽然是异步操作，但是 都是 同一个线程 Thread-0执行的，为什么呢？
+>- 如上图所示，main()方法调用 supplyAsync()方法，然后main()方法再调用thenApplyAsync()方法，后一个方法thenApplyAsync()方法 依赖前一个方法supplyAsync()的返回值，因此，异步切换线程 没有意义
 
 函数式编程 + Reactive
 
@@ -428,3 +452,7 @@ Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.uti
 
 
 #### Kuzz
+
+## 扩展
+>- 判断 是阻塞方法，还是非阻塞方法？
+>> throws InterruptedException 声明抛出该异常的都是阻塞方法，未声明抛出该异常都是非阻塞方法
