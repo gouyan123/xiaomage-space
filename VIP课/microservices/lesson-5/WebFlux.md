@@ -1,160 +1,171 @@
-# Spring WebFlux 运用
-## Spring5及Reactive背景
-```text
-2017年Java技术生态中，最具影响力的发布莫过于Java9和Spring5，前者主要支持模块化，次要地提供了Flow API的支持，后者将"身家性命"压在Reactive上面，认为Reactive是未来的趋势，它以Reactive框架Reactor为基础，
-逐步构建一套完整的Reactive技术栈，其中以 WebFlux技术最为引人关注，作为替代Servlet Web的核心特性，承载了多年Spring逆转Java EE的初心。于是，业界开始大力的推广Reactive技术，Reactive的一些讲法如下。
-```
+## 第五节 Spring WebFlux 运用
 
-## 关于 Reactive 的一些讲法
-```text
-Reactive文章链接：https://m.imooc.com/article/46306?utm_source=oschina-app
-其中笔者挑选了以下三种出镜率最高的讲法：
-1、Reactive 是异步非阻塞编程：
-    错误，正确说法：是 同步+异步非阻塞编程；
-2、Reactive 能够提升程序性能：小部分情况 能够提升程序性能；
-    [参考测试用例地址](https://blog.ippon.tech/spring-5-webflux-performance-tests/)
-    NIO实际属于同步非阻塞，AIO属于异步非阻塞；
-3、Reactive 解决传统编程模型遇到的困境(重点)；
-    也是错的，传统困境不需要Reactive解决，也不能被 Reactive解决；
-    对于传统编程模型中的某些困境，Reactor 观点归纳如下：
-        3.1 阻塞导致性能瓶颈和浪费资源：
-            1 任何代码都是阻塞(指令是串行)；
-            2 非阻塞从实现来说，就是回调；阻塞：要操作的数据还没准备好；回调即 线程当前不阻塞等待数据，数据准备好以后，执行回调处理准备好的数据；
-        3.2 任何代码都是阻塞（指令是串行）
-        3.3 非阻塞从实现来说，就是回调
+### 关于 Reactive 的一些讲法
+
+>其中笔者挑选了以下三种出镜率最高的讲法
+>- Reactive 是异步非阻塞编程：错误，Reactive是 同步/异步非阻塞编程模型；
+>- Reactive 是同步/异步非阻塞编程：大多数情况是没有的，少数可能能会，[参考测试用例地址](https://blog.ippon.tech/spring-5-webflux-performance-tests/)
+>- Reactive 解决传统编程模型遇到的困境：错误，传统困境不需要，也不能被 Reactive解决；
+
+>传统编程模型中遇到的某些困境：Reactor 认为阻塞可能是浪费的，将以上 Reactor 观点归纳如下，它认为：
+>- 阻塞导致性能瓶颈和浪费资源：
+>>- 任何代码都是阻塞的，因为指令是串行的；
+>>- 非阻塞从实现来说，就是回调(当前不阻塞，事后 数据要操作的数据准备好了 再来执行)，非阻塞(Spring事件就是 非阻塞)
+>- 增加线程可能会引起资源竞争和并发问题：通用问题
+>- 并行的方式不是银弹，不能解决所有问题，废话
+
+
+```puml
+title 阻塞
+load -> doLoad
+doLoad -> loadConfigurations : 耗时 1s
+loadConfigurations -> loadUsers : 耗时 2s
+loadUsers -> loadOrders : 耗时 3s
+```
+```puml
+title 非阻塞
+load -> doLoad
+doLoad -> loadConfigurations : 耗时 1s
+doLoad -> loadUsers : 耗时 2s
+doLoad -> loadOrders : 耗时 3s
+```
+`同步 代码见 spring-reactive项目 DataLoader类，异步 代码见ParallelDataLoader`
+
+>同步/异步 非阻塞
+>- 同步回调非阻塞(回调实现非阻塞)
+>- 异步回调非阻塞(回调实现非阻塞)
+>- `代码见 spring-reactive项目 SpringEventDemo类`
+
+
+>Reactor 认为异步不一定能够救赎，再次将以上观点归纳，它认为：
+>- Callbacks 是解决非阻塞的方案，然而他们之间很难组合，并且快速地将代码引导至 "Callback Hell" 的不归路
+>- Futures  相对于 Callbacks 好一点，不过还是无法组合，不过  CompletableFuture 能够提升这方面的不足
+
+
+
+### CompletableFuture
+> Future 的局限性：
+>- future.get() 方法是阻塞的；
+>- Future 没有办法组合；
+
+> CompletableFuture特点：
+>- 任务Future之间有依赖关系，第一步的结果，是第二步的输入；
+>- 提供异步操作，提供 Future 链式操作，提供函数式编程；
+>- 函数式编程 + Reactive：重点；
+```java
+public class CompletableFutureDemo {
+    public static void main(String[] args) {
+        println("当前线程");
+        CompletableFuture.supplyAsync(() -> {
+           println("第一步");
+           return "Hello";                          //第一步返回 Hello
+        }).thenApplyAsync(result -> {
+            println("第二步");
+            return result + " World";               //第二步以第一步返回结果 为输入
+        }).thenAccept(CompletableFutureDemo::println)
+        .join();                                    //等待Thread-0线程执行结束，主线程再继续执行，类似 CountDownLatch
+    }
+    private static void println(String message) {
+        System.out.printf("[线程 : %s] %s\n",Thread.currentThread().getName(), message);
+    }
+}
+/**
+返回结果如下，虽然是异步操作，但是 都是 同一个线程 Thread-0执行的
+*[线程 : main] 当前线程
+*[线程 : Thread-0] 第一步
+*[线程 : Thread-0] 第二步
+*[线程 : Thread-0] Hello World
+*/
 ```
 
 ```puml
-A -> B: have()
+title 代码表面
+main -> supplyAsync
+main -> thenApplyAsync
+main -> thenAccept
 ```
-[百度](https://www.baidu.com)
-    [参考测试用例地址](https://blog.ippon.tech/spring-5-webflux-performance-tests/)
+>* supplyAsync()方法，thenApplyAsync()，thenAccept()是并行的，但是 `后面的方法要等前面的返回结果`，因此 `并行 相当于 串行`
 
-| id  | name  | age |
-| --- | --- | --- |
-| 23  | James  | 34 |
-| 24  | Kobe  | 37 |
+```puml
+title 实质
+main -> supplyAsync
+supplyAsync -> thenApplyAsync : thenApplyAsync方法 以前一步supplyAsync方法 输出结果为 输入参数，使用多线程没意义
+thenApplyAsync -> thenAccept
+```
+>结果分析：虽然是异步操作，但是 都是 同一个线程 Thread-0执行的，为什么呢？
+>- 如上图所示，main()方法调用 supplyAsync()方法，然后main()方法再调用thenApplyAsync()方法，后一个方法thenApplyAsync()方法 依赖前一个方法supplyAsync()的返回值，因此，异步切换线程 没有意义
 
+### Reactive + 函数式编程
+> 传统三段式编程 属于 命令式编程(Imperative programming) 即一行一行的执行，属于非流式
+>- 业务执行
+>- 业务执行完成
+>- 异常处理
+```text
+    try {
+        业务执行
+    }catch (Exception e){
+        异常处理
+    }finally {
+        业务执行完成
+    }
+```
+
+> Reactive 编程 属于 流式编程，Fluent 流畅的，Streams 流式的，好处是什么？
+> 大多数业务逻辑属于 数据操作，数据操作有如下几种类型：
+>- 消费 数据：Consumer
+>- 转换 数据类型：Function
+>- 增加/减少 数据维度：map/flatMap/reduce
+>- 业务效果：实现业务流程编排
+
+
+> 函数式语言特性（Java 8+）
+>- 生产类型 Supplier
+>- 转换类型  Function
+>- 消费类型  Consumer
+>- 判断类型 Predicate
+>- 提升/减少维度 map/reduce/flatMap
+
+`代码见 spring-reactive项目 StreamDemo类 `
 ```java
-public class User{
-
+/**java,c#,js,python,scala,koltin 都使用 Reactive + Stream的模式*/
+public class StreamDemo {
+    public static void main(String[] args) {
+        Stream.of(0,1,2,3,4,5,6,7,8,9)              //Supplier 生产数据
+                .filter(v -> v % 2 == 0)            //Predicate 判断数据
+                .map(v -> v + 1)                    //Function 改变数据维度
+                .reduce(Integer::sum)               //聚合操作
+                .ifPresent(System.out::println);    //Consumer 消费数据
+//                .forEach(System.out::println);      //Consumer
+    }
 }
 ```
-
-
-
-
-
-[HandlerMapping](https://docs.spring.io/spring/docs/5.0.8.RELEASE/spring-framework-reference/web.html#mvc-handlermapping)
-
-[百度](https://www.baidu.com/)
-
-[参考测试用例地址](https://blog.ippo.tech/spring-5-webflux-performance-tests/)
-
-增加线程可能会引起资源竞争和并发问题
-
-
-通用问题
-
-
-并行的方式不是银弹（不能解决所有问题）
-
-```puml
- load() -> loadConfigurations(): loadConfigurations() -> loadUsers()
-\: loadUsers() -> loadOrders() : 
+```text
+Stream 是 Iterator 模式，数据已完全准备，Pull拉模式；
+Reactive 是观察者模式，数据来一个算一个，Push推模式，当有数据变化的时候，作出反应 Reactor
 ```
-Reactor 认为异步不一定能够救赎
-
-再次将以上观点归纳，它认为：
+>- ReactiveX，Reactor 都是 Reactive的实现；
 
 
-Callbacks 是解决非阻塞的方案，然而他们之间很难组合，并且快速地将代码引导至 "Callback Hell" 的不归路
-Futures  相对于 Callbacks 好一点，不过还是无法组合，不过  CompletableFuture 能够提升这方面的不足
-
-
-
-CompletableFuture
-
-
-Future 限制
-
-
-
-get() 方法是阻塞的
-
-Future 没有办法组合
-
-
-任务Future之间由依赖关系
-第一步的结果，是第二部的输入
-
-
-
-
-CompletableFuture
-
-
-提供异步操作
-提供 Future 链式操作
-提供函数式编程
-
-
-main() -> supplyAsync(): 异步操作
-
-supplyAsync() -> thenApplyAsync() : 
-
-thenApplyAsync() -> thenAccept() : 
-
-
-函数式编程 + Reactive
-
-
-Reactive programming
-编程风格
-
-
-Fluent 流畅的
-Streams 流式的
-
-
-业务效果
-
-
-流程编排
-大多数业务逻辑是数据操作
-
-
-函数式语言特性（Java 8+）
-
-
-消费类型  Consumer
-
-生产类型 Supplier
-
-转换类型  Function
-
-判断类型 Predicate
-
-提升/减少维度 map/reduce/flatMap
-
-
-
-
-
-        // 是不是非常直观? Java/C#/JS/Python/Scale/Koltin -> Reactive/Stream
-        Stream.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) // 0-9 集合
-                .filter(v -> v % 2 == 1) // 判断数值->获取奇数
-                .map(v -> v - 1) // 奇数变偶数
-                .reduce(Integer::sum) // 聚合操作
-                .ifPresent(System.out::println) // 输出 0 + 2 + 4 + 6 + 8
-Stream 是 Iterator 模式，数据已完全准备，拉模式（Pull）
-
-Reactive 是观察者模式，来一个算一个，推模式（Push），当有数据变化的时候，作出反应（Reactor）
-
-React（反应）
-
-
-WebFlux 使用场景
+### WebFlux 使用场景
+```java
+public class ReactorDemo {
+    public static void main(String[] args) {
+        Flux.just(0,1,2,3,4,5,6,7,8,9)              //Flux是一个 reactor
+                .filter(v -> v % 2 == 1)
+                .map(v -> v - 1)
+                .reduce(Integer::sum)
+                //main线程里面 新启一个线程 运行观察者，观察者还没开始运行，main线程就结束了，观察者线程也跟着结束了
+                .subscribeOn(Schedulers.elastic())  
+                .subscribe(ReactorDemo::println);   //订阅才执行
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+/**返回结果：[线程 : elastic-2] 20，由main线程 跨到了 elastic-2线程*/
+```
 
 长期异步执行，一旦提交，慢慢操作。是否适合 RPC 操作？
 
@@ -210,6 +221,7 @@ Reactor Streams 并发编程之 Reactor
 Vert.x 异步编程
 异步事件驱动 Web 开发
 响应式应用架构重构
+
 
 
 
@@ -462,4 +474,8 @@ Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.uti
 
 
 
-#### Kuzz]()
+#### Kuzz
+
+## 扩展
+>- 判断 是阻塞方法，还是非阻塞方法？
+>> throws InterruptedException 声明抛出该异常的都是阻塞方法，未声明抛出该异常都是非阻塞方法
