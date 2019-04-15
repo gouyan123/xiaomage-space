@@ -1,7 +1,6 @@
------
-ppt内容：
-主要议题：服务短路（CircuitBreaker），Spring Cloud Hystrix Client，Spring Cloud Hystrix Dashboard，整合 Netflix Turbine；
+# 主要议题：服务短路（CircuitBreaker），Spring Cloud Hystrix Client，Spring Cloud Hystrix Dashboard，整合 Netflix Turbine；
 
+![命令模式](assets\命令模式.jpg)
 # Spring Cloud Netflix Hystrix
 熔断：多个client请求一个service，当client数量过多时，service会负载过大，因此，要对其中一部分client进行熔断，保证其他client可用；
 熔断方式：

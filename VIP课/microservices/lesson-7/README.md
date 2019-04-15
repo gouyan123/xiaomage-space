@@ -1,24 +1,14 @@
 # 第七节 Spring Cloud 配置管理
-
 ## 分布式配置
-
 ### 国内知名开源项目
 > * 百度 Disconf，携程 Apollo，阿里 Nacos
-
 ### 国外知名开源项目
 > * Spring Cloud Config，Netfix Archaius，Apache Zookeeper
-
 ### 客户端
 > * 一般：配置客户端 → HTTP1.1 Pull → 配置服务端； HTTP1.1特点：无状态短连接；
 > * springcloud：配置客户端 → 启动服务时加载 通过 HTTP1.1 Pull → 配置服务端 → git/本地文件file/DB；
 > * Java Client自行读取 HttpClient；Apache Commons Configuration；
 ##### Spring Environment
-
-
-
-
-
-
 
 #### 创建 spring-cloud-config-client，从 配置中心，获取自己的配置文件
 > * 配置三方库 `commons-configuration`
@@ -73,6 +63,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 }
 ```
 Spring Cloud 客户端配置定位扩展 : `PropertySourceLocator`
+![spring-cloud-config](assert/spring-cloud-config.jpg)
 ### 创建 spring-cloud-config-server 作为配置服务端，既然是服务端，就有HTTP端点 endpoint，配置客户端 向 配置服务端 请求配置信息，配置服务端再 向配置中心 请求配置信息
 > * pom.xml 只依赖 spring-cloud-config-server
 ```xml
@@ -92,17 +83,14 @@ ${user.dir}/spring-cloud-project/spring-cloud-config-server/src/main/resources/c
 > * 请求http://localhost:10086/config/default 获取 config.properties配置文件
 > * 请求http://localhost:10086/config/test 获取 config-test.properties配置文件
 
-#### 基于 Git 实现
-
-版本化配置
-
-/应用名/profile/${label}
+#### 服务端基于 Git 实现，实际是基于版本化配置
+> * 三段式：/应用名/profile/${label}，其中label指分支
 
 /应用名/profile/ = /应用名/profile/master
 
 /应用名/ = /应用名.properties
 
-${label} : 分支
+
 
 Spring Cloud Config 实现一套完整的配置管理 API 设计
 

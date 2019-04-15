@@ -1,5 +1,215 @@
-# 第五节 Spring WebFlux 运用
+# Spring WebFlux 运用
+## Spring5及Reactive背景
+```text
+2017年Java技术生态中，最具影响力的发布莫过于Java9和Spring5，前者主要支持模块化，次要地提供了Flow API的支持，后者将"身家性命"压在Reactive上面，认为Reactive是未来的趋势，它以Reactive框架Reactor为基础，
+逐步构建一套完整的Reactive技术栈，其中以 WebFlux技术最为引人关注，作为替代Servlet Web的核心特性，承载了多年Spring逆转Java EE的初心。于是，业界开始大力的推广Reactive技术，Reactive的一些讲法如下。
+```
 
+## 关于 Reactive 的一些讲法
+```text
+Reactive文章链接：https://m.imooc.com/article/46306?utm_source=oschina-app
+其中笔者挑选了以下三种出镜率最高的讲法：
+1、Reactive 是异步非阻塞编程：
+    错误，正确说法：是 同步+异步非阻塞编程；
+2、Reactive 能够提升程序性能：小部分情况 能够提升程序性能；
+    [参考测试用例地址](https://blog.ippon.tech/spring-5-webflux-performance-tests/)
+    NIO实际属于同步非阻塞，AIO属于异步非阻塞；
+3、Reactive 解决传统编程模型遇到的困境(重点)；
+    也是错的，传统困境不需要Reactive解决，也不能被 Reactive解决；
+    对于传统编程模型中的某些困境，Reactor 观点归纳如下：
+        3.1 阻塞导致性能瓶颈和浪费资源：
+            1 任何代码都是阻塞(指令是串行)；
+            2 非阻塞从实现来说，就是回调；阻塞：要操作的数据还没准备好；回调即 线程当前不阻塞等待数据，数据准备好以后，执行回调处理准备好的数据；
+        3.2 任何代码都是阻塞（指令是串行）
+        3.3 非阻塞从实现来说，就是回调
+```
+
+```puml
+A -> B: have()
+```
+[百度](https://www.baidu.com)
+    [参考测试用例地址](https://blog.ippon.tech/spring-5-webflux-performance-tests/)
+
+| id  | name  | age |
+| --- | --- | --- |
+| 23  | James  | 34 |
+| 24  | Kobe  | 37 |
+
+```java
+public class User{
+
+}
+```
+
+
+
+
+
+[HandlerMapping](https://docs.spring.io/spring/docs/5.0.8.RELEASE/spring-framework-reference/web.html#mvc-handlermapping)
+
+[百度](https://www.baidu.com/)
+
+[参考测试用例地址](https://blog.ippo.tech/spring-5-webflux-performance-tests/)
+
+增加线程可能会引起资源竞争和并发问题
+
+
+通用问题
+
+
+并行的方式不是银弹（不能解决所有问题）
+
+```puml
+ load() -> loadConfigurations(): loadConfigurations() -> loadUsers()
+\: loadUsers() -> loadOrders() : 
+```
+Reactor 认为异步不一定能够救赎
+
+再次将以上观点归纳，它认为：
+
+
+Callbacks 是解决非阻塞的方案，然而他们之间很难组合，并且快速地将代码引导至 "Callback Hell" 的不归路
+Futures  相对于 Callbacks 好一点，不过还是无法组合，不过  CompletableFuture 能够提升这方面的不足
+
+
+
+CompletableFuture
+
+
+Future 限制
+
+
+
+get() 方法是阻塞的
+
+Future 没有办法组合
+
+
+任务Future之间由依赖关系
+第一步的结果，是第二部的输入
+
+
+
+
+CompletableFuture
+
+
+提供异步操作
+提供 Future 链式操作
+提供函数式编程
+
+
+main() -> supplyAsync(): 异步操作
+
+supplyAsync() -> thenApplyAsync() : 
+
+thenApplyAsync() -> thenAccept() : 
+
+
+函数式编程 + Reactive
+
+
+Reactive programming
+编程风格
+
+
+Fluent 流畅的
+Streams 流式的
+
+
+业务效果
+
+
+流程编排
+大多数业务逻辑是数据操作
+
+
+函数式语言特性（Java 8+）
+
+
+消费类型  Consumer
+
+生产类型 Supplier
+
+转换类型  Function
+
+判断类型 Predicate
+
+提升/减少维度 map/reduce/flatMap
+
+
+
+
+
+        // 是不是非常直观? Java/C#/JS/Python/Scale/Koltin -> Reactive/Stream
+        Stream.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) // 0-9 集合
+                .filter(v -> v % 2 == 1) // 判断数值->获取奇数
+                .map(v -> v - 1) // 奇数变偶数
+                .reduce(Integer::sum) // 聚合操作
+                .ifPresent(System.out::println) // 输出 0 + 2 + 4 + 6 + 8
+Stream 是 Iterator 模式，数据已完全准备，拉模式（Pull）
+
+Reactive 是观察者模式，来一个算一个，推模式（Push），当有数据变化的时候，作出反应（Reactor）
+
+React（反应）
+
+
+WebFlux 使用场景
+
+长期异步执行，一旦提交，慢慢操作。是否适合 RPC 操作？
+
+任务型的，少量线程，多个任务长时间运作，达到伸缩性。
+
+Mono：单数据 Optional 0:1, RxJava : Single
+
+Flux : 多数据集合，Collection 0:N , RxJava : Observable
+
+
+函数式编程
+非阻塞（同步/异步）
+远离 Servlet API
+
+
+API
+Servlet
+HttpServletRequest
+
+
+不再强烈依赖 Servlet 容器（兼容）
+
+
+容器
+Tomcat
+Jetty
+
+
+
+
+Spring Cloud Gateway -> Reactor
+
+Spring WebFlux -> Reactor
+
+Zuul2 -> Netty  Reactive
+
+
+WebFlux 整体架构
+
+
+相关视频
+
+
+公开课
+
+
+高并发系列
+
+
+Java 8 异步并发编程
+Java 9 异步并发编程
+Reactor Streams 并发编程之 Reactor
+Vert.x 异步编程
+异步事件驱动 Web 开发
+响应式应用架构重构
 
 
 
@@ -252,4 +462,4 @@ Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.uti
 
 
 
-#### Kuzz
+#### Kuzz]()
