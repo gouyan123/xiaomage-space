@@ -1,5 +1,9 @@
 ## 第五节 Spring WebFlux 运用
-
+```text
+Reactive背景：
+2017年Java技术生态中，最具影响力的发布莫过于Java9和Spring5，前者主要支持模块化，次要地提供了Flow API的支持，后者将"身家性命"压在Reactive上面，认为Reactive是未来的趋势，它以 Reactor实现和ReactiveX实现为基础，
+逐步构建一套完整的Reactive技术栈，其中以 WebFlux技术最为引人关注，作为替代Servlet Web的核心特性，承载了多年Spring逆转Java EE的初心。于是，业界开始大力的推广Reactive技术，Reactive的一些讲法如下。
+```
 ### 关于 Reactive 的一些讲法
 
 >其中笔者挑选了以下三种出镜率最高的讲法
@@ -115,7 +119,7 @@ thenApplyAsync -> thenAccept
 >- 消费 数据：Consumer
 >- 转换 数据类型：Function
 >- 增加/减少 数据维度：map/flatMap/reduce
->- 业务效果：实现业务流程编排
+>- 业务效果：实现业务代码 流程式编排
 
 
 > 函数式语言特性（Java 8+）
@@ -146,8 +150,9 @@ Reactive 是观察者模式，数据来一个算一个，Push推模式，当有�
 >- ReactiveX，Reactor 都是 Reactive的实现；
 
 
-### WebFlux 使用场景
+### WebFlux
 ```java
+/**代码示例*/
 public class ReactorDemo {
     public static void main(String[] args) {
         Flux.just(0,1,2,3,4,5,6,7,8,9)              //Flux是一个 reactor
@@ -166,69 +171,47 @@ public class ReactorDemo {
 }
 /**返回结果：[线程 : elastic-2] 20，由main线程 跨到了 elastic-2线程*/
 ```
+> WebFlux
+>- WebFlux目的：提高伸缩性，而不是执行速度；
+>- WebFlux场景：长期异步执行，一旦提交，慢慢去操作，不适合 RPC操作，适合 任务型即少量线程，多个任务长时间运行 达到伸缩性；
+>- WebFlux 与WebMvc比较：WebMvc性能更好，见代码 spring-reactive项目 WebFluxController类；
 
-长期异步执行，一旦提交，慢慢操作。是否适合 RPC 操作？
+```java
+/**测试：http://localhost:8080/
+* 返回结果如下，表明 执行计算 和 返回结果都是 reactor-http-nio-2线程执行的，证明是同步的
+* [线程 : reactor-http-nio-2] 执行计算
+* [线程 : reactor-http-nio-2] 返回结果
+* */
+@RestController
+public class WebFluxController {
+    @RequestMapping("")
+    public Mono<String> index() {
+        println("执行计算");
+        Mono<String> result =  Mono.fromSupplier(() -> {
+            println("返回结果");
+            return "Hello,World";
+        });
+        return result;
+    }
+}
+```
+> WebFlux 与 RxJava中 数据集合
+>- `Mono`：单数据集合 `Optional` 0:1, `RxJava` : `Single`
+>- `Flux` : 多数据集合，`Collection` 0:N , `RxJava` : `Observable`
 
-任务型的，少量线程，多个任务长时间运作，达到伸缩性。
+> Reactive特点总结：
+>- 属于 函数式编程
+>- 属于 非阻塞（同步 或 异步）
+>- 不再强烈依赖 Servlet API和其容器，Servlet3.1开始支持 异步非阻塞；
 
-Mono：单数据 Optional 0:1, RxJava : Single
-
-Flux : 多数据集合，Collection 0:N , RxJava : Observable
-
-
-函数式编程
-非阻塞（同步/异步）
-远离 Servlet API
-
-
-API
-Servlet
-HttpServletRequest
-
-
-不再强烈依赖 Servlet 容器（兼容）
-
-
-容器
-Tomcat
-Jetty
-
-
-
-
-Spring Cloud Gateway -> Reactor
-
-Spring WebFlux -> Reactor
-
-Zuul2 -> Netty  Reactive
-
-
-WebFlux 整体架构
-
-
-相关视频
+> 哪些地方应用 Reactive了？
+>- Spring Cloud Gateway -> Reactor
+>- Spring WebFlux -> Reactor
+>- Zuul2 -> Netty  Reactive
 
 
-公开课
-
-
-高并发系列
-
-
-Java 8 异步并发编程
-Java 9 异步并发编程
-Reactor Streams 并发编程之 Reactor
-Vert.x 异步编程
-异步事件驱动 Web 开发
-响应式应用架构重构
-
-
-
-
-
-## 回顾 Spring Web MVC
-
-
+### WebFlux整体架构
+>- 回顾 Spring Web MVC (WebFlux整体架构 与 WebMvc整体架构 相同)
 
 | Bean type                                                    | Explanation                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -243,13 +226,23 @@ Vert.x 异步编程
 
 
 
-`HandlerInterceptor` : 前置、后置处理、完成阶段（异常处理）
+> `HandlerInterceptor` : 前置 或 后置处理，可以做 全局异常处理；
+```java
+public interface HandlerInterceptor {
+    // 请求 前置处理
+	default boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		return true;
+	}
+    // 请求 后置处理
+	default void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,@Nullable ModelAndView modelAndView) throws Exception {
+	}
+    // 请求 完成阶段处理，可以理解为finally，类似 CompletableFuture#whenComplete
+	default void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,@Nullable Exception ex) throws Exception {
+	}
 
-* 前置：pre- before-
-* 后置：post- after-
-* 完成：`finally`
-  * `org.springframework.web.servlet.HandlerInterceptor#afterCompletion`
-  * `java.util.concurrent.CompletableFuture#whenComplete`
+}
+```
+
 
 `HandlerMapping` :
 
@@ -268,18 +261,15 @@ Vert.x 异步编程
   * `SimpleUrlHandlerMapping `
 
 *  包含 `HandlerInterceptor` 集合
-  * 责任链
-    * 区别 `Filter`
-      * `HandlerInterceptor` 采用返回值
-      * `Filter`  采用 `FilterChain`
-        * 最终节点 Servlet
+    *  `HandlerInterceptor` 与 `Filter`区别
+      * `HandlerInterceptor` 采用返回值进行拦截
+      * `Filter`  采用 `FilterChain`进行过滤，最终节点是 Servlet
   * 拦截链条
-  * 各司其职
-    * 顺序
-* 作为 `DispatcherServlet` 一种`HandlerMapping`
-  * `DispatcherServlet` 关联多个 `HandlerMapping`
-    * `DispatcherServlet` ：  `HandlerMapping` = 1 : N
-    * `HandlerMapping` ：  `HandlerInterceptor` = 1 : N
+  * 各司其职：每个 HandlerInterceptor实现类，只负责自己
+    * 顺序问题：HandlerInterceptor实现类 执行顺序 即拦截顺序
+
+* 一个`DispatcherServlet` 关联多个 `HandlerMapping`
+    * 一个`HandlerMapping` 关联多个 `HandlerInterceptor`
       * 要经过筛选 `HandlerExecutionChain`
         * 一个 Handler
           * 猜测一：`@Controller`
@@ -287,9 +277,9 @@ Vert.x 异步编程
           * ~~猜测三：`HttpServletRequest`~~
           * `HandlerMethod` ？
         * `HandlerInterceptor` List
-    * 问题：多个 `HandlerMapping` 谁被选择
+    * 问题：dispatcherServlet 有多个`HandlerMapping` ，dispatcherServlet 选择哪个？
       * 可能猜想点
-        * `Ordered` 接口参考顺序
+        * `Ordered` 接口参考顺序：按照 Order接口方法 排序后，存在 List集合里面，List属于有序集合，Spring中有序操作一般采用List作为存储；
         * 哪个 `HandlerMapping` 被请求规则匹配了
 
 

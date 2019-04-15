@@ -9,15 +9,11 @@ public class WebFluxController {
 
     @RequestMapping("")
     public Mono<String> index() {
-        // 执行计算
         println("执行计算");
         Mono<String> result =  Mono.fromSupplier(() -> {
-
             println("返回结果");
-
             return "Hello,World";
         });
-
         return result;
     }
 

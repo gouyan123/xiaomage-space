@@ -15,9 +15,7 @@
 ```java
 @SpringBootConfiguration
 @EnableAutoConfiguration
-@ComponentScan(excludeFilters = {
-		@Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
-		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
+@ComponentScan(excludeFilters = {@Filter(type = FilterType.CUSTOM,classes= TypeExcludeFilter.class),@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
 public @interface SpringBootApplication {
     //
 }
